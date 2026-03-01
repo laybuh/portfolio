@@ -352,9 +352,6 @@ body::before {
 }
 
 @media (max-width: 480px) {
-  nav ul {
-    display: none;
-  }
 
   h1 {
     font-size: 2.5rem;
