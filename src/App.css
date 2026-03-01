@@ -335,8 +335,7 @@ body::before {
   }
 
   .floating-links {
-    bottom: 1.5rem;
-    right: 1.5rem;
+    display: none;
   }
 
   .about-text p {
