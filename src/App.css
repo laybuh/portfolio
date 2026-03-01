@@ -326,6 +326,11 @@ body::before {
     bottom: 1.5rem;
     right: 1.5rem;
   }
+
+  .about-text p {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
 }
 
 @media (max-width: 480px) {
