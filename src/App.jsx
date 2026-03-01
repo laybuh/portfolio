@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
+import laybaPhoto from './assets/blah.jpg' 
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -57,7 +58,7 @@ function App() {
       <section className="about" id="about">
         <div className="about-container">
           <div className="about-photo-wrap">
-            <img src="/src/assets/blah.jpg" alt="Layba" className="about-photo-placeholder" />
+            <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
           </div>
           <div className="about-text">
             <a className="tag" href="#about">#about</a>
