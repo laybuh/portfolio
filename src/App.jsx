@@ -94,7 +94,7 @@ function App() {
               <div className="project-tags">
                 <span className="project-tag">React</span>
                 <span className="project-tag">Vite</span>
-                <span className="project-tag">API</span>
+                <span className="project-tag">Jikan API</span>
               </div>
             </div>
             <div className="project-links">
