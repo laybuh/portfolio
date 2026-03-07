@@ -2,6 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import laybaPhoto from './assets/blah.jpg'
 import animePhoto from './assets/anime.png'
+import mapPhoto from './assets/map.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -99,6 +100,25 @@ function App() {
             <div className="project-links">
               <a href="https://animesearcher.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
               <a href="https://github.com/laybuh/anime-search" target="_blank" rel="noreferrer" className="project-link">github</a>
+            </div>
+          </div>
+          <div className="project-card">
+            <div className="project-img-wrap">
+              <img src={mapPhoto} alt="Angular World Map" />
+            </div>
+            <div className="project-info">
+              <p className="project-title">Angular World Map</p>
+              <p className="project-desc">Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding.</p>
+              <div className="project-tags">
+                <span className="project-tag">Angular</span>
+                <span className="project-tag">TypeScript</span>
+                <span className="project-tag">World Bank API</span>
+                <span className="project-tag">SVG</span>
+              </div>
+            </div>
+            <div className="project-links">
+              <a href="https://layba-map.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://github.com/laybuh/angular-map/" target="_blank" rel="noreferrer" className="project-link">github</a>
             </div>
           </div>
 
