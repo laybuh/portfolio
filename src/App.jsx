@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import laybaPhoto from './assets/blah.jpg'
-import laybaPhoto from './assets/anime.png'
+import animePhoto from './assets/anime.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
