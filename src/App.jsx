@@ -141,8 +141,8 @@ function App() {
             </div>
             <div className="project-links">
               <a href="https://dospace.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
-              <a href="https://github.com/laybuh/todo-frontend" target="_blank" rel="noreferrer" className="project-link">github (frontend)</a>
-              <a href="https://github.com/laybuh/todo-app" target="_blank" rel="noreferrer" className="project-link">github (backend)</a>
+              <a href="https://github.com/laybuh/todo-frontend" target="_blank" rel="noreferrer" className="project-link">github (FE)</a>
+              <a href="https://github.com/laybuh/todo-app" target="_blank" rel="noreferrer" className="project-link">github (BE)</a>
 
             </div>
           </div>
