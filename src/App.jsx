@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import laybaPhoto from './assets/blah.jpg'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
+import dospacePhoto from './assets/dospace.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -119,6 +120,30 @@ function App() {
             <div className="project-links">
               <a href="https://layba-map.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
               <a href="https://github.com/laybuh/angular-map/" target="_blank" rel="noreferrer" className="project-link">github</a>
+            </div>
+          </div>
+          <div className="project-card">
+            <div className="project-img-wrap">
+              <img src={dospacePhoto} alt="dospace" />
+            </div>
+            <div className="project-info">
+              <p className="project-title">dospace</p>
+              <p className="project-desc">Built with React, Vite, Node.js, and PostgreSQL, this full-stack encrypted to-do list manager secures every task with AES-256 encryption so not even the admin can read them. To-dos are stored in the database as unreadable ciphertext. Features JWT authentication, bcrypt hashing, email verification with auto-expiry, password reset via domain-verified transactional email, password strength validation, idle session timeout with tab close detection, account deletion with email confirmation, and cascade delete.</p>
+              <div className="project-tags">
+                <span className="project-tag">React</span>
+                <span className="project-tag">Vite</span>
+                <span className="project-tag">Node.js</span>
+                <span className="project-tag">Express</span>
+                <span className="project-tag">PostgreSQL</span>
+                <span className="project-tag">JWT</span>
+                <span className="project-tag">AES-256</span>
+              </div>
+            </div>
+            <div className="project-links">
+              <a href="https://dospace.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://github.com/laybuh/todo-frontend" target="_blank" rel="noreferrer" className="project-link">github (frontend)</a>
+              <a href="https://github.com/laybuh/todo-app" target="_blank" rel="noreferrer" className="project-link">github (backend)</a>
+
             </div>
           </div>
 
