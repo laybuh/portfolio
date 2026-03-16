@@ -109,7 +109,7 @@ function App() {
             </div>
             <div className="project-info">
               <p className="project-title">Angular World Map</p>
-              <p className="project-desc">Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding.</p>
+              <p className="project-desc">Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding. Originally built for a university course, extended and deployed independently.</p>
               <div className="project-tags">
                 <span className="project-tag">Angular</span>
                 <span className="project-tag">TypeScript</span>
