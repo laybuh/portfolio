@@ -4,6 +4,7 @@ import laybaPhoto from './assets/blah.jpg'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
 import dospacePhoto from './assets/dospace.png'
+import hazefmPhoto from './assets/hazefm.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -146,7 +147,28 @@ function App() {
 
             </div>
           </div>
+<div className="project-card">
+            <div className="project-img-wrap">
+              <img src={hazefmPhoto} alt="haze.fm" />
+            </div>
+            <div className="project-info">
+              <p className="project-title">haze.fm</p>
+              <p className="project-desc">Built with Next.js and TypeScript, this music discovery app generates curated playlists based on your mood or a favorite artist. It connects to the Last.fm API to fetch tracks using emotional tag mapping and artist data, and uses the YouTube Data API to stream full songs directly in the app. Features a custom mood-to-tag mapping system, real-time playlist generation, shuffle, skip, and regenerate controls, and an immersive aesthetic visual experience with cycling background scenes.</p>
+              <div className="project-tags">
+                <span className="project-tag">Next.js</span>
+                <span className="project-tag">TypeScript</span>
+                <span className="project-tag">Last.fm API</span>
+                <span className="project-tag">YouTube API</span>
+                <span className="project-tag">Tailwind CSS</span>
+              </div>
+            </div>
+            <div className="project-links">
+              <a href="https://hazefm.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://github.com/laybuh/hazefm" target="_blank" rel="noreferrer" className="project-link">github</a>
+            
 
+            </div>
+          </div>
           {/* Will add new projects here later */}
 
         </div>
