@@ -532,7 +532,3 @@ body::before {
   color: #ffffff;
   border-color: rgba(232, 180, 232, 0.5);
 }
-
-.contact-container .tag {
-  align-self: flex-start;
-}
