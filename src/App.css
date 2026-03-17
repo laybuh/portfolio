@@ -86,7 +86,7 @@ h1 span {
 
 button {
   margin-top: 1rem;
-  padding: 0.8rem 2rem;
+  padding: 15px 50px;
   background: transparent;
   border: 1px solid #e8b4e8;
   color: #e8b4e8;
@@ -96,6 +96,7 @@ button {
   cursor: pointer;
   width: fit-content;
   transition: all 0.3s ease;
+  opacity: 80%;
 }
 
 button:hover {
@@ -152,28 +153,6 @@ body::before {
   color: #e8b4e8;
 }
 
-.floating-links {
-  position: fixed;
-  bottom: 3rem;
-  right: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  z-index: 100;
-}
-
-.bubble {
-  padding: 0.6rem 1.2rem;
-  border: 1px solid rgba(232, 180, 232, 0.2);
-  border-radius: 999px;
-  color: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-  animation: float 4s ease-in-out infinite;
-}
 
 .bubble:nth-child(2) {
   animation-delay: 1s;
@@ -393,7 +372,7 @@ body::before {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -484,4 +463,72 @@ body::before {
 
 .project-link:hover {
   color: #e8b4e8;
+}
+
+.contact {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(232, 180, 232, 0.1);
+  border-radius: 16px;
+  padding: 4rem;
+  backdrop-filter: blur(10px);
+}
+
+.contact-container h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.contact-sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 1px;
+}
+
+.contact-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-email {
+  margin-top: 2rem;
+}
+
+.contact-social,
+.contact-email {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #e8b4e8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border: 1px solid rgba(232, 180, 232, 0.2);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+}
+
+.contact-social:hover,
+.contact-email:hover {
+  color: #ffffff;
+  border-color: rgba(232, 180, 232, 0.5);
 }
