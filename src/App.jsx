@@ -46,9 +46,10 @@ function App() {
         <nav>
           <a href="#" className="logo">layba.dev</a>
           <ul>
-            <li><a href="#about">#about</a></li>
-            <li><a href="#projects">#projects</a></li>
-            <li><a href="#contact">#contact</a></li>
+            <li><a href="/">index</a></li>
+            <li><a href="#about">about</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#contact">contact</a></li>
           </ul>
         </nav>
 
@@ -185,7 +186,8 @@ function App() {
         <div className="contact-container">
           <a className="tag" href="#contact">#contact</a>
           <h2>Let's connect.</h2>
-          <p className="contact-sub">Have a project in mind or just want to connect? I'd love to hear from you.</p>
+          <p className="contact-sub">Have a project in mind or just want to connect?</p>
+          <p className="contact-sub">I'd love to hear from you.</p>
           <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>
           <div className="contact-links">
             <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">linkedin</a>
