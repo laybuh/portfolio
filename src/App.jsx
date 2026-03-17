@@ -188,8 +188,8 @@ function App() {
           <p className="contact-sub">Have a project in mind or just want to connect? I'd love to hear from you.</p>
           <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>
           <div className="contact-links">
-            <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">LinkedIn</a>
-            <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-social">GitHub</a>
+            <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">linkedin</a>
+            <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-social">github</a>
           </div>
         </div>
       </section>
