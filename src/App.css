@@ -472,7 +472,7 @@ body::before {
     flex-direction: column;
     padding: 2rem;
     gap: 2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .about-photo-placeholder {
@@ -481,13 +481,13 @@ body::before {
   }
 
   .about-text h2 {
-    font-size: 2rem;
+    text-align: left;
   }
 
   .about-text p {
-    font-size: 0.78rem;
-    letter-spacing: 1px;
-    line-height: 1.6;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    line-height: 1.7;
   }
 
   button {
