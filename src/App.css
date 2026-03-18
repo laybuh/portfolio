@@ -206,7 +206,7 @@ body::before {
 }
 
 .about-text p {
-  color: #d8bfd8;
+  color: #c7b3c7;
   font-size: 0.9rem;
   line-height: 1.8;
   font-weight: 300;
@@ -220,7 +220,7 @@ body::before {
   padding: 6rem 4rem;
   position: relative;
   z-index: 1;
-  background: rgba(199, 125, 255, 0.03);
+  background: rgba(37, 31, 42, 0.04);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(232, 180, 232, 0.08);
   border-bottom: 1px solid rgba(232, 180, 232, 0.08);
