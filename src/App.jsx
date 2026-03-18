@@ -10,8 +10,15 @@ function Sparkles() {
   const [sparkles, setSparkles] = useState([])
 
   useEffect(() => {
+    let lastSpawn = 0
+
     const handleMouseMove = (e) => {
+      const now = Date.now()
+      if (now - lastSpawn < 50) return
       if (Math.random() > 0.6) return
+
+      lastSpawn = now
+
       const sparkle = {
         id: Math.random(),
         x: e.clientX,
@@ -23,6 +30,7 @@ function Sparkles() {
         setSparkles(prev => prev.filter(s => s.id !== sparkle.id))
       }, 600)
     }
+
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
@@ -46,7 +54,7 @@ function App() {
         <nav>
           <a href="#" className="logo">layba.dev</a>
           <ul>
-            <li><a href="/">index</a></li>
+            <li><a href="#">index</a></li>
             <li><a href="#about">about</a></li>
             <li><a href="#projects">projects</a></li>
             <li><a href="#contact">contact</a></li>
