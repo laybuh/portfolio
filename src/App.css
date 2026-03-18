@@ -1,3 +1,7 @@
+* {
+  cursor: crosshair;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -149,9 +153,6 @@ body::before {
   color: #e8b4e8;
 }
 
-
-
-
 @keyframes float {
 
   0%,
@@ -186,12 +187,9 @@ body::before {
   }
 }
 
-
 .about-photo-wrap {
   flex-shrink: 0;
 }
-
-
 
 .about-text {
   display: flex;
@@ -251,87 +249,6 @@ body::before {
 ::selection {
   background-color: #c77dff;
   color: black;
-}
-
-
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-  }
-
-  nav ul {
-    display: flex;
-    gap: 1.2rem;
-  }
-
-  nav ul a {
-    font-size: 0.75rem;
-  }
-
-  .logo {
-    font-size: 1.1rem;
-  }
-
-  .hero {
-    padding: 0 2rem;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  .about {
-    padding: 4rem 2rem;
-  }
-
-  .about-container {
-    flex-direction: column;
-    padding: 2rem;
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .about-photo-placeholder {
-    width: 150px;
-    height: 150px;
-  }
-
-  .about-text h2 {
-    font-size: 2rem;
-  }
-
-  .about-text p {
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-  }
-
-  button {
-    width: 100%;
-    text-align: center;
-
-  }
-
-  .projects {
-    padding: 4rem 2rem;
-  }
-
-  .projects-header h2 {
-    font-size: 2rem;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-
-  h1 {
-    font-size: 2.5rem;
-  }
 }
 
 .projects {
@@ -516,4 +433,144 @@ body::before {
 .contact-email:hover {
   color: #ffffff;
   border-color: rgba(232, 180, 232, 0.5);
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  nav ul a {
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .hero {
+    padding: 0 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .about {
+    padding: 4rem 2rem;
+  }
+
+  .about-container {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .about-photo-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .projects {
+    padding: 4rem 1.5rem;
+  }
+
+  .projects-header h2 {
+    font-size: 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .project-info {
+    padding: 1rem;
+  }
+
+  .project-title {
+    font-size: 0.95rem;
+  }
+
+  .project-desc {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .project-links {
+    padding: 0 1rem 1rem;
+  }
+
+  .contact {
+    padding: 4rem 1.5rem;
+  }
+
+  .contact-container {
+    padding: 2.5rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .contact-container h2 {
+    font-size: 2rem;
+  }
+
+  .contact-sub {
+    font-size: 0.85rem;
+    max-width: 280px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-email {
+    margin-top: 0.5rem;
+  }
+
+  .contact-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0;
+  }
+
+  .contact-social,
+  .contact-email {
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .project-desc {
+    font-size: 0.75rem;
+  }
 }
