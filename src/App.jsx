@@ -64,7 +64,7 @@ function App() {
         <div className="hero-content">
           <p className="tag">&gt; index</p>
           <h1>Hi, I'm <span>Layba</span>.</h1>
-          <p className="subtitle">Turning ideas into beautiful, functional web experiences.</p>
+          <p className="subtitle">I like building aesthetic digital experiences.</p>
           <div className="hero-buttons">
             <button
               type="button"
