@@ -117,7 +117,7 @@ function App() {
               </div>
             </div>
             <div className="project-links">
-              <a href="https://dospace.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://dospace.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
               <a href="https://github.com/laybuh/todo-frontend" target="_blank" rel="noreferrer" className="project-link">github (FE)</a>
               <a href="https://github.com/laybuh/todo-app" target="_blank" rel="noreferrer" className="project-link">github (BE)</a>
 
@@ -139,7 +139,7 @@ function App() {
               </div>
             </div>
             <div className="project-links">
-              <a href="https://hazefm.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://hazefm.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
               <a href="https://github.com/laybuh/hazefm" target="_blank" rel="noreferrer" className="project-link">github</a>
 
 
@@ -162,7 +162,7 @@ function App() {
               </div>
             </div>
             <div className="project-links">
-              <a href="https://animesearcher.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://animesearcher.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
               <a href="https://github.com/laybuh/anime-search" target="_blank" rel="noreferrer" className="project-link">github</a>
             </div>
           </div>
@@ -181,7 +181,7 @@ function App() {
               </div>
             </div>
             <div className="project-links">
-              <a href="https://layba-map.vercel.app" target="_blank" rel="noreferrer" className="project-link">↗ live</a>
+              <a href="https://layba-map.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
               <a href="https://github.com/laybuh/angular-map/" target="_blank" rel="noreferrer" className="project-link">github</a>
             </div>
           </div>
