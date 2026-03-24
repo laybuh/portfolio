@@ -62,7 +62,6 @@ function App() {
         </nav>
 
         <div className="hero-content">
-          <p className="tag">&gt; index</p>
           <h1>Hi, I'm <span>Layba</span>.</h1>
           <p className="subtitle">I like building aesthetic digital experiences.</p>
           <div className="hero-buttons">
@@ -82,7 +81,6 @@ function App() {
             <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
           </div>
           <div className="about-text">
-            <a className="tag" href="#about">#about</a>
             <h2>Nice to meet you.</h2>
             <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
             <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
@@ -93,7 +91,6 @@ function App() {
       </section>
       <section className="projects" id="projects">
         <div className="projects-header">
-          <a className="tag" href="#projects">#projects</a>
           <h2>Things I've built.</h2>
         </div>
 
@@ -191,7 +188,6 @@ function App() {
       </section>
       <section className="contact" id="contact">
         <div className="contact-container">
-          <a className="tag" href="#contact">#contact</a>
           <h2>Let's connect.</h2>
           <p className="contact-sub">Have a project in mind or just want to connect?</p>
           <p className="contact-sub">I'd love to hear from you.</p>
