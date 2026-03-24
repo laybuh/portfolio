@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-import laybaPhoto from './assets/blah.jpg'
+import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
 import dospacePhoto from './assets/dospace.png'
