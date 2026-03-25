@@ -90,6 +90,26 @@ body::before {
   }
 }
 
+/* typed text cursor */
+.cursor {
+  display: inline-block;
+  color: var(--green);
+  animation: blink 0.7s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
 /* nav */
 nav {
   display: flex;
@@ -108,6 +128,11 @@ nav {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
+}
+
+.hero.explored nav {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .logo {
@@ -223,14 +248,22 @@ h1 span {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
   letter-spacing: 1px;
-  text-transform: none;
+  min-height: 1.3em;
 }
 
 .hero-buttons {
   margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
 }
 
-/* explore / view my work button */
+.hero-buttons.btn-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* buttons */
 button {
   padding: 14px 48px;
   background: transparent;
@@ -266,6 +299,12 @@ button:hover::before {
   transform: translateX(0);
 }
 
+.btn-explore {
+  padding: 18px 72px;
+  font-size: 0.85rem;
+  letter-spacing: 5px;
+}
+
 /* site content unlock */
 .site-content {
   overflow: hidden;
@@ -282,6 +321,18 @@ button:hover::before {
   transform: translateY(0);
   pointer-events: all;
   transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
+}
+
+/* scroll fade-up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* about */
@@ -332,7 +383,6 @@ button:hover::before {
     0 0 20px rgba(152, 214, 171, 0.12),
     0 0 50px rgba(152, 214, 171, 0.06);
   padding: 5px;
-  opacity: 0.8;
 }
 
 .about-text {
@@ -346,7 +396,7 @@ button:hover::before {
   letter-spacing: 4px;
   text-transform: uppercase;
   color: #fff;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .about-text h2 {
@@ -357,13 +407,18 @@ button:hover::before {
   margin-bottom: 0.25rem;
 }
 
-
 .about-text p {
   color: rgba(255, 255, 255, 0.65);
   font-size: 0.8rem;
-  line-height: 1.9;
   font-weight: 400;
   letter-spacing: 0.5px;
+  line-height: 2;
+  margin-bottom: 0.5rem;
+}
+
+.about-desc {
+  padding-left: 1.5rem;
+  border-left: thin solid #5d696156;
 }
 
 .about-availability {
@@ -708,21 +763,75 @@ button:hover::before {
 
   h1 {
     font-size: 3.2rem;
+    min-height: 2.2em;
   }
 
-  .about-text h2,
-  .projects-header h2,
-  .contact-container h2 {
-    font-size: 2.5rem;
+  .subtitle {
+    min-height: 2.6em;
   }
 
-  .about-text p {
+  .hero-buttons {
+    width: 100%;
+  }
+
+  .btn-explore {
+    width: 100%;
+    padding: 16px 0;
     font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-align: center;
   }
 
   button {
     width: 100%;
     text-align: center;
+  }
+
+  .about-photo-placeholder {
+    width: 90px;
+    height: 90px;
+  }
+
+  .about-container {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .about-photo-wrap {
+    margin-top: 0;
+  }
+
+  .about-label {
+    font-size: 0.6rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
+
+  .about-availability {
+    font-size: 0.58rem;
+    letter-spacing: 1.2px;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .projects-header h2 {
+    font-size: 2rem;
+  }
+
+  .contact-container h2 {
+    font-size: 2.2rem;
+  }
+
+  .contact-sub {
+    font-size: 0.78rem;
   }
 
   .contact-links {
@@ -739,16 +848,4 @@ button:hover::before {
 .about-photo-wrap::before,
 .about-photo-wrap::after {
   display: none;
-}
-
-
-.hero.explored nav {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.btn-explore {
-  padding: 18px 72px;
-  font-size: 0.85rem;
-  letter-spacing: 5px;
 }

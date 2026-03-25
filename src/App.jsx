@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
@@ -46,13 +46,96 @@ function Sparkles() {
   )
 }
 
+const HEADING = "Hi, I'm Layba."
+const SUBTITLE = "I like building aesthetic digital experiences."
+const LAYBA_START = 8
+const LAYBA_END = 13
+const SPEED = 22
+
+function HeroTyped({ onAllDone }) {
+  const [phase, setPhase] = useState(0) // 0 = typing h1, 1 = typing subtitle, 2 = done
+  const [h1Count, setH1Count] = useState(0)
+  const [subCount, setSubCount] = useState(0)
+
+  // Phase 0: type heading
+  useEffect(() => {
+    if (phase !== 0) return
+    if (h1Count >= HEADING.length) {
+      setTimeout(() => setPhase(1), 150)
+      return
+    }
+    const t = setTimeout(() => setH1Count(c => c + 1), SPEED)
+    return () => clearTimeout(t)
+  }, [phase, h1Count])
+
+  // Phase 1: type subtitle
+  useEffect(() => {
+    if (phase !== 1) return
+    if (subCount >= SUBTITLE.length) {
+      setTimeout(() => {
+        setPhase(2)
+        onAllDone()
+      }, 150)
+      return
+    }
+    const t = setTimeout(() => setSubCount(c => c + 1), SPEED)
+    return () => clearTimeout(t)
+  }, [phase, subCount, onAllDone])
+
+  // Build h1 with green "Layba"
+  const beforeLayba = HEADING.slice(0, Math.min(h1Count, LAYBA_START))
+  const layba = HEADING.slice(LAYBA_START, Math.min(h1Count, LAYBA_END))
+  const afterLayba = h1Count > LAYBA_END ? HEADING.slice(LAYBA_END, h1Count) : ''
+
+  return (
+    <>
+      <h1>
+        {beforeLayba}
+        {layba && <span>{layba}</span>}
+        {afterLayba}
+        {phase === 0 && <span className="cursor">|</span>}
+      </h1>
+      <p className="subtitle">
+        {SUBTITLE.slice(0, subCount)}
+        {phase === 1 && <span className="cursor">|</span>}
+      </p>
+    </>
+  )
+}
+
+function useFadeUp() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible')
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return ref
+}
+
 function App() {
   const [explored, setExplored] = useState(false)
+  const [showButton, setShowButton] = useState(false)
 
-  const handleExplore = () => {
-    setExplored(true)
-  }
+  const aboutRef = useFadeUp()
+  const projectsRef = useFadeUp()
+  const contactRef = useFadeUp()
 
+  const handleExplore = () => setExplored(true)
   const handleViewWork = () => {
     document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
   }
@@ -72,9 +155,8 @@ function App() {
         </nav>
 
         <div className="hero-content">
-          <h1>Hi, I'm <span>Layba</span>.</h1>
-          <p className="subtitle">I like building aesthetic digital experiences.</p>
-          <div className="hero-buttons">
+          <HeroTyped onAllDone={() => setShowButton(true)} />
+          <div className={`hero-buttons ${showButton ? 'btn-visible' : ''}`}>
             <button
               type="button"
               className={explored ? '' : 'btn-explore'}
@@ -87,7 +169,7 @@ function App() {
       </section>
 
       <div className={`site-content ${explored ? 'unlocked' : ''}`}>
-        <section className="about" id="about">
+        <section className="about fade-up" id="about" ref={aboutRef}>
           <div className="about-container">
             <div className="about-photo-wrap">
               <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
@@ -95,11 +177,13 @@ function App() {
             <div className="about-text">
               <span className="about-label">full stack developer</span>
               <h2>Profile</h2>
-              <p className="about-lead">I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
-              <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
-              <p>My background in technical tutoring taught me how to break down complex problems and communicate clearly, which makes me a better developer. I care deeply about the user experience and a detailed, intentional implementation.</p>
-              <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
-              <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
+              <div className="about-desc">
+                <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
+                <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
+                <p>My background in technical tutoring taught me how to break down complex problems and communicate clearly, which makes me a better developer. I care deeply about the user experience and a detailed, intentional implementation.</p>
+                <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
+                <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
+              </div>
               <div className="about-availability">
                 <span className="availability-dot" />
                 Currently open to freelance opportunities
@@ -108,7 +192,7 @@ function App() {
           </div>
         </section>
 
-        <section className="projects" id="projects">
+        <section className="projects fade-up" id="projects" ref={projectsRef}>
           <div className="projects-header">
             <h2>Things I've built.</h2>
           </div>
@@ -200,7 +284,7 @@ function App() {
           </div>
         </section>
 
-        <section className="contact" id="contact">
+        <section className="contact fade-up" id="contact" ref={contactRef}>
           <div className="contact-container">
             <h2>Let's connect.</h2>
             <p className="contact-sub">Have a project in mind or just want to connect?</p>
