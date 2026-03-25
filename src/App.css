@@ -120,7 +120,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   background: rgba(7, 10, 8, 0.8);
