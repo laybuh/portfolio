@@ -368,6 +368,7 @@ button:hover::before {
   border-radius: 50%;
   background: rgba(98, 109, 103, 0.4);
   margin-top: 0.5rem;
+  opacity: 1;
 }
 
 .about-photo-placeholder {
