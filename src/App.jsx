@@ -1,24 +1,23 @@
 import './App.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
 import dospacePhoto from './assets/dospace.png'
 import hazefmPhoto from './assets/hazefm.png'
+import eliPhoto from './assets/3li3li.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
 
   useEffect(() => {
     let lastSpawn = 0
-
     const handleMouseMove = (e) => {
       const now = Date.now()
       if (now - lastSpawn < 50) return
       if (Math.random() > 0.6) return
-
       lastSpawn = now
-
       const sparkle = {
         id: Math.random(),
         x: e.clientX,
@@ -30,7 +29,6 @@ function Sparkles() {
         setSparkles(prev => prev.filter(s => s.id !== sparkle.id))
       }, 600)
     }
-
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
@@ -46,256 +44,184 @@ function Sparkles() {
   )
 }
 
-const HEADING = "Hi, I'm Layba."
-const SUBTITLE = "I like building aesthetic digital experiences."
-const LAYBA_START = 8
-const LAYBA_END = 13
-const SPEED = 22
-
-function HeroTyped({ onAllDone }) {
-  const [phase, setPhase] = useState(0) // 0 = typing h1, 1 = typing subtitle, 2 = done
-  const [h1Count, setH1Count] = useState(0)
-  const [subCount, setSubCount] = useState(0)
-
-  // Phase 0: type heading
-  useEffect(() => {
-    if (phase !== 0) return
-    if (h1Count >= HEADING.length) {
-      setTimeout(() => setPhase(1), 150)
-      return
-    }
-    const t = setTimeout(() => setH1Count(c => c + 1), SPEED)
-    return () => clearTimeout(t)
-  }, [phase, h1Count])
-
-  // Phase 1: type subtitle
-  useEffect(() => {
-    if (phase !== 1) return
-    if (subCount >= SUBTITLE.length) {
-      setTimeout(() => {
-        setPhase(2)
-        onAllDone()
-      }, 150)
-      return
-    }
-    const t = setTimeout(() => setSubCount(c => c + 1), SPEED)
-    return () => clearTimeout(t)
-  }, [phase, subCount, onAllDone])
-
-  // Build h1 with green "Layba"
-  const beforeLayba = HEADING.slice(0, Math.min(h1Count, LAYBA_START))
-  const layba = HEADING.slice(LAYBA_START, Math.min(h1Count, LAYBA_END))
-  const afterLayba = h1Count > LAYBA_END ? HEADING.slice(LAYBA_END, h1Count) : ''
-
+function Nav() {
   return (
-    <>
-      <h1>
-        {beforeLayba}
-        {layba && <span>{layba}</span>}
-        {afterLayba}
-        {phase === 0 && <span className="cursor">|</span>}
-      </h1>
-      <p className="subtitle">
-        {SUBTITLE.slice(0, subCount)}
-        {phase === 1 && <span className="cursor">|</span>}
-      </p>
-    </>
+    <nav>
+      <Link to="/" className="logo">layba.dev</Link>
+      <ul>
+        <li><Link to="/">index</Link></li>
+        <li><Link to="/about">about</Link></li>
+        <li><Link to="/projects">projects</Link></li>
+        <li><Link to="/contact">contact</Link></li>
+      </ul>
+    </nav>
   )
 }
 
-function useFadeUp() {
-  const ref = useRef(null)
+function Home() {
+  const navigate = useNavigate()
+  return (
+    <section className="hero">
+      <div className="hero-content">
+        <h1>Hi, I'm <span>Layba</span>.</h1>
+        <p className="subtitle">I like building aesthetic digital experiences.</p>
+        <div className="hero-buttons btn-visible">
+          <button type="button" onClick={() => navigate('/projects')}>
+            View My Work
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
+function About() {
+  return (
+    <section className="about" id="about">
+      <div className="about-container">
+        <div className="about-photo-wrap">
+          <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
+        </div>
+        <div className="about-text">
+          <span className="about-label">full stack developer</span>
+          <h2>Profile</h2>
+          <div className="about-desc">
+            <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
+            <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
+            <p>My background in technical tutoring taught me how to break down complex problems and communicate clearly, which makes me a better developer. I care deeply about the user experience and a detailed, intentional implementation.</p>
+            <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
+            <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
+          </div>
+          <div className="about-availability">
+            <span className="availability-dot" />
+            Currently open to freelance opportunities
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('visible')
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.1 }
-    )
+const projects = [
+  {
+    img: dospacePhoto,
+    alt: 'dospace',
+    title: 'dospace',
+    desc: 'Built with React, Vite, Node.js, and PostgreSQL, this full-stack encrypted to-do list manager secures every task with AES-256 encryption so not even the admin can read them. To-dos are stored in the database as unreadable ciphertext. Features JWT authentication, bcrypt hashing, email verification with auto-expiry, password reset via domain-verified transactional email, password strength validation, idle session timeout with tab close detection, account deletion with email confirmation, and cascade delete.',
+    tags: ['React', 'Vite', 'Node.js', 'Express', 'PostgreSQL', 'JWT', 'AES-256'],
+    links: [
+      { href: 'https://dospace.vercel.app', label: 'live' },
+      { href: 'https://github.com/laybuh/todo-frontend', label: 'github (FE)' },
+      { href: 'https://github.com/laybuh/todo-app', label: 'github (BE)' },
+    ]
+  },
+  {
+    img: hazefmPhoto,
+    alt: 'haze.fm',
+    title: 'haze.fm',
+    desc: 'Built with Next.js and TypeScript, this music discovery app generates curated playlists based on your mood or a favorite artist. It connects to the Last.fm API to fetch tracks using emotional tag mapping and artist data, and uses the YouTube Data API to stream full songs directly in the app. Features a custom mood-to-tag mapping system, real-time playlist generation, shuffle, skip, and regenerate controls, and an immersive aesthetic visual experience with cycling background scenes.',
+    tags: ['Next.js', 'TypeScript', 'Last.fm API', 'YouTube API', 'Tailwind CSS'],
+    links: [
+      { href: 'https://hazefm.vercel.app', label: 'live' },
+      { href: 'https://github.com/laybuh/hazefm', label: 'github' },
+    ]
+  },
+  {
+    img: eliPhoto,
+    alt: '3li3li',
+    title: '3li3li',
+    desc: 'A Y2K/vaporwave artist website built for independent musician 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
+    tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
+    links: [
+      { href: 'https://3li3li.com', label: 'live' },
+    ]
+  },
+  {
+    img: animePhoto,
+    alt: 'Anime Searcher',
+    title: 'Anime Searcher',
+    desc: 'Built with React and Vite, this app connects to the Jikan API to search the MyAnimeList database in real time. Users can look up any anime and see cover art, genres, scores, and descriptions. Styled with a custom vaporwave aesthetic.',
+    tags: ['React', 'Vite', 'Jikan API'],
+    links: [
+      { href: 'https://animesearcher.vercel.app', label: 'live' },
+      { href: 'https://github.com/laybuh/anime-search', label: 'github' },
+    ]
+  },
+  {
+    img: mapPhoto,
+    alt: 'Angular World Map',
+    title: 'Angular World Map',
+    desc: 'Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding. Originally built for a university course, extended and deployed independently.',
+    tags: ['Angular', 'TypeScript', 'World Bank API', 'SVG'],
+    links: [
+      { href: 'https://layba-map.vercel.app', label: 'live' },
+      { href: 'https://github.com/laybuh/angular-map/', label: 'github' },
+    ]
+  },
+]
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+function Projects() {
+  return (
+    <section className="projects" id="projects">
+      <div className="projects-header">
+        <h2>Things I've built.</h2>
+      </div>
+      <div className="projects-grid">
+        {projects.map((p) => (
+          <div className="project-card" key={p.title}>
+            <div className="project-img-wrap">
+              <img src={p.img} alt={p.alt} />
+            </div>
+            <div className="project-info">
+              <p className="project-title">{p.title}</p>
+              <p className="project-desc">{p.desc}</p>
+              <div className="project-tags">
+                {p.tags.map(tag => (
+                  <span className="project-tag" key={tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div className="project-links">
+              {p.links.map(l => (
+                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
 
-  return ref
+function Contact() {
+  return (
+    <section className="contact" id="contact">
+      <div className="contact-container">
+        <h2>Let's connect.</h2>
+        <p className="contact-sub">Have a project in mind or just want to connect?</p>
+        <p className="contact-sub">I'd love to hear from you.</p>
+        <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>
+        <div className="contact-links">
+          <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">linkedin</a>
+          <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-social">github</a>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function App() {
-  const [explored, setExplored] = useState(false)
-  const [showButton, setShowButton] = useState(false)
-
-  const aboutRef = useFadeUp()
-  const projectsRef = useFadeUp()
-  const contactRef = useFadeUp()
-
-  const handleExplore = () => setExplored(true)
-  const handleViewWork = () => {
-    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <main>
       <Sparkles />
-      <section className={`hero ${explored ? 'explored' : ''}`}>
-        <nav>
-          <a href="#" className="logo">layba.dev</a>
-          <ul>
-            <li><a href="#">index</a></li>
-            <li><a href="#about">about</a></li>
-            <li><a href="#projects">projects</a></li>
-            <li><a href="#contact">contact</a></li>
-          </ul>
-        </nav>
-
-        <div className="hero-content">
-          <HeroTyped onAllDone={() => setShowButton(true)} />
-          <div className={`hero-buttons ${showButton ? 'btn-visible' : ''}`}>
-            <button
-              type="button"
-              className={explored ? '' : 'btn-explore'}
-              onClick={explored ? handleViewWork : handleExplore}
-            >
-              {explored ? 'View My Work' : 'Explore'}
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <div className={`site-content ${explored ? 'unlocked' : ''}`}>
-        <section className="about fade-up" id="about" ref={aboutRef}>
-          <div className="about-container">
-            <div className="about-photo-wrap">
-              <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
-            </div>
-            <div className="about-text">
-              <span className="about-label">full stack developer</span>
-              <h2>Profile</h2>
-              <div className="about-desc">
-                <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
-                <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
-                <p>My background in technical tutoring taught me how to break down complex problems and communicate clearly, which makes me a better developer. I care deeply about the user experience and a detailed, intentional implementation.</p>
-                <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
-                <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
-              </div>
-              <div className="about-availability">
-                <span className="availability-dot" />
-                Currently open to freelance opportunities
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="projects fade-up" id="projects" ref={projectsRef}>
-          <div className="projects-header">
-            <h2>Things I've built.</h2>
-          </div>
-
-          <div className="projects-grid">
-            <div className="project-card">
-              <div className="project-img-wrap">
-                <img src={dospacePhoto} alt="dospace" />
-              </div>
-              <div className="project-info">
-                <p className="project-title">dospace</p>
-                <p className="project-desc">Built with React, Vite, Node.js, and PostgreSQL, this full-stack encrypted to-do list manager secures every task with AES-256 encryption so not even the admin can read them. To-dos are stored in the database as unreadable ciphertext. Features JWT authentication, bcrypt hashing, email verification with auto-expiry, password reset via domain-verified transactional email, password strength validation, idle session timeout with tab close detection, account deletion with email confirmation, and cascade delete.</p>
-                <div className="project-tags">
-                  <span className="project-tag">React</span>
-                  <span className="project-tag">Vite</span>
-                  <span className="project-tag">Node.js</span>
-                  <span className="project-tag">Express</span>
-                  <span className="project-tag">PostgreSQL</span>
-                  <span className="project-tag">JWT</span>
-                  <span className="project-tag">AES-256</span>
-                </div>
-              </div>
-              <div className="project-links">
-                <a href="https://dospace.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
-                <a href="https://github.com/laybuh/todo-frontend" target="_blank" rel="noreferrer" className="project-link">github (FE)</a>
-                <a href="https://github.com/laybuh/todo-app" target="_blank" rel="noreferrer" className="project-link">github (BE)</a>
-              </div>
-            </div>
-
-            <div className="project-card">
-              <div className="project-img-wrap">
-                <img src={hazefmPhoto} alt="haze.fm" />
-              </div>
-              <div className="project-info">
-                <p className="project-title">haze.fm</p>
-                <p className="project-desc">Built with Next.js and TypeScript, this music discovery app generates curated playlists based on your mood or a favorite artist. It connects to the Last.fm API to fetch tracks using emotional tag mapping and artist data, and uses the YouTube Data API to stream full songs directly in the app. Features a custom mood-to-tag mapping system, real-time playlist generation, shuffle, skip, and regenerate controls, and an immersive aesthetic visual experience with cycling background scenes.</p>
-                <div className="project-tags">
-                  <span className="project-tag">Next.js</span>
-                  <span className="project-tag">TypeScript</span>
-                  <span className="project-tag">Last.fm API</span>
-                  <span className="project-tag">YouTube API</span>
-                  <span className="project-tag">Tailwind CSS</span>
-                </div>
-              </div>
-              <div className="project-links">
-                <a href="https://hazefm.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
-                <a href="https://github.com/laybuh/hazefm" target="_blank" rel="noreferrer" className="project-link">github</a>
-              </div>
-            </div>
-
-            <div className="project-card">
-              <div className="project-img-wrap">
-                <img src={animePhoto} alt="Anime Searcher" />
-              </div>
-              <div className="project-info">
-                <p className="project-title">Anime Searcher</p>
-                <p className="project-desc">Built with React and Vite, this app connects to the Jikan API to search the MyAnimeList database in real time. Users can look up any anime and see cover art, genres, scores, and descriptions. Styled with a custom vaporwave aesthetic.</p>
-                <div className="project-tags">
-                  <span className="project-tag">React</span>
-                  <span className="project-tag">Vite</span>
-                  <span className="project-tag">Jikan API</span>
-                </div>
-              </div>
-              <div className="project-links">
-                <a href="https://animesearcher.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
-                <a href="https://github.com/laybuh/anime-search" target="_blank" rel="noreferrer" className="project-link">github</a>
-              </div>
-            </div>
-
-            <div className="project-card">
-              <div className="project-img-wrap">
-                <img src={mapPhoto} alt="Angular World Map" />
-              </div>
-              <div className="project-info">
-                <p className="project-title">Angular World Map</p>
-                <p className="project-desc">Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding. Originally built for a university course, extended and deployed independently.</p>
-                <div className="project-tags">
-                  <span className="project-tag">Angular</span>
-                  <span className="project-tag">TypeScript</span>
-                  <span className="project-tag">World Bank API</span>
-                  <span className="project-tag">SVG</span>
-                </div>
-              </div>
-              <div className="project-links">
-                <a href="https://layba-map.vercel.app" target="_blank" rel="noreferrer" className="project-link">live</a>
-                <a href="https://github.com/laybuh/angular-map/" target="_blank" rel="noreferrer" className="project-link">github</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="contact fade-up" id="contact" ref={contactRef}>
-          <div className="contact-container">
-            <h2>Let's connect.</h2>
-            <p className="contact-sub">Have a project in mind or just want to connect?</p>
-            <p className="contact-sub">I'd love to hear from you.</p>
-            <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>
-            <div className="contact-links">
-              <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">linkedin</a>
-              <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-social">github</a>
-            </div>
-          </div>
-        </section>
+      <Nav />
+      <div className="page-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
     </main>
   )
