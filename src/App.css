@@ -291,7 +291,7 @@ button:hover::before {
   object-position: center;
   display: block;
   border: thin solid rgba(214, 152, 209, 0.25);
-  opacity: 0.8;
+  filter: grayscale(100%) contrast(1.3);
   
 }
 
