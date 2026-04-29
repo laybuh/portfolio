@@ -203,6 +203,7 @@ function Contact() {
         <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>
         <div className="contact-links">
           <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-social">linkedin</a>
+          <a href="https://www.instagram.com/laybacoded" target="_blank" rel="noreferrer" className="contact-social">instagram</a>
           <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-social">github</a>
         </div>
       </div>
