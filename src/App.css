@@ -9,12 +9,12 @@
 }
 
 :root {
-  --green: #98d6ab;
-  --dark: #070a08;
+  --pink: #d698d0;
+  --dark: #0a0709;
   --card-bg: rgba(255, 255, 255, 0.02);
   --border: rgba(232, 180, 232, 0.1);
-  --border-hover: rgba(152, 214, 171, 0.35);
-  --text-muted: rgba(210, 230, 215, 0.75);
+  --border-hover: rgba(210, 152, 214, 0.35);
+  --text-muted: rgba(230, 210, 227, 0.75);
 }
 
 html {
@@ -61,7 +61,7 @@ body::before {
 }
 
 ::selection {
-  background-color: var(--green);
+  background-color: var(--pink);
   color: #000;
 }
 
@@ -69,7 +69,7 @@ body::before {
   position: fixed;
   pointer-events: none;
   font-size: 0.65rem;
-  color: rgba(180, 232, 202, 0.8);
+  color: rgba(229, 180, 232, 0.8);
   animation: fadeout 0.6s ease forwards;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -106,7 +106,7 @@ nav {
 .logo {
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--green);
+  color: var(--pink);
   letter-spacing: 5px;
   text-shadow: 0 0 20px rgba(152, 214, 171, 0.4);
   text-decoration: none;
@@ -135,12 +135,12 @@ nav ul a::after {
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--green);
+  background: var(--pink);
   transition: width 0.3s ease;
 }
 
 nav ul a:hover {
-  color: var(--green);
+  color: var(--pink);
 }
 
 nav ul a:hover::after {
@@ -202,8 +202,8 @@ h1 {
 }
 
 h1 span {
-  color: var(--green);
-  text-shadow: 0 0 30px rgba(180, 232, 182, 0.3), 0 0 60px rgba(180, 232, 215, 0.2);
+  color: var(--pink);
+  text-shadow: 0 0 30px rgba(232, 180, 216, 0.3), 0 0 60px rgba(230, 180, 232, 0.2);
 }
 
 .subtitle {
@@ -220,8 +220,8 @@ h1 span {
 button {
   padding: 14px 48px;
   background: transparent;
-  border: 1px solid rgba(180, 232, 180, 0.3);
-  color: var(--green);
+  border: 1px solid rgba(232, 180, 229, 0.3);
+  color: var(--pink);
   font-family: 'Syne', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 3px;
@@ -237,15 +237,15 @@ button::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--green);
+  background: var(--pink);
   transform: translateX(-101%);
   transition: transform 0.4s ease;
   z-index: -1;
 }
 
 button:hover {
-  color: #070a08;
-  border-color: var(--green);
+  color: #0a070a;
+  border-color: var(--pink);
 }
 
 button:hover::before {
@@ -281,24 +281,18 @@ button:hover::before {
   flex-shrink: 0;
   position: relative;
   padding: 3px;
-  border-radius: 50%;
-  background: rgba(98, 109, 103, 0.4);
   margin-top: 0.5rem;
 }
 
 .about-photo-placeholder {
   width: 130px;
   height: 130px;
-  border-radius: 50%;
   object-fit: cover;
   object-position: center;
   display: block;
-  border: 1px solid rgba(152, 214, 171, 0.25);
-  box-shadow:
-    0 0 0 4px rgba(152, 214, 171, 0.06),
-    0 0 20px rgba(152, 214, 171, 0.12),
-    0 0 50px rgba(152, 214, 171, 0.06);
-  padding: 5px;
+  border: thin solid rgba(214, 152, 209, 0.25);
+  opacity: 0.8;
+  
 }
 
 .about-text {
@@ -318,7 +312,7 @@ button:hover::before {
 .about-text h2 {
   font-size: 2.6rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--pink);
   line-height: 1.1;
   margin-bottom: 0.25rem;
 }
@@ -334,7 +328,7 @@ button:hover::before {
 
 .about-desc {
   padding-left: 1.5rem;
-  border-left: thin solid #5d696156;
+  border-left: thin solid #695d6756;
 }
 
 .about-availability {
@@ -345,8 +339,8 @@ button:hover::before {
   font-size: 0.68rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(152, 214, 171, 0.8);
-  border: 1px solid rgba(152, 214, 171, 0.15);
+  color: rgba(214, 152, 212, 0.911);
+  border: 1px solid rgba(214, 152, 202, 0.15);
   border-radius: 2px;
   padding: 0.55rem 1rem;
   width: fit-content;
@@ -357,8 +351,8 @@ button:hover::before {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 6px rgba(152, 214, 171, 0.8);
+  background: var(--pink);
+  box-shadow: 0 0 6px rgba(214, 152, 207, 0.8);
   animation: pulse 2s ease infinite;
   flex-shrink: 0;
 }
@@ -395,7 +389,7 @@ button:hover::before {
 .projects-header h2 {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--pink);
 }
 
 .projects-grid {
@@ -420,7 +414,7 @@ button:hover::before {
 .project-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(152, 214, 171, 0.07);
+  box-shadow: 0 20px 60px rgba(214, 152, 205, 0.07);
 }
 
 .project-img-wrap {
@@ -479,8 +473,8 @@ button:hover::before {
   font-size: 0.62rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(152, 214, 171, 0.8);
-  border: 1px solid rgba(152, 214, 171, 0.2);
+  color: rgba(214, 152, 209, 0.8);
+  border: 1px solid rgba(214, 152, 191, 0.2);
   border-radius: 2px;
   padding: 0.2rem 0.6rem;
 }
@@ -511,7 +505,7 @@ button:hover::before {
 }
 
 .project-link:hover {
-  color: var(--green);
+  color: var(--pink);
 }
 
 .contact {
@@ -552,7 +546,7 @@ button:hover::before {
 .contact-container::before {
   content: '✦';
   font-size: 0.6rem;
-  color: rgba(152, 214, 171, 0.4);
+  color: rgba(214, 152, 212, 0.4);
   letter-spacing: 8px;
   margin-bottom: 0.5rem;
 }
@@ -560,7 +554,7 @@ button:hover::before {
 .contact-container h2 {
   font-size: 3.5rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--pink);
   text-shadow: 0 0 30px rgba(232, 180, 232, 0.25);
 }
 
@@ -581,10 +575,10 @@ button:hover::before {
   font-size: 0.7rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--pink);
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid rgba(180, 232, 197, 0.2);
+  border: 1px solid rgba(232, 180, 219, 0.2);
   padding: 0.7rem 1.6rem;
   border-radius: 2px;
 }
@@ -592,7 +586,7 @@ button:hover::before {
 .contact-social:hover,
 .contact-email:hover {
   color: #fff;
-  border-color: rgba(180, 232, 196, 0.5);
+  border-color: rgba(231, 180, 232, 0.5);
   background: rgba(232, 180, 232, 0.05);
 }
 
