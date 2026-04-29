@@ -119,7 +119,7 @@ const projects = [
     img: eliPhoto,
     alt: '3li3li',
     title: '3li3li',
-    desc: 'A Y2K/vaporwave artist website built for independent musician 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
+    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://3li3li.com', label: 'live' },
