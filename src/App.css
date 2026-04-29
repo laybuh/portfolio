@@ -80,6 +80,7 @@ body::before {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -80%) scale(0.4);
@@ -363,10 +364,13 @@ button:hover::before {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     box-shadow: 0 0 6px rgba(152, 214, 171, 0.8);
   }
+
   50% {
     opacity: 0.5;
     box-shadow: 0 0 12px rgba(152, 214, 171, 0.4);
@@ -424,19 +428,6 @@ button:hover::before {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   position: relative;
-}
-
-.project-img-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(152, 214, 171, 0.08);
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.project-card:hover .project-img-wrap::after {
-  opacity: 0;
 }
 
 .project-img-wrap img {
