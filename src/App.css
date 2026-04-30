@@ -152,7 +152,7 @@ nav ul a:hover::after {
 }
 
 .hero {
-  height: 100svh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
