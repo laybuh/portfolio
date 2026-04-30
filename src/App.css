@@ -19,6 +19,8 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--dark);
+  min-height: 100%;
 }
 
 body {
