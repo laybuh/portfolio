@@ -737,3 +737,10 @@ button:hover::before {
 .about-photo-wrap::after {
   display: none;
 }
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 100dvh;
+    padding-top: 10rem;
+  }
+}
