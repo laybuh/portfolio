@@ -65,6 +65,12 @@ body::before {
   color: #000;
 }
 
+main {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
 .sparkle {
   position: fixed;
   pointer-events: none;
@@ -152,11 +158,13 @@ nav ul a:hover::after {
 }
 
 .hero {
+  flex: 1;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5rem;
+  padding: 0 2rem;
+  padding-top: 8rem;
   position: relative;
   overflow: hidden;
 }
