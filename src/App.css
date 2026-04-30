@@ -318,7 +318,7 @@ button:hover::before {
   font-size: 0.68rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(214, 152, 212, 0.911);
+  color: rgb(255, 186, 253);
   border: 1px solid rgba(214, 152, 202, 0.15);
   border-radius: 2px;
   padding: 0.55rem 1rem;
@@ -331,7 +331,7 @@ button:hover::before {
   height: 6px;
   border-radius: 50%;
   background: var(--pink);
-  box-shadow: 0 0 6px rgba(214, 152, 207, 0.8);
+  box-shadow: 0 0 6px rgba(255, 210, 250, 0.8);
   animation: pulse 2s ease infinite;
   flex-shrink: 0;
 }
@@ -450,7 +450,7 @@ button:hover::before {
   font-size: 0.62rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(214, 152, 209, 0.8);
+  color: rgba(254, 194, 249, 0.8);
   border: 1px solid rgba(214, 152, 191, 0.2);
   border-radius: 2px;
   padding: 0.2rem 0.6rem;
@@ -523,7 +523,7 @@ button:hover::before {
 .contact-container::before {
   content: '✦';
   font-size: 0.6rem;
-  color: rgba(214, 152, 212, 0.4);
+  color: rgba(255, 195, 227, 0.63);
   letter-spacing: 8px;
   margin-bottom: 0.5rem;
 }
@@ -555,7 +555,7 @@ button:hover::before {
   color: var(--pink);
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid rgba(232, 180, 219, 0.2);
+  border: 1px solid rgba(255, 200, 236, 0.614);
   padding: 0.7rem 1.6rem;
   border-radius: 2px;
 }
