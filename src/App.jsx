@@ -22,7 +22,7 @@ function Sparkles() {
         id: Math.random(),
         x: e.clientX,
         y: e.clientY,
-        symbol: ['✦', '✧', '⋆'][Math.floor(Math.random() * 3)]
+        symbol: ['✦', '✧', '⋆', '♡', '˚', '✿'][Math.floor(Math.random() * 6)]
       }
       setSparkles(prev => [...prev, sparkle])
       setTimeout(() => {
@@ -62,7 +62,9 @@ function Home() {
   const navigate = useNavigate()
   return (
     <section className="hero">
+      <div className="hero-grid" aria-hidden="true" />
       <div className="hero-content">
+        <span className="hero-eyebrow">visitor@layba:~$ whoami</span>
         <h1>Hi, I'm <span>Layba</span>.</h1>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
@@ -83,7 +85,8 @@ function About() {
           <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
         </div>
         <div className="about-text">
-          <span className="about-label">full stack developer</span>
+          <span className="about-cmd"><span className="term-prompt">visitor@layba</span>:~/about$ cat profile.txt</span>
+          <span className="about-label"># full stack developer</span>
           <h2>Profile</h2>
           <div className="about-desc">
             <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
@@ -96,6 +99,7 @@ function About() {
             <span className="availability-dot" />
             Currently open to freelance opportunities
           </div>
+          <span className="about-cmd about-cmd-end"><span className="term-prompt">visitor@layba</span>:~/about$ <span className="term-caret" /></span>
         </div>
       </div>
     </section>
