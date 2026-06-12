@@ -951,3 +951,42 @@ button:hover::before {
     padding-top: 10rem;
   }
 }
+
+/* ko-fi floating link */
+.kofi-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9997;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(126, 240, 230, 0.25);
+  border-radius: 2px;
+  padding: 0.3rem 0.7rem;
+  background: rgba(7, 10, 8, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kofi-text {
+  background-image: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kofi-float:hover {
+  border-color: rgba(183, 140, 255, 0.45);
+  box-shadow: 0 0 12px rgba(126, 240, 230, 0.2), 0 0 18px rgba(183, 140, 255, 0.18);
+}
+
+@media (max-width: 600px) {
+  .kofi-float {
+    right: 0.9rem;
+    bottom: 0.9rem;
+  }
+}

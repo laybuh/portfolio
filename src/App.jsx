@@ -44,6 +44,19 @@ function Sparkles() {
   )
 }
 
+function KofiButton() {
+  return (
+    <a
+      href="https://ko-fi.com/layba"
+      target="_blank"
+      rel="noreferrer"
+      className="kofi-float"
+    >
+      <span className="kofi-text">BUY ME A COFFEE</span>
+    </a>
+  )
+}
+
 function Nav() {
   return (
     <nav>
@@ -219,6 +232,7 @@ function App() {
   return (
     <main>
       <Sparkles />
+      <KofiButton />
       <Nav />
       <div className="page-content">
         <Routes>
