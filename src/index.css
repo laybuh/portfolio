@@ -644,9 +644,9 @@ button:hover::before {
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(255, 158, 221, 0.4),
-    rgba(183, 140, 255, 0.18) 30%,
-    transparent 60%
+    rgba(255, 158, 221, 0.42),
+    rgba(183, 140, 255, 0.16) 16%,
+    transparent 40%
   );
   transition: opacity 0.5s ease;
 }
@@ -656,7 +656,7 @@ button:hover::before {
 }
 
 .project-card:hover .project-img-wrap::after {
-  opacity: 0.55;
+  opacity: 0;
 }
 
 .project-info {
