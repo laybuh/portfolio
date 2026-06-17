@@ -694,12 +694,11 @@ button:hover::before {
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 1.5px;
-  color: var(--pink);
-  border: 1px solid rgba(227, 175, 222, 0.35);
+  color: rgba(227, 175, 222, 0.7);
+  border: 1px solid rgba(227, 175, 222, 0.18);
   border-radius: 2px;
   padding: 0.2rem 0.6rem;
   width: fit-content;
-  text-shadow: 0 0 8px rgba(227, 175, 222, 0.3);
 }
 
 .project-status {
