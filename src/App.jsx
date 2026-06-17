@@ -98,7 +98,6 @@ function About() {
           <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
         </div>
         <div className="about-text">
-          <span className="about-label"># full stack developer</span>
           <h2>Profile</h2>
           <div className="about-desc">
             <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
@@ -107,9 +106,12 @@ function About() {
             <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
             <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
           </div>
-          <div className="about-availability">
-            <span className="availability-dot" />
-            Currently open to freelance opportunities
+          <div className="about-meta">
+            <div className="about-availability">
+              <span className="availability-dot" />
+              Currently open to freelance opportunities
+            </div>
+            <span className="about-tag"># full stack developer</span>
           </div>
         </div>
       </div>
