@@ -644,9 +644,9 @@ button:hover::before {
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(255, 158, 221, 0.42),
-    rgba(183, 140, 255, 0.16) 16%,
-    transparent 40%
+    rgba(255, 158, 221, 0.26),
+    rgba(183, 140, 255, 0.09) 14%,
+    transparent 32%
   );
   transition: opacity 0.5s ease;
 }
@@ -682,21 +682,39 @@ button:hover::before {
   letter-spacing: 0.3px;
 }
 
-.project-handle {
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: -0.35rem;
+}
+
+.project-handle,
+.project-status {
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 1.5px;
   color: var(--pink);
-  text-decoration: none;
+  border: 1px solid rgba(227, 175, 222, 0.35);
+  border-radius: 2px;
+  padding: 0.2rem 0.6rem;
   width: fit-content;
-  margin-top: -0.35rem;
-  text-shadow: 0 0 10px rgba(227, 175, 222, 0.35);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 0 0 8px rgba(227, 175, 222, 0.3);
+}
+
+.project-status {
+  text-transform: uppercase;
+}
+
+.project-handle {
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-handle:hover {
   color: rgb(255, 200, 247);
-  text-shadow: 0 0 12px rgba(227, 175, 222, 0.6);
+  border-color: var(--border-hover);
+  box-shadow: 0 0 12px rgba(227, 175, 222, 0.25);
 }
 
 .project-tags {

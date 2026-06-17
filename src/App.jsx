@@ -123,10 +123,10 @@ function About() {
 const projects = [
   {
     img: eliPhoto,
-    alt: '3li3li',
-    title: '3li3li',
+    alt: '3LI3LI',
+    title: '3LI3LI',
     instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
-    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
+    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI (Eli). Built with React, Vite, and CSS Modules. Features a multi-page layout routed with React Router, an AIM-style intro window that welcomes visitors on arrival, a scrolling Y2K ticker bar across the top, and a custom sparkle cursor that follows the mouse. The music page includes a Spotify embed for streaming, while ElfSight TikTok and Instagram embeds pull in her latest posts so the site stays current without manual updates. An EP section lets fans purchase and download her release through a Web3Forms and Cash App setup. Fully responsive across mobile and deployed to a custom domain at 3li3li.com.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://3li3li.com', label: 'live' },
@@ -136,6 +136,7 @@ const projects = [
     img: michiferqueenPhoto,
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
+    status: 'Template & Design · Launching Soon',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
     desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon (@themichiferqueen) as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe', 'Tailwind CSS'],
@@ -204,8 +205,13 @@ function Projects() {
             </div>
             <div className="project-info">
               <p className="project-title">{p.title}</p>
-              {p.instagram && (
-                <a className="project-handle" href={p.instagram.href} target="_blank" rel="noreferrer">{p.instagram.label}</a>
+              {(p.instagram || p.status) && (
+                <div className="project-badges">
+                  {p.instagram && (
+                    <a className="project-handle" href={p.instagram.href} target="_blank" rel="noreferrer">{p.instagram.label}</a>
+                  )}
+                  {p.status && <span className="project-status">{p.status}</span>}
+                </div>
               )}
               <p className="project-desc">{p.desc}</p>
               <div className="project-tags">
