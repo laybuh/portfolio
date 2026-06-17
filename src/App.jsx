@@ -98,7 +98,6 @@ function About() {
           <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
         </div>
         <div className="about-text">
-          <span className="about-cmd"><span className="term-prompt">visitor@layba</span>:~/about$ cat profile.txt</span>
           <span className="about-label"># full stack developer</span>
           <h2>Profile</h2>
           <div className="about-desc">
@@ -112,7 +111,6 @@ function About() {
             <span className="availability-dot" />
             Currently open to freelance opportunities
           </div>
-          <span className="about-cmd about-cmd-end"><span className="term-prompt">visitor@layba</span>:~/about$ <span className="term-caret" /></span>
         </div>
       </div>
     </section>
