@@ -127,7 +127,7 @@ const projects = [
     desc: ' Built with React, Vite, Tailwind, Node.js, Express, and PostgreSQL, this full-stack mental wellness and productivity app brings tasks, journaling, mood tracking, affirmations, and focus tools into one private space. Every piece of user-written content is encrypted with AES-256-GCM before it reaches the database, so a leak would only expose unreadable ciphertext. Features JWT authentication with rotating refresh tokens and reuse detection, bcrypt hashing, email-based two-step verification, email verification with auto-expiry, password reset via domain-verified transactional email, password strength validation, rate limiting, CSRF origin checks, a strict Content-Security-Policy, idle session timeout with tab close detection, and password-confirmed account deletion.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'PostgreSQL', 'JWT', '2FA', 'AES-256-GCM', 'bcrypt'],
     links: [
-      { href: 'https://dospace.vercel.app', label: 'live' },
+      { href: 'https://lunev.app', label: 'live' },
       { href: 'https://github.com/laybuh/todo-frontend', label: 'github (FE)' },
       { href: 'https://github.com/laybuh/todo-app', label: 'github (BE)' },
     ]
