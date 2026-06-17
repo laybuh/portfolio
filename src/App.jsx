@@ -122,13 +122,25 @@ function About() {
 
 const projects = [
   {
+    img: eliPhoto,
+    alt: '3li3li',
+    title: '3li3li',
+    instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
+    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
+    tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
+    links: [
+      { href: 'https://3li3li.com', label: 'live' },
+    ]
+  },
+  {
     img: michiferqueenPhoto,
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
-    status: 'Template & design · launching soon',
+    instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
+    desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon (@themichiferqueen) as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses server-side price authority so prices can\'t be tampered with, hardened with input validation, rate limiting, open-redirect prevention, and webhook-free payment verification. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe', 'Tailwind CSS'],
     links: [
-      { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen', social: true },
+      { href: 'https://aliveafterparadise.vercel.app/', label: 'live' },
     ]
   },
   {
@@ -141,17 +153,6 @@ const projects = [
       { href: 'https://lunev.app', label: 'live' },
       { href: 'https://github.com/laybuh/todo-frontend', label: 'github (FE)' },
       { href: 'https://github.com/laybuh/todo-app', label: 'github (BE)' },
-    ]
-  },
-  {
-    img: eliPhoto,
-    alt: '3li3li',
-    title: '3li3li',
-    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout with React Router, an AIM-style intro window, scrolling Y2K ticker bar, ElfSight TikTok and Instagram embed for live updates, Spotify embed on the music page, custom sparkle cursor effects, and a fully responsive mobile design.',
-    tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
-    links: [
-      { href: 'https://3li3li.com', label: 'live' },
-      { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli', social: true },
     ]
   },
   {
@@ -203,11 +204,10 @@ function Projects() {
             </div>
             <div className="project-info">
               <p className="project-title">{p.title}</p>
-              {p.status ? (
-                <p className="project-status"><span className="status-dot" />{p.status}</p>
-              ) : (
-                <p className="project-desc">{p.desc}</p>
+              {p.instagram && (
+                <a className="project-handle" href={p.instagram.href} target="_blank" rel="noreferrer">{p.instagram.label}</a>
               )}
+              <p className="project-desc">{p.desc}</p>
               <div className="project-tags">
                 {p.tags.map(tag => (
                   <span className="project-tag" key={tag}>{tag}</span>
@@ -216,7 +216,7 @@ function Projects() {
             </div>
             <div className="project-links">
               {p.links.map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className={l.social ? 'project-link project-link-social' : 'project-link'}>{l.label}</a>
+                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
               ))}
             </div>
           </div>
