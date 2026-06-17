@@ -155,9 +155,9 @@ const projects = [
   },
   {
     img: animePhoto,
-    alt: 'Anime Searcher',
-    title: 'Anime Searcher',
-    desc: 'Built with React and Vite, this app connects to the Jikan API to search the MyAnimeList database in real time. Users can look up any anime and see cover art, genres, scores, and descriptions. Styled with a custom vaporwave aesthetic.',
+    alt: 'Anime Search Terminal',
+    title: 'Anime Search Terminal',
+    desc: 'Built with React and Vite, this app connects to the Jikan API to search the MyAnimeList database using live data. Search by title and filter by type, genre, and minimum score, then sort results by rating or name. Each result shows cover art, score, and a hover-to-reveal synopsis, with a light/dark toggle and a responsive, dark neon interface.',
     tags: ['React', 'Vite', 'Jikan API'],
     links: [
       { href: 'https://animesearcher.vercel.app', label: 'live' },
