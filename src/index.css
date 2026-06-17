@@ -666,6 +666,31 @@ button:hover::before {
   letter-spacing: 0.3px;
 }
 
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgb(255, 186, 253);
+  border: 1px solid rgba(227, 175, 222, 0.25);
+  border-radius: 2px;
+  padding: 0.4rem 0.75rem;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 6px rgba(255, 210, 250, 0.8);
+  animation: pulse 2s ease infinite;
+  flex-shrink: 0;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;
@@ -720,6 +745,11 @@ button:hover::before {
 .project-link:hover {
   color: var(--cyan);
   text-shadow: 0 0 10px rgba(126, 240, 230, 0.5);
+}
+
+.project-link-social:hover {
+  color: var(--pink);
+  text-shadow: 0 0 10px rgba(227, 175, 222, 0.5);
 }
 
 .contact {

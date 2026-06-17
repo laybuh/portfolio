@@ -7,6 +7,7 @@ import mapPhoto from './assets/map.png'
 import dospacePhoto from './assets/dospace.png'
 import hazefmPhoto from './assets/hazefm.png'
 import eliPhoto from './assets/3li3li.png'
+import michiferqueenPhoto from './assets/themichiferqueen.png'
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -121,6 +122,16 @@ function About() {
 
 const projects = [
   {
+    img: michiferqueenPhoto,
+    alt: 'themichiferqueen',
+    title: 'themichiferqueen',
+    status: 'Template & design · launching soon',
+    tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe', 'Tailwind CSS'],
+    links: [
+      { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen', social: true },
+    ]
+  },
+  {
     img: dospacePhoto,
     alt: 'lunev',
     title: 'lunev',
@@ -140,6 +151,7 @@ const projects = [
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://3li3li.com', label: 'live' },
+      { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli', social: true },
     ]
   },
   {
@@ -191,7 +203,11 @@ function Projects() {
             </div>
             <div className="project-info">
               <p className="project-title">{p.title}</p>
-              <p className="project-desc">{p.desc}</p>
+              {p.status ? (
+                <p className="project-status"><span className="status-dot" />{p.status}</p>
+              ) : (
+                <p className="project-desc">{p.desc}</p>
+              )}
               <div className="project-tags">
                 {p.tags.map(tag => (
                   <span className="project-tag" key={tag}>{tag}</span>
@@ -200,7 +216,7 @@ function Projects() {
             </div>
             <div className="project-links">
               {p.links.map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
+                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className={l.social ? 'project-link project-link-social' : 'project-link'}>{l.label}</a>
               ))}
             </div>
           </div>
