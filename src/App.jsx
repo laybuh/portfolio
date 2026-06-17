@@ -137,7 +137,7 @@ const projects = [
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon (@themichiferqueen) as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses server-side price authority so prices can\'t be tampered with, hardened with input validation, rate limiting, open-redirect prevention, and webhook-free payment verification. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
+    desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon (@themichiferqueen) as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe', 'Tailwind CSS'],
     links: [
       { href: 'https://aliveafterparadise.vercel.app/', label: 'live' },
