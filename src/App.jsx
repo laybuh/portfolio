@@ -126,7 +126,7 @@ const projects = [
     alt: '3LI3LI',
     title: '3LI3LI',
     instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
-    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI (Eli). Built with React, Vite, and CSS Modules. Features a multi-page layout routed with React Router, an AIM-style intro window that welcomes visitors on arrival, a scrolling Y2K ticker bar across the top, and a custom sparkle cursor that follows the mouse. The music page includes a Spotify embed for streaming, while ElfSight TikTok and Instagram embeds pull in her latest posts so the site stays current without manual updates. An EP section lets fans purchase and download her release through a Web3Forms and Cash App setup. Fully responsive across mobile and deployed to a custom domain at 3li3li.com.',
+    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout routed with React Router, an AIM-style intro window that welcomes visitors on arrival, a scrolling Y2K ticker bar across the top, and a custom sparkle cursor that follows the mouse. The music page includes a Spotify embed for streaming, while ElfSight TikTok and Instagram embeds pull in her latest posts so the site stays current without manual updates. An EP section lets fans purchase and download her release through a Web3Forms and Cash App setup. Fully responsive across mobile and deployed to a custom domain at 3li3li.com.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://3li3li.com', label: 'live' },
@@ -138,7 +138,7 @@ const projects = [
     title: 'themichiferqueen',
     status: 'Template & Design · Launching Soon',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon (@themichiferqueen) as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
+    desc: 'A custom retro-pixel/Y2K site template and CMS, designed and built for independent author Jasmine Plaskon as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder content while the client adds her own. Live site coming at launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe', 'Tailwind CSS'],
     links: [
       { href: 'https://aliveafterparadise.vercel.app/', label: 'live' },
