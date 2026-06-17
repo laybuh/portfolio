@@ -645,8 +645,8 @@ button:hover::before {
   background: linear-gradient(
     to right,
     rgba(255, 158, 221, 0.26),
-    rgba(183, 140, 255, 0.09) 14%,
-    transparent 32%
+    rgba(183, 140, 255, 0.08) 8%,
+    transparent 20%
   );
   transition: opacity 0.5s ease;
 }
