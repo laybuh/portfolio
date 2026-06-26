@@ -494,17 +494,17 @@ button:hover::before {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .project-card {
   position: relative;
-  border: 1px solid var(--border-hover);
-  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   overflow: hidden;
   background: var(--card-bg);
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 22px rgba(227, 175, 222, 0.18), 0 0 44px rgba(126, 240, 230, 0.1);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.28);
   transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
@@ -581,9 +581,9 @@ button:hover::before {
 
 .project-title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
-  letter-spacing: 1px;
+  letter-spacing: 0.3px;
 }
 
 .project-desc {
@@ -611,7 +611,6 @@ button:hover::before {
   border-radius: 2px;
   padding: 0.2rem 0.6rem;
   width: fit-content;
-  text-shadow: 0 0 6px rgba(227, 175, 222, 0.25);
 }
 
 .project-status {
@@ -626,7 +625,6 @@ button:hover::before {
 .project-handle:hover {
   color: rgb(255, 200, 247);
   border-color: var(--border-hover);
-  box-shadow: 0 0 12px rgba(227, 175, 222, 0.25);
 }
 
 .project-tags {
@@ -651,7 +649,6 @@ button:hover::before {
 .project-tag:hover {
   color: var(--pink);
   border-color: rgba(227, 175, 222, 0.4);
-  box-shadow: 0 0 12px rgba(227, 175, 222, 0.2);
 }
 
 .project-links {
