@@ -1,5 +1,4 @@
 import './App.css'
-import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
@@ -8,42 +7,6 @@ import dospacePhoto from './assets/dospace.png'
 import hazefmPhoto from './assets/hazefm.png'
 import eliPhoto from './assets/3li3li.png'
 import michiferqueenPhoto from './assets/themichiferqueen.png'
-
-function Sparkles() {
-  const [sparkles, setSparkles] = useState([])
-
-  useEffect(() => {
-    let lastSpawn = 0
-    const handleMouseMove = (e) => {
-      const now = Date.now()
-      if (now - lastSpawn < 50) return
-      if (Math.random() > 0.6) return
-      lastSpawn = now
-      const sparkle = {
-        id: Math.random(),
-        x: e.clientX,
-        y: e.clientY,
-        symbol: ['✦', '✧', '⋆', '♡', '˚', '✿'][Math.floor(Math.random() * 6)]
-      }
-      setSparkles(prev => [...prev, sparkle])
-      setTimeout(() => {
-        setSparkles(prev => prev.filter(s => s.id !== sparkle.id))
-      }, 600)
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
-  return (
-    <>
-      {sparkles.map(s => (
-        <span key={s.id} className="sparkle" style={{ left: s.x, top: s.y }}>
-          {s.symbol}
-        </span>
-      ))}
-    </>
-  )
-}
 
 function KofiButton() {
   return (
@@ -76,9 +39,8 @@ function Home() {
   const navigate = useNavigate()
   return (
     <section className="hero">
-      <div className="hero-grid" aria-hidden="true" />
       <div className="hero-content">
-        <span className="hero-eyebrow">visitor@layba:~$ whoami</span>
+        <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt</span>
         <h1>Hi, I'm <span>Layba</span>.</h1>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
@@ -108,11 +70,8 @@ function About() {
             <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
           </div>
           <div className="about-meta">
-            <div className="about-availability">
-              <span className="availability-dot" />
-              Currently open to freelance opportunities
-            </div>
-            <span className="about-tag"># full stack developer</span>
+            <span className="about-availability">Open to freelance opportunities</span>
+            <span className="about-tag">full stack developer</span>
           </div>
         </div>
       </div>
@@ -253,7 +212,6 @@ function Contact() {
 function App() {
   return (
     <main>
-      <Sparkles />
       <KofiButton />
       <Nav />
       <div className="page-content">
