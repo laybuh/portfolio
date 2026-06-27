@@ -115,7 +115,7 @@ function About() {
           <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
         </div>
         <div className="about-text">
-          <h2>Profile</h2>
+          <h2 className="glitch" data-text="Profile">Profile</h2>
           <div className="about-desc">
             <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
             <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
@@ -208,11 +208,15 @@ function Projects() {
   return (
     <section className="projects" id="projects">
       <div className="projects-header">
-        <h2>Things I've built.</h2>
+        <h2 className="glitch" data-text="Things I've built.">Things I've built.</h2>
       </div>
       <div className="projects-grid">
-        {projects.map((p) => (
+        {projects.map((p, i) => (
           <div className="project-card" key={p.title}>
+            <div className="project-window-bar">
+              <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
+              <span className="project-window-name">~/{p.title.toLowerCase()}/</span>
+            </div>
             <div className="project-img-wrap">
               <img src={p.img} alt={p.alt} />
             </div>
@@ -249,7 +253,7 @@ function Contact() {
   return (
     <section className="contact" id="contact">
       <div className="contact-container">
-        <h2>Let's connect.</h2>
+        <h2 className="glitch" data-text="Let's connect.">Let's connect.</h2>
         <p className="contact-sub">Have a project in mind or just want to connect?</p>
         <p className="contact-sub">I'd love to hear from you.</p>
         <a href="mailto:hello@layba.dev" className="contact-email">hello@layba.dev</a>

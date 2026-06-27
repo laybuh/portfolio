@@ -568,27 +568,35 @@ button:hover::before {
   flex-direction: column;
 }
 
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple));
-  opacity: 1;
-  transition: opacity 0.4s ease;
-  z-index: 2;
+.project-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-window-index {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--pink);
+}
+
+.project-window-name {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .project-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-6px);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
-}
-
-.project-card:hover::before {
-  opacity: 0;
 }
 
 .project-img-wrap {
@@ -612,9 +620,9 @@ button:hover::before {
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(255, 158, 221, 0.26),
-    rgba(183, 140, 255, 0.08) 8%,
-    transparent 20%
+    rgba(255, 158, 221, 0.3),
+    rgba(183, 140, 255, 0.12) 16%,
+    transparent 40%
   );
   transition: opacity 0.5s ease;
 }
