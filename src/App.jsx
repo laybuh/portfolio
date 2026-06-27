@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
 import mapPhoto from './assets/map.png'
@@ -46,14 +46,31 @@ function Sparkles() {
 }
 
 function KofiButton() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
   return (
     <a
       href="https://ko-fi.com/layba"
       target="_blank"
       rel="noreferrer"
-      className="kofi-float"
+      className={`kofi-float${isHome ? ' kofi-home' : ''}`}
+      aria-label="Buy me a coffee"
     >
-      <span className="kofi-text">BUY ME A COFFEE</span>
+      <svg
+        className="kofi-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 8h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
+        <path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" />
+        <path d="M8 2v2M11 2v2" />
+      </svg>
+      <span className="kofi-text"><span className="kofi-prompt">$</span>buy me a coffee</span>
     </a>
   )
 }
@@ -61,7 +78,7 @@ function KofiButton() {
 function Nav() {
   return (
     <nav>
-      <Link to="/" className="logo">layba.dev</Link>
+      <Link to="/" className="logo glitch" data-text="layba.dev">layba.dev</Link>
       <ul>
         <li><Link to="/">index</Link></li>
         <li><Link to="/about">about</Link></li>
@@ -77,8 +94,8 @@ function Home() {
   return (
     <section className="hero">
       <div className="hero-content">
-        <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt</span>
-        <h1>Hi, I'm <span>Layba</span>.</h1>
+        <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt<span className="term-caret" /></span>
+        <h1 className="glitch" data-text="Hi, I'm Layba.">Hi, I'm <span>Layba</span>.</h1>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
           <button type="button" onClick={() => navigate('/projects')}>
