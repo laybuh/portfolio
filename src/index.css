@@ -65,6 +65,28 @@ main {
   flex-direction: column;
 }
 
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 0.65rem;
+  color: rgba(229, 180, 232, 0.8);
+  animation: fadeout 0.6s ease forwards;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80%) scale(0.4);
+  }
+}
+
 nav {
   display: flex;
   justify-content: space-between;

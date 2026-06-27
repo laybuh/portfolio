@@ -1,4 +1,5 @@
 import './App.css'
+import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import laybaPhoto from './assets/blah.png'
 import animePhoto from './assets/anime.png'
@@ -7,6 +8,42 @@ import dospacePhoto from './assets/dospace.png'
 import hazefmPhoto from './assets/hazefm.png'
 import eliPhoto from './assets/3li3li.png'
 import michiferqueenPhoto from './assets/themichiferqueen.png'
+
+function Sparkles() {
+  const [sparkles, setSparkles] = useState([])
+
+  useEffect(() => {
+    let lastSpawn = 0
+    const handleMouseMove = (e) => {
+      const now = Date.now()
+      if (now - lastSpawn < 50) return
+      if (Math.random() > 0.6) return
+      lastSpawn = now
+      const sparkle = {
+        id: Math.random(),
+        x: e.clientX,
+        y: e.clientY,
+        symbol: ['✦', '✧', '⋆', '˚'][Math.floor(Math.random() * 4)]
+      }
+      setSparkles(prev => [...prev, sparkle])
+      setTimeout(() => {
+        setSparkles(prev => prev.filter(s => s.id !== sparkle.id))
+      }, 600)
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
+  return (
+    <>
+      {sparkles.map(s => (
+        <span key={s.id} className="sparkle" style={{ left: s.x, top: s.y }}>
+          {s.symbol}
+        </span>
+      ))}
+    </>
+  )
+}
 
 function KofiButton() {
   return (
@@ -212,6 +249,7 @@ function Contact() {
 function App() {
   return (
     <main>
+      <Sparkles />
       <KofiButton />
       <Nav />
       <div className="page-content">
