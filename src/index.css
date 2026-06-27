@@ -112,8 +112,7 @@ nav::after {
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), var(--purple), transparent);
-  opacity: 0.75;
+  background: rgba(176, 150, 219, 0.22);
 }
 
 .logo {
@@ -193,8 +192,8 @@ nav ul a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 2rem;
-  padding-top: 6rem;
+  padding: 0 5rem;
+  padding-top: 5rem;
   position: relative;
   overflow: hidden;
 }
@@ -279,13 +278,15 @@ h1 span {
   filter: drop-shadow(0 0 26px rgba(255, 158, 221, 0.45));}
 
 .subtitle {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--display);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
   font-weight: 400;
-  letter-spacing: 1px;
-  margin-top: 0.6rem;
-  margin-left: 0.2rem;
+  letter-spacing: 0.5px;
+  line-height: 1.7;
+  max-width: 540px;
+  margin-top: 0.85rem;
+  margin-left: 0.3rem;
 }
 
 .hero-buttons {
@@ -620,7 +621,7 @@ button:hover::before {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: var(--pink);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .project-window-name {
