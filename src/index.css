@@ -378,8 +378,8 @@ button:hover::before {
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(255, 158, 221, 0.85),
-    rgba(183, 140, 255, 0.4) 18%,
+    rgba(255, 158, 221, 0.45),
+    rgba(183, 140, 255, 0.2) 18%,
     transparent 48%
   );
 }
