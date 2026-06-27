@@ -118,7 +118,7 @@ nav::after {
 
 .logo {
   font-family: var(--display);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 2px;
   text-decoration: none;
@@ -127,7 +127,8 @@ nav::after {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 14px rgba(227, 175, 222, 0.5));}
+  -webkit-text-stroke: 0.5px rgba(215, 183, 212, 0.55);
+  filter: drop-shadow(0 0 18px rgba(227, 175, 222, 0.75));}
 
 .glitch {
   position: relative;
@@ -177,25 +178,9 @@ nav ul a {
   position: relative;
 }
 
-nav ul a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cyan), var(--pink));
-  box-shadow: 0 0 8px var(--pink);
-  transition: width 0.3s ease;
-}
-
 nav ul a:hover {
   color: var(--pink);
   text-shadow: 0 0 10px rgba(227, 175, 222, 0.6);
-}
-
-nav ul a:hover::after {
-  width: 100%;
 }
 
 .page-content {
