@@ -443,19 +443,6 @@ button:hover::before {
   display: block;
 }
 
-.about-photo-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    to right,
-    rgba(255, 158, 221, 0.45),
-    rgba(183, 140, 255, 0.2) 18%,
-    transparent 48%
-  );
-}
-
 .about-text {
   display: flex;
   flex-direction: column;
