@@ -309,7 +309,24 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
+      <Footer />
     </main>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <Link to="/" className="footer-tag">© {new Date().getFullYear()} layba.dev</Link>
+      <a
+        className="footer-tag"
+        href="https://unsplash.com/photos/a-room-with-tables-and-chairs-hzBQyvjM59Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span className="footer-prompt">$</span> attribution.src
+      </a>
+    </footer>
   )
 }
 
