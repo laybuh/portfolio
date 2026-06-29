@@ -443,6 +443,21 @@ button:hover::before {
   display: block;
 }
 
+.about-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(206, 76, 168, 0.42),
+    rgba(124, 78, 214, 0.3) 35%,
+    rgba(124, 78, 214, 0.14) 60%,
+    rgba(124, 78, 214, 0.04) 80%,
+    transparent 100%
+  );
+}
+
 .about-text {
   display: flex;
   flex-direction: column;
