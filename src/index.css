@@ -198,6 +198,44 @@ nav ul a:hover {
   overflow: hidden;
 }
 
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.98) 32%,
+      rgba(0, 0, 0, 0.93) 45%,
+      rgba(0, 0, 0, 0.85) 57%,
+      rgba(0, 0, 0, 0.76) 68%,
+      rgba(0, 0, 0, 0.67) 79%,
+      rgba(0, 0, 0, 0.58) 90%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    linear-gradient(
+      120deg,
+      rgba(176, 150, 219, 0.3),
+      rgba(255, 158, 221, 0.18) 55%,
+      rgba(126, 240, 230, 0.1) 100%
+    ),
+    url('./assets/interior.jpg') center / cover no-repeat;
+  background-color: #000;
+  filter: saturate(1.4) contrast(1.1) brightness(0.92);
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -441,6 +479,18 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
+  filter: brightness(0.68);
+}
+
+.about-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .about-photo-wrap::after {
@@ -450,11 +500,9 @@ button:hover::before {
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(206, 76, 168, 0.42),
-    rgba(124, 78, 214, 0.3) 35%,
-    rgba(124, 78, 214, 0.14) 60%,
-    rgba(124, 78, 214, 0.04) 80%,
-    transparent 100%
+    rgba(200, 100, 110, 0.55),
+    rgba(200, 100, 110, 0.22) 25%,
+    transparent 50%
   );
 }
 

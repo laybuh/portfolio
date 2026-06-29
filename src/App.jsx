@@ -94,6 +94,8 @@ function Home() {
   const navigate = useNavigate()
   return (
     <section className="hero">
+      <div className="hero-bg" aria-hidden="true" />
+      <div className="hero-grain" aria-hidden="true" />
       <div className="hero-content">
         <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt<span className="term-caret" /></span>
         <h1 className="glitch" data-text="Hi, I'm Layba.">Hi, I'm <span>Layba</span>.</h1>
