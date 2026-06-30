@@ -3,12 +3,21 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import ContactForm from './ContactForm'
 import laybaPhoto from './assets/layba.webp'
-import animePhoto from './assets/anime.png'
-import mapPhoto from './assets/map.png'
-import dospacePhoto from './assets/dospace.png'
-import hazefmPhoto from './assets/hazefm.png'
-import eliPhoto from './assets/3li3li.png'
-import michiferqueenPhoto from './assets/themichiferqueen.png'
+import animePhoto from './assets/anime.webp'
+import mapPhoto from './assets/map.webp'
+import dospacePhoto from './assets/dospace.webp'
+import hazefmPhoto from './assets/hazefm.webp'
+import eliPhoto from './assets/3li3li.webp'
+import michiferqueenPhoto from './assets/themichiferqueen.webp'
+import laybadevPhoto from './assets/laybadev.webp'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
 
 function Sparkles() {
   const [sparkles, setSparkles] = useState([])
@@ -176,6 +185,19 @@ function About() {
   )
 }
 
+const featured = {
+  img: laybadevPhoto,
+  alt: 'layba.dev',
+  title: 'layba.dev',
+  status: 'you are here',
+  statusHref: 'https://layba.dev',
+  desc: "Built with React, Vite, and React Router and styled entirely in hand-written CSS with no UI framework, this is the portfolio site you're currently viewing. The hero composites two photographs into a single scene using gradient-masked blend modes, layered with a CRT sub-pixel grille, film grain, chromatic glitch lines, a vignette, and a slanted binary overlay for a cyberpunk feel. Every image is optimized into WebP for fast loads, each route scrolls back to the top on navigation, and a custom sparkle cursor follows the mouse across the whole site.",
+  tags: ['React', 'Vite', 'React Router', 'CSS'],
+  links: [
+    { href: 'https://github.com/laybuh/portfolio', label: 'github' },
+  ]
+}
+
 const projects = [
   {
     img: eliPhoto,
@@ -192,9 +214,9 @@ const projects = [
     img: michiferqueenPhoto,
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
-    status: 'Template & Design · Launching Soon',
+    status: 'Custom Build · Launching Soon',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    desc: 'A custom retro-pixel/Y2K design and CMS template, built for independent author Jasmine Plaskon as a full handoff: the owner manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. Shown with placeholder and empty content states while the client adds her final content. Live site coming at launch.',
+    desc: 'A custom retro-pixel/Y2K website built for independent author Jasmine Plaskon as a full handoff: she manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. The author is currently filling it with her own stories and art ahead of launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe API', 'Tailwind CSS', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://aliveafterparadise.vercel.app/', label: 'view demo' },
@@ -250,6 +272,26 @@ const projects = [
 function Projects() {
   return (
     <section className="projects" id="projects">
+      <div className="project-featured">
+        <div className="project-featured-media">
+          <img src={featured.img} alt={featured.alt} />
+        </div>
+        <div className="project-featured-body">
+          <a className="project-status" href={featured.statusHref}>{featured.status}</a>
+          <p className="project-featured-title">{featured.title}</p>
+          <p className="project-desc">{featured.desc}</p>
+          <div className="project-tags">
+            {featured.tags.map(tag => (
+              <span className="project-tag" key={tag}>{tag}</span>
+            ))}
+          </div>
+          <div className="project-featured-links">
+            {featured.links.map(l => (
+              <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="projects-header">
         <h2>Things I've built.</h2>
       </div>
@@ -270,7 +312,10 @@ function Projects() {
                   {p.instagram && (
                     <a className="project-handle" href={p.instagram.href} target="_blank" rel="noreferrer">{p.instagram.label}</a>
                   )}
-                  {p.status && <span className="project-status">{p.status}</span>}
+                  {p.status && (p.statusHref
+                    ? <a className="project-status" href={p.statusHref}>{p.status}</a>
+                    : <span className="project-status">{p.status}</span>
+                  )}
                 </div>
               )}
               <p className="project-desc">{p.desc}</p>
@@ -331,6 +376,7 @@ function Contact() {
 function App() {
   return (
     <main>
+      <ScrollToTop />
       <Sparkles />
       <KofiButton />
       <Nav />
