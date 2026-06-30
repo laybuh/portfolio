@@ -1076,27 +1076,26 @@ button:hover::before {
   margin-top: 0.25rem;
 }
 
-.credits-list li {
+.credits-list a {
+  display: inline-flex;
   font-family: var(--mono);
   font-size: 0.6rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--pink);
-  border: 1px solid rgba(214, 152, 202, 0.15);
+  color: var(--purple);
+  border: 1px solid rgba(176, 150, 219, 0.18);
   border-radius: 2px;
   padding: 0.55rem 1rem;
-  background: rgba(152, 214, 171, 0.04);
-  text-shadow: 0 0 10px rgba(227, 175, 222, 0.4);
-}
-
-.credits-list a {
-  color: inherit;
+  background: rgba(176, 150, 219, 0.04);
+  text-shadow: 0 0 10px rgba(176, 150, 219, 0.35);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .credits-list a:hover {
   color: var(--cyan);
+  border-color: rgba(176, 150, 219, 0.4);
+  background: rgba(176, 150, 219, 0.08);
 }
 
 .contact {
