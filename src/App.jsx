@@ -95,6 +95,21 @@ function Home() {
   return (
     <section className="hero">
       <div className="hero-bg" aria-hidden="true" />
+      <div className="hero-overlay" aria-hidden="true" />
+      <div className="hero-dark" aria-hidden="true" />
+      <div className="hero-crt" aria-hidden="true" />
+      <pre className="hero-code" aria-hidden="true">{`01001100 01100001 01111001 01100010 01100001
+10110010 00101110 01100100 01100101 01110110
+0110 1001 0010 1110 0100 1010 0101 1100 0011
+11010010 01000110 10011010 00101101 01110011
+0101 0110 1000 1110 0011 1101 0010 1010 0110
+00110100 01011010 11100110 01001111 00001010
+1001 1110 0100 0010 0111 1011 0010 1100 1000
+01101000 01101001 00101100 00100000 01001001
+0011 1010 0010 1011 0101 1100 1001 0010 0110
+11110000 10101011 01001101 00101110 01111111
+0100 1100 0110 0001 0111 1001 0110 0010 0001
+10010100 00101110 11010010 01100101 01110110`}</pre>
       <div className="hero-grain" aria-hidden="true" />
       <div className="hero-content">
         <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt<span className="term-caret" /></span>
@@ -277,6 +292,28 @@ function Projects() {
   )
 }
 
+function Credits() {
+  return (
+    <section className="credits" id="credits">
+      <div className="credits-container">
+        <h2>Credits</h2>
+        <p className="credits-sub">Background imagery via Unsplash.</p>
+        <ul className="credits-list">
+          <li>
+            Interior photo{' — '}
+            <a href="https://unsplash.com/photos/a-room-with-tables-and-chairs-hzBQyvjM59Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noreferrer">on Unsplash</a>
+          </li>
+          <li>
+            Photo by{' '}
+            <a href="https://unsplash.com/@paracetamol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noreferrer">Ray ZHUANG</a>{' — '}
+            <a href="https://unsplash.com/photos/people-walking-on-street-during-night-time-6-cvDnp9y7I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noreferrer">on Unsplash</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  )
+}
+
 function Contact() {
   return (
     <section className="contact" id="contact">
@@ -307,6 +344,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/credits" element={<Credits />} />
         </Routes>
       </div>
       <Footer />
@@ -318,14 +356,9 @@ function Footer() {
   return (
     <footer className="site-footer">
       <Link to="/" className="footer-tag">© {new Date().getFullYear()} layba.dev</Link>
-      <a
-        className="footer-tag"
-        href="https://unsplash.com/photos/a-room-with-tables-and-chairs-hzBQyvjM59Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span className="footer-prompt">$</span> attribution.src
-      </a>
+      <Link to="/credits" className="footer-tag">
+        <span className="footer-prompt">$</span>photo
+      </Link>
     </footer>
   )
 }
