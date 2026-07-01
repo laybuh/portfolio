@@ -169,11 +169,11 @@ function About() {
         <div className="about-text">
           <h2>Profile</h2>
           <div className="about-desc">
-            <p>I'm Layba, a full stack developer who likes building things that are both functional and beautiful.</p>
-            <p>On the frontend I work with React, Angular, TypeScript, and Bootstrap; on the backend, Java, Spring Boot, Node.js, and Python. I'm also comfortable in C# and C++, with a strong OOP foundation that carries across everything. I design RESTful APIs, work with PostgreSQL and MySQL, and lean on Git and Docker to keep projects organized and deployable.</p>
+            <p>I'm Layba, a full-stack developer who likes building things that are both functional and beautiful.</p>
+            <p>On the frontend, I work with React, Angular, TypeScript, and Bootstrap; on the backend, Java, Spring Boot, Node.js, and Python. I'm also comfortable with C# and C++, with a strong OOP foundation that carries over to everything. I design RESTful APIs, work with PostgreSQL and MySQL, and lean on Git and Docker to keep projects organized and deployable.</p>
             <p>Tutoring taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
             <p>I'm open to freelance work right now. Website, web app, or something custom, I'd love to help.</p>
-            <p>Outside of coding you'll find me with my cats, keeping up with fashion and beauty, or hunting for good Thai food, usually with a coffee or matcha in hand.</p>
+            <p>Outside of coding, you'll find me with my cats, keeping up with fashion and beauty, or hunting for good Thai food, usually with a coffee or matcha in hand.</p>
           </div>
           <div className="about-meta">
             <span className="about-availability">Open to freelance opportunities</span>
