@@ -682,7 +682,22 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(1) brightness(0.68) contrast(1.18);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.about-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(26, 6, 66, 0.92),
+    rgba(58, 16, 130, 0.55) 30%,
+    rgba(100, 40, 210, 0.16) 60%,
+    transparent 100%
+  );
 }
 
 .about-photo-wrap::before {
