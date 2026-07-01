@@ -169,11 +169,11 @@ function About() {
         <div className="about-text">
           <h2>Profile</h2>
           <div className="about-desc">
-            <p>I'm Layba, a full stack developer who loves building things that are both functional and beautiful.</p>
-            <p>I build web applications using React, Angular, TypeScript, and Bootstrap on the frontend, and Java, Spring Boot, Node.js, and Python on the backend. I'm also proficient in C# and C++, with a strong foundation in object-oriented programming that carries across everything I build. I design RESTful APIs, work with PostgreSQL and MySQL databases, and write clean, maintainable code that actually makes sense. My standard workflow includes Git, Docker, and the tools that keep projects organized and deployable.</p>
-            <p>My background in technical tutoring taught me how to break down complex problems and communicate clearly, which makes me a better developer. I care deeply about the user experience and a detailed, intentional implementation.</p>
-            <p>I'm currently open to freelance opportunities. Whether you need a website, a web app, or a custom solution, I'd love to work with you.</p>
-            <p>When I'm not coding, you can find me spending time with my cats, keeping up with fashion and beauty, or searching for good Thai food. I'm always fueled by coffee or matcha.</p>
+            <p>I'm Layba, a full stack developer who likes building things that are both functional and beautiful.</p>
+            <p>On the frontend I work with React, Angular, TypeScript, and Bootstrap; on the backend, Java, Spring Boot, Node.js, and Python. I'm also comfortable in C# and C++, with a strong OOP foundation that carries across everything. I design RESTful APIs, work with PostgreSQL and MySQL, and lean on Git and Docker to keep projects organized and deployable.</p>
+            <p>Tutoring taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
+            <p>I'm open to freelance work right now. Website, web app, or something custom, I'd love to help.</p>
+            <p>Outside of coding you'll find me with my cats, keeping up with fashion and beauty, or hunting for good Thai food, usually with a coffee or matcha in hand.</p>
           </div>
           <div className="about-meta">
             <span className="about-availability">Open to freelance opportunities</span>
@@ -191,7 +191,7 @@ const featured = {
   title: 'layba.dev',
   status: 'you are here',
   statusHref: 'https://layba.dev',
-  desc: "Built with React, Vite, and React Router and styled entirely in hand-written CSS with no UI framework, this is the portfolio site you're currently viewing. The hero composites two photographs into a single scene using gradient-masked blend modes, layered with a CRT sub-pixel grille, film grain, chromatic glitch lines, a vignette, and a slanted binary overlay for a cyberpunk feel. Every image is optimized into WebP for fast loads, each route scrolls back to the top on navigation, and a custom sparkle cursor follows the mouse across the whole site.",
+  desc: "The site you're on. React, Vite, and React Router, with every style hand-written in CSS and no UI framework. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, a vignette, and a slanted binary overlay for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
   links: [
     { href: 'https://github.com/laybuh/portfolio', label: 'github' },
@@ -204,7 +204,7 @@ const projects = [
     alt: '3LI3LI',
     title: '3LI3LI',
     instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
-    desc: 'A Y2K/vaporwave artist website built for independent music artist 3LI3LI. Built with React, Vite, and CSS Modules. Features a multi-page layout routed with React Router, an AIM-style intro window that welcomes visitors on arrival, a scrolling Y2K ticker bar across the top, and a custom sparkle cursor that follows the mouse. The music page includes a Spotify embed for streaming, while ElfSight TikTok and Instagram embeds pull in her latest posts so the site stays current without manual updates. An EP section lets fans purchase and download her release through a Web3Forms and Cash App setup.',
+    desc: 'A Y2K/vaporwave site for independent music artist 3LI3LI. React, Vite, and CSS Modules across multiple routes, with an AIM-style intro window, a scrolling Y2K ticker bar, and a sparkle cursor. The music page runs a Spotify embed, ElfSight pulls in her latest TikTok and Instagram posts automatically, and fans can buy and download her EP through a Web3Forms and Cash App setup.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://3li3li.com', label: 'live' },
@@ -216,7 +216,7 @@ const projects = [
     title: 'themichiferqueen',
     status: 'Custom Build · Launching Soon',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    desc: 'A custom retro-pixel/Y2K website built for independent author Jasmine Plaskon as a full handoff: she manages every page (stories, blog, gallery, lore, and shop) through Sanity with no code. Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4. The Stripe shop uses a hardened, server-side payment configuration so prices and checkout can\'t be tampered with. Includes an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. The author is currently filling it with her own stories and art ahead of launch.',
+    desc: 'A retro-pixel/Y2K site for independent author Jasmine Plaskon, built as a full handoff so she runs every page (stories, blog, gallery, lore, and shop) through Sanity without touching code. Next.js 16, React 19, TypeScript, and Tailwind CSS v4. The Stripe shop is locked down server-side so prices and checkout can\'t be tampered with, plus an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. She\'s filling it with her own stories and art ahead of launch.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe API', 'Tailwind CSS', 'Spotify Embed', 'Web3Forms API'],
     links: [
       { href: 'https://aliveafterparadise.vercel.app/', label: 'view demo' },
@@ -226,7 +226,7 @@ const projects = [
     img: dospacePhoto,
     alt: 'lunev',
     title: 'lunev',
-    desc: ' Built with React, Vite, Tailwind, Node.js, Express, and PostgreSQL, this full-stack mental wellness and productivity app brings tasks, journaling, mood tracking, affirmations, and focus tools into one private space. Every piece of user-written content is encrypted with AES-256-GCM before it reaches the database, so a leak would only expose unreadable ciphertext. Features JWT authentication with rotating refresh tokens and reuse detection, bcrypt hashing, email-based two-step verification, email verification with auto-expiry, password reset via domain-verified transactional email, password strength validation, rate limiting, CSRF origin checks, a strict Content-Security-Policy, idle session timeout with tab close detection, and password-confirmed account deletion.',
+    desc: 'A full-stack mental wellness and productivity app that pulls tasks, journaling, mood tracking, affirmations, and focus tools into one private space. React, Vite, and Tailwind up front, with Node.js, Express, and PostgreSQL behind it. Everything a user writes is encrypted with AES-256-GCM before it reaches the database, so a leak would only expose unreadable ciphertext. Auth is hardened with JWT refresh-token rotation and reuse detection, bcrypt hashing, two-step email verification, rate limiting, CSRF checks, a strict Content-Security-Policy, and idle session timeout.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'PostgreSQL', 'JWT', '2FA', 'AES-256-GCM', 'bcrypt'],
     links: [
       { href: 'https://lunev.app', label: 'live' },
@@ -238,7 +238,7 @@ const projects = [
     img: hazefmPhoto,
     alt: 'haze.fm',
     title: 'haze.fm',
-    desc: 'Built with Next.js and TypeScript, this music discovery app generates curated playlists based on your mood or a favorite artist. It connects to the Last.fm API to fetch tracks using emotional tag mapping and artist data, and uses the YouTube Data API to stream full songs directly in the app. Features a custom mood-to-tag mapping system, real-time playlist generation, shuffle, skip, and regenerate controls, and an immersive aesthetic visual experience with cycling background scenes.',
+    desc: 'A music discovery app that builds playlists from a mood or a favorite artist. Next.js and TypeScript, with Last.fm mapping emotional tags to tracks and the YouTube Data API streaming full songs in-app. Custom mood-to-tag logic, real-time playlist generation, shuffle, skip, and regenerate controls, and cycling background scenes to set the tone.',
     tags: ['Next.js', 'TypeScript', 'Last.fm API', 'YouTube API', 'Tailwind CSS'],
     links: [
       { href: 'https://hazefm.vercel.app', label: 'live' },
@@ -249,7 +249,7 @@ const projects = [
     img: animePhoto,
     alt: 'Anime Search Terminal',
     title: 'Anime Search Terminal',
-    desc: 'Built with React and Vite, this app connects to the Jikan API to search the MyAnimeList database using live data. Search by title and filter by type, genre, and minimum score, then sort results by rating or name. Each result shows cover art, score, and a hover-to-reveal synopsis, with a light/dark toggle and a responsive, dark neon interface.',
+    desc: 'A React and Vite app wired to the Jikan API for live MyAnimeList data. Search by title, filter by type, genre, and minimum score, then sort by rating or name. Each result shows cover art, score, and a hover-to-reveal synopsis, with a light/dark toggle and a responsive dark neon interface.',
     tags: ['React', 'Vite', 'Jikan API'],
     links: [
       { href: 'https://animesearcher.vercel.app', label: 'live' },
@@ -260,7 +260,7 @@ const projects = [
     img: mapPhoto,
     alt: 'Angular World Map',
     title: 'Angular World Map',
-    desc: 'Built with Angular and TypeScript, this interactive world map connects to the World Bank API to fetch live country data. Click any country on the SVG map to display its name, capital city, region, income level, and coordinates in a sidebar panel. Built using Angular routing, HttpClient, component architecture, and event binding. Originally built for a university course, extended and deployed independently.',
+    desc: 'An interactive world map in Angular and TypeScript, pulling live country data from the World Bank API. Click any country on the SVG map to see its name, capital, region, income level, and coordinates in a sidebar. Uses Angular routing, HttpClient, and event binding. Started as a university project, then extended and deployed on my own.',
     tags: ['Angular', 'TypeScript', 'World Bank API', 'SVG'],
     links: [
       { href: 'https://layba-map.vercel.app', label: 'live' },

@@ -682,33 +682,7 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: saturate(1.05) contrast(1.02);
-}
-
-.about-photo-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(
-    to right,
-    rgba(26, 6, 66, 0.92),
-    rgba(58, 16, 130, 0.55) 30%,
-    rgba(100, 40, 210, 0.16) 60%,
-    transparent 100%
-  );
-}
-
-.about-photo-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.14;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  filter: grayscale(1);
 }
 
 .about-text {
