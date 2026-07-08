@@ -11,6 +11,43 @@ import eliPhoto from './assets/3li3li.webp'
 import michiferqueenPhoto from './assets/themichiferqueen.webp'
 import laybadevPhoto from './assets/laybadev.webp'
 
+function BootScreen() {
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const smallScreen = window.matchMedia('(max-width: 600px)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    return !smallScreen && !reduced
+  })
+  const [granted, setGranted] = useState(false)
+  const [leaving, setLeaving] = useState(false)
+
+  useEffect(() => {
+    if (!visible) return
+    const t1 = setTimeout(() => setGranted(true), 1500)
+    const t2 = setTimeout(() => setLeaving(true), 2600)
+    const t3 = setTimeout(() => setVisible(false), 3050)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+    }
+  }, [visible])
+
+  if (!visible) return null
+
+  return (
+    <div className={`boot${leaving ? ' is-leaving' : ''}`} aria-hidden="true">
+      <div className="boot-scanlines" />
+      <div className="boot-panel">
+        <span className="boot-label">// SYSTEM BOOT</span>
+        <p className="boot-line">&gt; INITIALIZING...</p>
+        <p className={`boot-line boot-granted${granted ? ' show' : ''}`}>&gt; ACCESS GRANTED</p>
+        <div className="boot-bar"><span className="boot-bar-fill" /></div>
+      </div>
+    </div>
+  )
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
@@ -106,6 +143,7 @@ function Home() {
       <div className="hero-bg" aria-hidden="true" />
       <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-dark" aria-hidden="true" />
+      <div className="hero-glitch" aria-hidden="true" />
       <div className="hero-crt" aria-hidden="true" />
       <pre className="hero-code" aria-hidden="true">{`01001100 01100001 01111001 01100010 01100001
 10110010 00101110 01100100 01100101 01110110
@@ -376,6 +414,7 @@ function Contact() {
 function App() {
   return (
     <main>
+      <BootScreen />
       <ScrollToTop />
       <Sparkles />
       <KofiButton />
@@ -398,9 +437,6 @@ function Footer() {
   return (
     <footer className="site-footer">
       <Link to="/" className="footer-tag">© {new Date().getFullYear()} layba.dev</Link>
-      <Link to="/credits" className="footer-tag">
-        <span className="footer-prompt">$</span>photo
-      </Link>
     </footer>
   )
 }

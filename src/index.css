@@ -115,6 +115,143 @@ main {
   flex-direction: column;
 }
 
+/* short cyberpunk boot / initializing flash (desktop only) */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 50%, rgba(123, 60, 200, 0.2), transparent 70%),
+    #06040c;
+  overflow: hidden;
+  transition: opacity 0.45s ease;
+}
+
+.boot.is-leaving {
+  opacity: 0;
+}
+
+.boot-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.4) 3px
+  );
+}
+
+.boot-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 340px;
+  padding: 2rem 2.75rem;
+  border: 1px solid rgba(176, 150, 219, 0.4);
+  background: rgba(20, 12, 32, 0.5);
+  box-shadow:
+    0 0 42px rgba(123, 60, 200, 0.28),
+    inset 0 0 32px rgba(123, 60, 200, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* cyberpunk HUD corner brackets */
+.boot-panel::before,
+.boot-panel::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--pink);
+}
+
+.boot-panel::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.boot-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.boot-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--pink);
+  text-shadow: 0 0 10px rgba(227, 175, 222, 0.5);
+}
+
+.boot-line {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  color: var(--purple);
+  text-shadow:
+    -1px 0 rgba(255, 60, 180, 0.4),
+    1px 0 rgba(126, 240, 230, 0.35),
+    0 0 12px rgba(176, 150, 219, 0.45);
+}
+
+.boot-granted {
+  color: #c9a6ff;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.boot-granted.show {
+  opacity: 1;
+  transform: none;
+}
+
+.boot-bar {
+  height: 6px;
+  margin-top: 0.35rem;
+  border: 1px solid rgba(176, 150, 219, 0.35);
+  background: rgba(176, 150, 219, 0.06);
+  overflow: hidden;
+}
+
+.boot-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--purple) 0,
+    var(--purple) 6px,
+    transparent 6px,
+    transparent 9px
+  );
+  animation: bootBar 2.6s linear forwards;
+}
+
+@keyframes bootBar {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .boot {
+    display: none;
+  }
+}
+
 .sparkle {
   position: fixed;
   pointer-events: none;
@@ -257,22 +394,21 @@ nav ul a:hover {
   background:
     linear-gradient(
       to right,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.98) 40%,
-      rgba(0, 0, 0, 0.95) 50%,
-      rgba(0, 0, 0, 0.4) 100%
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.82) 38%,
+      rgba(0, 0, 0, 0.55) 62%,
+      rgba(0, 0, 0, 0.12) 100%
     ),
     linear-gradient(
       120deg,
-      rgba(176, 150, 219, 0.3),
-      rgba(255, 158, 221, 0.18) 55%,
+      rgba(176, 150, 219, 0.22),
+      rgba(150, 180, 230, 0.12) 55%,
       rgba(126, 240, 230, 0.1) 100%
-    ),
-    url('./assets/interior.webp') center / cover no-repeat;
+    );
   background-color: #000;
-  filter: saturate(1.0) contrast(1) brightness(0.92) blur(0.6px);
+  filter: saturate(1.45) contrast(1.06) brightness(1.02);
   transform: scale(1.02);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .hero-overlay {
@@ -280,25 +416,40 @@ nav ul a:hover {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: url('./assets/street.webp') center / cover no-repeat;
   mix-blend-mode: screen;
-  opacity: 0.25;
-  filter: saturate(0.95) contrast(1) blur(0.6px);
+  opacity: 1;
+  filter: saturate(1.3) contrast(1.05) blur(0.4px);
   transform: scale(1.02);
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.35) 82%,
-    rgba(0, 0, 0, 0.78) 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.35) 82%,
-    rgba(0, 0, 0, 0.78) 100%
-  );
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.35) 82%,
+      rgba(0, 0, 0, 0.78) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 50%,
+      transparent 78%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.35) 82%,
+      rgba(0, 0, 0, 0.78) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 50%,
+      transparent 78%
+    );
+  mask-composite: intersect;
 }
 
 .hero-dark {
@@ -308,7 +459,38 @@ nav ul a:hover {
   pointer-events: none;
   background:
     radial-gradient(ellipse 70% 60% at 62% 52%, rgba(90, 255, 205, 0.05), transparent 62%),
-    rgba(0, 0, 0, 0.32);
+    rgba(0, 0, 0, 0.16);
+}
+
+/* subtle static "bad reception" ghosting on the hero picture (no animation) */
+.hero-glitch {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 40%, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 40%, #000 100%);
+}
+
+.hero-glitch::before,
+.hero-glitch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+}
+
+.hero-glitch::before {
+  transform: scale(1.02) translateX(3px);
+  opacity: 0.14;
+  filter: saturate(1.5) hue-rotate(-18deg);
+}
+
+.hero-glitch::after {
+  transform: scale(1.02) translateX(-3px);
+  opacity: 0.12;
+  filter: saturate(1.5) hue-rotate(22deg);
 }
 
 .hero-crt {
@@ -348,9 +530,9 @@ nav ul a:hover {
   text-align: right;
   transform: rotate(-7deg) skewX(-14deg);
   transform-origin: 90% 50%;
-  color: rgba(126, 240, 230, 0.55);
-  text-shadow: 0 0 8px rgba(126, 240, 230, 0.35);
-  opacity: 0.09;
+  color: rgba(168, 206, 232, 0.85);
+  text-shadow: 0 0 8px rgba(176, 150, 219, 0.5);
+  opacity: 0.24;
   -webkit-mask-image: radial-gradient(ellipse 60% 85% at 95% 50%, #000 30%, transparent 80%);
   mask-image: radial-gradient(ellipse 60% 85% at 95% 50%, #000 30%, transparent 80%);
 }
