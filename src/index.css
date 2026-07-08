@@ -458,7 +458,7 @@ nav ul a:hover {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 62% 52%, rgba(90, 255, 205, 0.05), transparent 62%),
+    radial-gradient(ellipse 70% 60% at 62% 52%, rgba(176, 150, 219, 0.08), rgba(126, 240, 230, 0.05) 45%, transparent 62%),
     rgba(0, 0, 0, 0.16);
 }
 
@@ -530,7 +530,7 @@ nav ul a:hover {
   text-align: right;
   transform: rotate(-7deg) skewX(-14deg);
   transform-origin: 90% 50%;
-  background: linear-gradient(180deg, rgba(126, 240, 230, 0.95), rgba(188, 164, 224, 0.95));
+  background: linear-gradient(180deg, rgba(126, 240, 230, 0.9) 0%, rgba(190, 165, 225, 0.95) 40%, rgba(198, 172, 230, 0.95) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
