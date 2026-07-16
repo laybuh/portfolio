@@ -179,7 +179,7 @@ const featured = {
   img: laybadevPhoto,
   alt: 'layba.dev',
   title: 'layba.dev',
-  status: "you're here",
+  status: 'this site',
   short: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library.",
   desc: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, and a vignette for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
@@ -299,7 +299,7 @@ function Projects() {
           <div className={`project-card${p.slug === featured.slug ? ' project-card-featured' : ''}`} key={p.slug}>
             <div className="project-window-bar">
               <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
-              <span className="project-window-name">~/{p.title.toLowerCase()}/</span>
+              <span className="project-window-name">~/{p.slug}/</span>
             </div>
             <div className="project-img-wrap">
               <img src={p.img} alt={p.alt} />
