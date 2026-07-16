@@ -179,6 +179,7 @@ const featured = {
   img: laybadevPhoto,
   alt: 'layba.dev',
   title: 'layba.dev',
+  status: "you're here",
   short: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library.",
   desc: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, and a vignette for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
@@ -290,27 +291,12 @@ function ProjectBadges({ project }) {
 function Projects() {
   return (
     <section className="projects" id="projects">
-      <div className="project-featured">
-        <div className="project-featured-media">
-          <img src={featured.img} alt={featured.alt} />
-        </div>
-        <div className="project-featured-body">
-          <p className="project-featured-title">{featured.title}</p>
-          <p className="project-desc">{featured.short}</p>
-          <div className="project-featured-links">
-            <Link to={`/projects/${featured.slug}`} className="project-readmore">read more</Link>
-            {featured.links.map(l => (
-              <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
-            ))}
-          </div>
-        </div>
-      </div>
       <div className="projects-header">
         <h2>Things I've built.</h2>
       </div>
       <div className="projects-grid">
-        {projects.map((p, i) => (
-          <div className="project-card" key={p.slug}>
+        {allProjects.map((p, i) => (
+          <div className={`project-card${p.slug === featured.slug ? ' project-card-featured' : ''}`} key={p.slug}>
             <div className="project-window-bar">
               <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
               <span className="project-window-name">~/{p.title.toLowerCase()}/</span>
