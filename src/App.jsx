@@ -10,6 +10,7 @@ import hazefmPhoto from './assets/hazefm.webp'
 import eliPhoto from './assets/3li3li.webp'
 import michiferqueenPhoto from './assets/themichiferqueen.webp'
 import laybadevPhoto from './assets/laybadev.webp'
+import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -93,6 +94,7 @@ function Nav() {
         <li><Link to="/">index</Link></li>
         <li><Link to="/about">about</Link></li>
         <li><Link to="/projects">projects</Link></li>
+        <li><Link to="/blog">blog</Link></li>
         <li><Link to="/contact">contact</Link></li>
       </ul>
     </nav>
@@ -273,6 +275,30 @@ const projects = [
 
 const allProjects = [featured, ...projects]
 
+const posts = [
+  {
+    slug: 'y2k-feminine',
+    img: y2kFemininePhoto,
+    alt: 'The Rise of Y2K and Feminine Tech',
+    title: 'The Rise of Y2K and Feminine Tech',
+    date: 'July 2026',
+    excerpt: 'I build all kinds of sites, but Y2K-style or girly websites are my favorite kind to build.',
+    body: [
+      `I build all kinds of sites, but Y2K-style or girly websites are my favorite kind to build. It has, unfortunately, become an unspoken rule that "professional" web design means gray, minimal, corporate. neutral fonts, muted palettes, a lot of white space, and somewhere along the way, we decided that look is what professionalism is.`,
+      `The tech industry is very male-dominated, and that type of mentality is a form of misogyny. It came from an industry that's still overwhelmingly male at every senior level, and it quietly coded gray and neutral as competent. At the same time, anything colorful, maximalist, or femme-coded got read as less serious, less technical, more "just design", as if a hot pink gradient site is somehow easier to build than a black, white, and beige one.`,
+      `A sparkly, glittery design with lots of effects and many different functions can be more complex and time-consuming to build than a minimal, gray website that the industry finds "professional". Anyone can throw a template together in a neutral palette and call it clean. Building something with custom cursors, layered gradients, glitchy hover states, and a whole visual world that still loads fast and works on every screen takes real skill; it's just skill that doesn't get coded as professionalism or skilled because it doesn't look like what men have been building for decades.`,
+      `In 1843, Ada Lovelace published what's widely credited as the first computer algorithm: notes she wrote for Charles Babbage's Analytical Engine, which was the only way it was recognized, as it was discouraged for women to post their own work. Software has feminine roots. Yet 180 years later, women make up only around a quarter of the global core technical workforce, a figure that shrinks even further at senior levels.`,
+      `Women reclaiming tech has been making a comeback. Cyberdecks, small custom-built computers, used to live almost entirely in a black-metal, minimal aesthetic. Now there's a whole wave of women building theirs in pink, in decorative cases, tucked into purses and dollhouses, deliberately choosing hackable ones, combining with makeup and personal tech, over another sealed, optimized device that was never embraced by creativity.`,
+      `Some of my clients are creators who don't see themselves reflected in typical "professional" web design: LGBTQ+ artists, femmes, women, people of color told that serious work has to look minimal and safe. I would argue the opposite. A site that's creative, maximalist, and specific to you is a lot more memorable, and it's not any less skilled just because it is fun to look at.`,
+    ],
+    sources: [
+      `Haugtvedt, K. & Abata, A., "Ada Lovelace: First Computer Programmer and Hacker?", ASEE, 2021`,
+      `Metana, "Women in Tech Statistics (2026)"`,
+      `TechCrunch, "Cyberdecks are having a moment"`,
+    ]
+  },
+]
+
 function ProjectBadges({ project }) {
   if (!project.instagram && !project.status) return null
   return (
@@ -317,6 +343,85 @@ function Projects() {
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  )
+}
+
+function Blog() {
+  return (
+    <section className="blog" id="blog">
+      <div className="projects-header">
+        <h2>Things I've written.</h2>
+        <p className="blog-sub">I'm a software engineer bringing femininity and creativity to a traditionally male-dominated industry.</p>
+      </div>
+      <div className="blog-list">
+        {posts.map((p, i) => (
+          <article className="project-card blog-card" key={p.slug}>
+            <div className="project-window-bar">
+              <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
+              <span className="project-window-name">~/blog/{p.slug}/</span>
+            </div>
+            <div className="blog-card-body">
+              <Link to={`/blog/${p.slug}`} className="blog-cover">
+                <img src={p.img} alt={p.alt} />
+              </Link>
+              <div className="project-info">
+                <span className="blog-date">{p.date}</span>
+                <p className="project-title">{p.title}</p>
+                <p className="project-desc">{p.excerpt}</p>
+              </div>
+            </div>
+            <div className="project-links">
+              <Link to={`/blog/${p.slug}`} className="project-readmore">read more</Link>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function BlogPost() {
+  const { slug } = useParams()
+  const post = posts.find(p => p.slug === slug)
+
+  if (!post) {
+    return (
+      <section className="project-detail">
+        <div className="project-detail-container">
+          <Link to="/blog" className="project-back">&larr; back to blog</Link>
+          <h2 className="project-detail-title">Post not found</h2>
+          <p className="project-detail-desc">That post doesn't exist. Head back and pick another.</p>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section className="project-detail blog-post">
+      <div className="project-detail-container">
+        <Link to="/blog" className="project-back">&larr; back to blog</Link>
+        <div className="project-detail-body">
+          <span className="blog-date">{post.date}</span>
+          <h2 className="project-detail-title">{post.title}</h2>
+          <div className="blog-post-cover">
+            <img src={post.img} alt={post.alt} />
+          </div>
+          <div className="blog-body">
+            {post.body.map((para, i) => (
+              <p className="project-detail-desc" key={i}>{para}</p>
+            ))}
+          </div>
+          <div className="blog-sources">
+            <p className="blog-sources-title">Sources</p>
+            <ul className="blog-sources-list">
+              {post.sources.map(s => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -414,6 +519,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/credits" element={<Credits />} />
         </Routes>
