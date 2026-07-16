@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, useLocation, useParams } from 'react-router-dom'
 import ContactForm from './ContactForm'
 import laybaPhoto from './assets/layba.webp'
 import animePhoto from './assets/anime.webp'
@@ -10,43 +10,6 @@ import hazefmPhoto from './assets/hazefm.webp'
 import eliPhoto from './assets/3li3li.webp'
 import michiferqueenPhoto from './assets/themichiferqueen.webp'
 import laybadevPhoto from './assets/laybadev.webp'
-
-function BootScreen() {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === 'undefined') return false
-    const smallScreen = window.matchMedia('(max-width: 600px)').matches
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    return !smallScreen && !reduced
-  })
-  const [granted, setGranted] = useState(false)
-  const [leaving, setLeaving] = useState(false)
-
-  useEffect(() => {
-    if (!visible) return
-    const t1 = setTimeout(() => setGranted(true), 1500)
-    const t2 = setTimeout(() => setLeaving(true), 2600)
-    const t3 = setTimeout(() => setVisible(false), 3050)
-    return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-      clearTimeout(t3)
-    }
-  }, [visible])
-
-  if (!visible) return null
-
-  return (
-    <div className={`boot${leaving ? ' is-leaving' : ''}`} aria-hidden="true">
-      <div className="boot-scanlines" />
-      <div className="boot-panel">
-        <span className="boot-label">// SYSTEM BOOT</span>
-        <p className="boot-line">&gt; INITIALIZING...</p>
-        <p className={`boot-line boot-granted${granted ? ' show' : ''}`}>&gt; ACCESS GRANTED</p>
-        <div className="boot-bar"><span className="boot-bar-fill" /></div>
-      </div>
-    </div>
-  )
-}
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -145,18 +108,6 @@ function Home() {
       <div className="hero-dark" aria-hidden="true" />
       <div className="hero-glitch" aria-hidden="true" />
       <div className="hero-crt" aria-hidden="true" />
-      <pre className="hero-code" aria-hidden="true">{`01001100 01100001 01111001 01100010 01100001
-10110010 00101110 01100100 01100101 01110110
-0110 1001 0010 1110 0100 1010 0101 1100 0011
-11010010 01000110 10011010 00101101 01110011
-0101 0110 1000 1110 0011 1101 0010 1010 0110
-00110100 01011010 11100110 01001111 00001010
-1001 1110 0100 0010 0111 1011 0010 1100 1000
-01101000 01101001 00101100 00100000 01001001
-0011 1010 0010 1011 0101 1100 1001 0010 0110
-11110000 10101011 01001101 00101110 01111111
-0100 1100 0110 0001 0111 1001 0110 0010 0001
-10010100 00101110 11010010 01100101 01110110`}</pre>
       <div className="hero-grain" aria-hidden="true" />
       <div className="hero-content">
         <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt<span className="term-caret" /></span>
@@ -224,24 +175,27 @@ function About() {
 }
 
 const featured = {
+  slug: 'layba-dev',
   img: laybadevPhoto,
   alt: 'layba.dev',
   title: 'layba.dev',
-  status: 'you are here',
-  statusHref: 'https://layba.dev',
-  desc: "The site you're on. React, Vite, and React Router, with every style hand-written in CSS and no UI framework. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, a vignette, and a slanted binary overlay for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
+  short: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library.",
+  desc: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, and a vignette for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
   links: [
+    { href: 'https://layba.dev', label: 'live' },
     { href: 'https://github.com/laybuh/portfolio', label: 'github' },
   ]
 }
 
 const projects = [
   {
+    slug: '3li3li',
     img: eliPhoto,
     alt: '3LI3LI',
     title: '3LI3LI',
     instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
+    short: 'A Y2K/vaporwave site for 3LI3LI, an independent singer, songwriter, and DJ.',
     desc: 'A Y2K/vaporwave site for independent music artist 3LI3LI. React, Vite, and CSS Modules across multiple routes, with an AIM-style intro window, a scrolling Y2K ticker bar, and a sparkle cursor. The music page runs a Spotify embed, ElfSight pulls in her latest TikTok and Instagram posts automatically, and fans can buy and download her EP through a Web3Forms and Cash App setup.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
@@ -249,21 +203,24 @@ const projects = [
     ]
   },
   {
+    slug: 'themichiferqueen',
     img: michiferqueenPhoto,
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
-    status: 'Custom Build · Launching Soon',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    desc: 'A retro-pixel/Y2K site for independent author Jasmine Plaskon, built as a full handoff so she runs every page (stories, blog, gallery, lore, and shop) through Sanity without touching code. Next.js 16, React 19, TypeScript, and Tailwind CSS v4. The Stripe shop is locked down server-side so prices and checkout can\'t be tampered with, plus an SSR-safe 18+ age gate, an image and video gallery, a floating Spotify player, and a Web3Forms newsletter. She\'s filling it with her own stories and art ahead of launch.',
+    short: 'A retro-pixel/Y2K site for independent author and artist Jasmine Plaskon.',
+    desc: 'A retro-pixel/Y2K site for independent author and artist Jasmine Plaskon. Next.js, TypeScript, and Tailwind across stories, blog, gallery, lore, and shop, with an 18+ age gate, a floating Spotify player, and a gallery for her art and video. Sanity lets her run every page and post her own work without touching code, and readers can buy her books through a Stripe shop or keep up through a Web3Forms newsletter.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe API', 'Tailwind CSS', 'Spotify Embed', 'Web3Forms API'],
     links: [
-      { href: 'https://aliveafterparadise.vercel.app/', label: 'view demo' },
+      { href: 'https://themichiferqueen.com', label: 'live' },
     ]
   },
   {
+    slug: 'lunev',
     img: dospacePhoto,
     alt: 'lunev',
     title: 'lunev',
+    short: 'A full-stack mental wellness and productivity app that pulls tasks, journaling, mood tracking, affirmations, and focus tools into one private space.',
     desc: 'A full-stack mental wellness and productivity app that pulls tasks, journaling, mood tracking, affirmations, and focus tools into one private space. React, Vite, and Tailwind up front, with Node.js, Express, and PostgreSQL behind it. Everything a user writes is encrypted with AES-256-GCM before it reaches the database, so a leak would only expose unreadable ciphertext. Auth is hardened with JWT refresh-token rotation and reuse detection, bcrypt hashing, two-step email verification, rate limiting, CSRF checks, a strict Content-Security-Policy, and idle session timeout.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'PostgreSQL', 'JWT', '2FA', 'AES-256-GCM', 'bcrypt'],
     links: [
@@ -273,9 +230,11 @@ const projects = [
     ]
   },
   {
+    slug: 'haze-fm',
     img: hazefmPhoto,
     alt: 'haze.fm',
     title: 'haze.fm',
+    short: 'A music discovery app that builds playlists from a mood or a favorite artist.',
     desc: 'A music discovery app that builds playlists from a mood or a favorite artist. Next.js and TypeScript, with Last.fm mapping emotional tags to tracks and the YouTube Data API streaming full songs in-app. Custom mood-to-tag logic, real-time playlist generation, shuffle, skip, and regenerate controls, and cycling background scenes to set the tone.',
     tags: ['Next.js', 'TypeScript', 'Last.fm API', 'YouTube API', 'Tailwind CSS'],
     links: [
@@ -284,9 +243,11 @@ const projects = [
     ]
   },
   {
+    slug: 'anime-search-terminal',
     img: animePhoto,
     alt: 'Anime Search Terminal',
     title: 'Anime Search Terminal',
+    short: 'A React and Vite app wired to the Jikan API for live MyAnimeList data.',
     desc: 'A React and Vite app wired to the Jikan API for live MyAnimeList data. Search by title, filter by type, genre, and minimum score, then sort by rating or name. Each result shows cover art, score, and a hover-to-reveal synopsis, with a light/dark toggle and a responsive dark neon interface.',
     tags: ['React', 'Vite', 'Jikan API'],
     links: [
@@ -295,9 +256,11 @@ const projects = [
     ]
   },
   {
+    slug: 'angular-world-map',
     img: mapPhoto,
     alt: 'Angular World Map',
     title: 'Angular World Map',
+    short: 'An interactive world map in Angular and TypeScript, pulling live country data from the World Bank API.',
     desc: 'An interactive world map in Angular and TypeScript, pulling live country data from the World Bank API. Click any country on the SVG map to see its name, capital, region, income level, and coordinates in a sidebar. Uses Angular routing, HttpClient, and event binding. Started as a university project, then extended and deployed on my own.',
     tags: ['Angular', 'TypeScript', 'World Bank API', 'SVG'],
     links: [
@@ -307,6 +270,23 @@ const projects = [
   },
 ]
 
+const allProjects = [featured, ...projects]
+
+function ProjectBadges({ project }) {
+  if (!project.instagram && !project.status) return null
+  return (
+    <div className="project-badges">
+      {project.instagram && (
+        <a className="project-handle" href={project.instagram.href} target="_blank" rel="noreferrer">{project.instagram.label}</a>
+      )}
+      {project.status && (project.statusHref
+        ? <a className="project-status" href={project.statusHref}>{project.status}</a>
+        : <span className="project-status">{project.status}</span>
+      )}
+    </div>
+  )
+}
+
 function Projects() {
   return (
     <section className="projects" id="projects">
@@ -315,15 +295,10 @@ function Projects() {
           <img src={featured.img} alt={featured.alt} />
         </div>
         <div className="project-featured-body">
-          <a className="project-status" href={featured.statusHref}>{featured.status}</a>
           <p className="project-featured-title">{featured.title}</p>
-          <p className="project-desc">{featured.desc}</p>
-          <div className="project-tags">
-            {featured.tags.map(tag => (
-              <span className="project-tag" key={tag}>{tag}</span>
-            ))}
-          </div>
+          <p className="project-desc">{featured.short}</p>
           <div className="project-featured-links">
+            <Link to={`/projects/${featured.slug}`} className="project-readmore">read more</Link>
             {featured.links.map(l => (
               <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
             ))}
@@ -335,7 +310,7 @@ function Projects() {
       </div>
       <div className="projects-grid">
         {projects.map((p, i) => (
-          <div className="project-card" key={p.title}>
+          <div className="project-card" key={p.slug}>
             <div className="project-window-bar">
               <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
               <span className="project-window-name">~/{p.title.toLowerCase()}/</span>
@@ -345,31 +320,60 @@ function Projects() {
             </div>
             <div className="project-info">
               <p className="project-title">{p.title}</p>
-              {(p.instagram || p.status) && (
-                <div className="project-badges">
-                  {p.instagram && (
-                    <a className="project-handle" href={p.instagram.href} target="_blank" rel="noreferrer">{p.instagram.label}</a>
-                  )}
-                  {p.status && (p.statusHref
-                    ? <a className="project-status" href={p.statusHref}>{p.status}</a>
-                    : <span className="project-status">{p.status}</span>
-                  )}
-                </div>
-              )}
-              <p className="project-desc">{p.desc}</p>
-              <div className="project-tags">
-                {p.tags.map(tag => (
-                  <span className="project-tag" key={tag}>{tag}</span>
-                ))}
-              </div>
+              <ProjectBadges project={p} />
+              <p className="project-desc">{p.short}</p>
             </div>
             <div className="project-links">
+              <Link to={`/projects/${p.slug}`} className="project-readmore">read more</Link>
               {p.links.map(l => (
                 <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
               ))}
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  )
+}
+
+function ProjectDetail() {
+  const { slug } = useParams()
+  const project = allProjects.find(p => p.slug === slug)
+
+  if (!project) {
+    return (
+      <section className="project-detail">
+        <div className="project-detail-container">
+          <Link to="/projects" className="project-back">&larr; back to projects</Link>
+          <h2 className="project-detail-title">Project not found</h2>
+          <p className="project-detail-desc">That project doesn't exist. Head back and pick another.</p>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section className="project-detail">
+      <div className="project-detail-container">
+        <Link to="/projects" className="project-back">&larr; back to projects</Link>
+        <div className="project-detail-media">
+          <img src={project.img} alt={project.alt} />
+        </div>
+        <div className="project-detail-body">
+          <h2 className="project-detail-title">{project.title}</h2>
+          <ProjectBadges project={project} />
+          <p className="project-detail-desc">{project.desc}</p>
+          <div className="project-tags">
+            {project.tags.map(tag => (
+              <span className="project-tag" key={tag}>{tag}</span>
+            ))}
+          </div>
+          <div className="project-detail-links">
+            {project.links.map(l => (
+              <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -414,7 +418,6 @@ function Contact() {
 function App() {
   return (
     <main>
-      <BootScreen />
       <ScrollToTop />
       <Sparkles />
       <KofiButton />
@@ -424,6 +427,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/credits" element={<Credits />} />
         </Routes>
