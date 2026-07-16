@@ -282,7 +282,7 @@ const posts = [
     alt: 'The Rise of Y2K and Feminine Tech',
     title: 'The Rise of Y2K and Feminine Tech',
     date: 'July 2026',
-    excerpt: 'I build all kinds of sites, but Y2K-style or girly websites are my favorite kind to build.',
+    excerpt: "I'm a software engineer bringing femininity and creativity to a traditionally male-dominated industry.",
     body: [
       `I build all kinds of sites, but Y2K-style or girly websites are my favorite kind to build. It has, unfortunately, become an unspoken rule that "professional" web design means gray, minimal, corporate. neutral fonts, muted palettes, a lot of white space, and somewhere along the way, we decided that look is what professionalism is.`,
       `The tech industry is very male-dominated, and that type of mentality is a form of misogyny. It came from an industry that's still overwhelmingly male at every senior level, and it quietly coded gray and neutral as competent. At the same time, anything colorful, maximalist, or femme-coded got read as less serious, less technical, more "just design", as if a hot pink gradient site is somehow easier to build than a black, white, and beige one.`,
@@ -353,7 +353,6 @@ function Blog() {
     <section className="blog" id="blog">
       <div className="projects-header">
         <h2>Things I've written.</h2>
-        <p className="blog-sub">I'm a software engineer bringing femininity and creativity to a traditionally male-dominated industry.</p>
       </div>
       <div className="blog-list">
         {posts.map((p, i) => (
