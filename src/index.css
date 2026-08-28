@@ -1197,7 +1197,7 @@ a.project-status:hover {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: rgba(255, 199, 230, 0.72);
   text-decoration: none;
   background: none;
