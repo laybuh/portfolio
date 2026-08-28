@@ -1198,22 +1198,22 @@ a.project-status:hover {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #2a0a1c;
+  color: rgba(255, 199, 230, 0.72);
   text-decoration: none;
-  background: var(--pink-2);
-  border: 1px solid var(--pink-1);
+  background: none;
+  border: none;
   border-radius: 0;
-  padding: 0.45rem 0.85rem;
-  box-shadow: 2px 2px 0 var(--pink-5);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  padding: 0.3rem 0;
+  margin-right: 0.6rem;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .project-link:hover,
 .project-readmore:hover {
-  color: #2a0a1c;
-  background: var(--pink-1);
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--pink-5);
+  color: rgba(255, 199, 230, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-shadow: 0 0 10px rgba(255, 143, 199, 0.3);
 }
 
 .blog {
