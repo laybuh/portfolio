@@ -73,14 +73,12 @@ function Sparkles() {
 }
 
 function KofiButton() {
-  const { pathname } = useLocation()
-  const isHome = pathname === '/'
   return (
     <a
       href="https://ko-fi.com/layba"
       target="_blank"
       rel="noreferrer"
-      className={`kofi-float${isHome ? ' kofi-home' : ''}`}
+      className="kofi-float"
       aria-label="Buy me a coffee"
     >
       <svg
@@ -200,7 +198,6 @@ function Hero() {
     <section className="hero">
       <div className="hero-stars" aria-hidden="true" />
       <div className="hero-stars2" aria-hidden="true" />
-      <div className="hero-wordmark" lang="ar" dir="rtl" aria-hidden="true">&#1604;&#1610;&#1576;&#1577;</div>
       <div className="hero-content">
         <div className="checker-row">
           <StarShape className="accent-star" />
@@ -258,7 +255,7 @@ function About() {
     <section className="about" id="about">
       <div className="about-cover" aria-hidden="true">
         <div className="about-eyebrow-row">
-          <span className="about-eyebrow">N&deg;01 &mdash; Layba</span>
+          <span className="about-eyebrow">N&deg;01 &mdash; <span className="about-eyebrow-ar" lang="ar" dir="rtl">&#1604;&#1610;&#1576;&#1577;</span></span>
           <span className="about-rule" />
           <span className="about-eyebrow">2026</span>
         </div>
@@ -692,7 +689,6 @@ function App() {
     <main>
       <ScrollToTop />
       <Sparkles />
-      <KofiButton />
       <Nav />
       <div className="page-content">
         <Routes>
@@ -714,6 +710,7 @@ function Footer() {
   return (
     <footer className="site-footer">
       <Link to="/" className="footer-tag">© {new Date().getFullYear()} layba.dev</Link>
+      <KofiButton />
     </footer>
   )
 }
