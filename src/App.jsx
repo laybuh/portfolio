@@ -36,42 +36,6 @@ function StarShape({ className }) {
   )
 }
 
-function Sparkles() {
-  const [sparkles, setSparkles] = useState([])
-
-  useEffect(() => {
-    let lastSpawn = 0
-    const handleMouseMove = (e) => {
-      const now = Date.now()
-      if (now - lastSpawn < 50) return
-      if (Math.random() > 0.6) return
-      lastSpawn = now
-      const sparkle = {
-        id: Math.random(),
-        x: e.clientX,
-        y: e.clientY,
-        symbol: ['✦', '✧', '⋆', '˚'][Math.floor(Math.random() * 4)]
-      }
-      setSparkles(prev => [...prev, sparkle])
-      setTimeout(() => {
-        setSparkles(prev => prev.filter(s => s.id !== sparkle.id))
-      }, 600)
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
-  return (
-    <>
-      {sparkles.map(s => (
-        <span key={s.id} className="sparkle" style={{ left: s.x, top: s.y }}>
-          {s.symbol}
-        </span>
-      ))}
-    </>
-  )
-}
-
 function KofiButton() {
   return (
     <a
@@ -107,7 +71,14 @@ const navLinks = [
   { key: '4', label: 'contact', to: '/contact' },
 ]
 
-function Nav() {
+const METER_SEGMENTS = 10
+const METER_GOAL = 20
+
+function Nav({ score }) {
+  const cycle = score % METER_GOAL
+  const filled = score > 0 && cycle === 0
+    ? METER_SEGMENTS
+    : Math.ceil(cycle / (METER_GOAL / METER_SEGMENTS))
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
@@ -141,6 +112,15 @@ function Nav() {
 
   return (
     <nav className="nav-term">
+      <span className="nav-score">
+        <span className="nav-score-label">caught:</span>
+        <b>{String(score).padStart(2, '0')}</b>
+        <span className="nav-score-meter" aria-hidden="true">
+          {Array.from({ length: METER_SEGMENTS }, (_, i) => (
+            <i key={i} className={i < filled ? 'nav-score-seg-on' : undefined} />
+          ))}
+        </span>
+      </span>
       <Link to="/" className="nav-term-home">
         <span className="nav-term-prompt">&gt;</span>index
       </Link>
@@ -192,12 +172,146 @@ function Nav() {
   )
 }
 
-function Hero() {
+function CatchGame({ onCatch }) {
+  const [pos, setPos] = useState(null)
+  const [ghost, setGhost] = useState(null)
+  const [flash, setFlash] = useState(null)
+  const hostRef = useRef(null)
+  const posRef = useRef({ x: 0, y: 0 })
+  const placeRef = useRef(() => {})
+  const lastDodgeRef = useRef(0)
+
+  useEffect(() => {
+    const host = hostRef.current
+    if (!host) return undefined
+    if (!window.matchMedia('(min-width: 601px)').matches) return undefined
+
+    const bounds = (rect) => ({
+      minX: 50,
+      maxX: rect.width - 50,
+      minY: 140,
+      maxY: rect.height - 70,
+    })
+
+    const blocked = (rect, x, y) => {
+      const content = host.parentElement?.querySelector('.hero-content')
+      const safe = content?.getBoundingClientRect()
+      if (!safe) return false
+      const pad = 44
+      const ax = rect.left + x
+      const ay = rect.top + y
+      return ax > safe.left - pad && ax < safe.right + pad
+        && ay > safe.top - pad && ay < safe.bottom + pad
+    }
+
+    const place = () => {
+      const rect = host.getBoundingClientRect()
+      const b = bounds(rect)
+      for (let i = 0; i < 40; i += 1) {
+        const x = b.minX + Math.random() * Math.max(1, b.maxX - b.minX)
+        const y = b.minY + Math.random() * Math.max(1, b.maxY - b.minY)
+        if (blocked(rect, x, y)) continue
+        posRef.current = { x, y }
+        setPos({ x, y })
+        return
+      }
+      posRef.current = { x: b.minX, y: b.minY }
+      setPos({ x: b.minX, y: b.minY })
+    }
+
+    placeRef.current = place
+    place()
+
+    const onMove = (e) => {
+      const rect = host.getBoundingClientRect()
+      if (e.clientX < rect.left || e.clientX > rect.right) return
+      if (e.clientY < rect.top || e.clientY > rect.bottom) return
+      const cx = e.clientX - rect.left
+      const cy = e.clientY - rect.top
+      const { x, y } = posRef.current
+      const dx = cx - x
+      const dy = cy - y
+      if (Math.hypot(dx, dy) > 55) return
+      const now = Date.now()
+      if (now - lastDodgeRef.current < 350) return
+      if (Math.random() > 0.45) return
+      lastDodgeRef.current = now
+      const b = bounds(rect)
+      const away = Math.atan2(dy, dx) + Math.PI
+      for (let i = 0; i < 24; i += 1) {
+        const angle = away + (Math.random() - 0.5) * 2.4
+        const jump = 70 + Math.random() * 60
+        const nx = Math.max(b.minX, Math.min(b.maxX, x + Math.cos(angle) * jump))
+        const ny = Math.max(b.minY, Math.min(b.maxY, y + Math.sin(angle) * jump))
+        if (blocked(rect, nx, ny)) continue
+        setGhost({ x, y, id: Math.random() })
+        posRef.current = { x: nx, y: ny }
+        setPos({ x: nx, y: ny })
+        return
+      }
+      setGhost({ x, y, id: Math.random() })
+      place()
+    }
+
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('resize', place)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('resize', place)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!ghost) return undefined
+    const t = setTimeout(() => setGhost(null), 350)
+    return () => clearTimeout(t)
+  }, [ghost])
+
+  useEffect(() => {
+    if (!flash) return undefined
+    const t = setTimeout(() => setFlash(null), 600)
+    return () => clearTimeout(t)
+  }, [flash])
+
+  const handleCatch = () => {
+    const { x, y } = posRef.current
+    setFlash({ x, y, id: Math.random() })
+    onCatch()
+    placeRef.current()
+  }
+
+  return (
+    <div className="catch-layer" ref={hostRef} aria-hidden="true">
+      {ghost && (
+        <span className="catch-ghost" key={ghost.id} style={{ left: ghost.x, top: ghost.y }}>
+          <StarShape className="catch-star" />
+        </span>
+      )}
+      {flash && (
+        <span className="catch-flash" key={flash.id} style={{ left: flash.x, top: flash.y }}>+1</span>
+      )}
+      {pos && (
+        <button
+          type="button"
+          className="catch-target"
+          style={{ left: pos.x, top: pos.y }}
+          onClick={handleCatch}
+          tabIndex={-1}
+        >
+          <StarShape className="catch-star" />
+        </button>
+      )}
+    </div>
+  )
+}
+
+function Hero({ onCatch }) {
   const navigate = useNavigate()
   return (
     <section className="hero">
       <div className="hero-stars" aria-hidden="true" />
       <div className="hero-stars2" aria-hidden="true" />
+      <CatchGame onCatch={onCatch} />
       <div className="hero-content">
         <div className="checker-row">
           <StarShape className="accent-star" />
@@ -205,6 +319,7 @@ function Hero() {
           <StarShape className="accent-star" />
         </div>
         <h1 className="welcome">WELCOME</h1>
+        <p className="hero-hint">game: catch the star.</p>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
           <button type="button" onClick={() => navigate('/projects')}>
@@ -241,10 +356,10 @@ function Hero() {
   )
 }
 
-function Home() {
+function Home({ onCatch }) {
   return (
     <>
-      <Hero />
+      <Hero onCatch={onCatch} />
       <About />
     </>
   )
@@ -685,14 +800,14 @@ function Contact() {
 }
 
 function App() {
+  const [score, setScore] = useState(0)
   return (
     <main>
       <ScrollToTop />
-      <Sparkles />
-      <Nav />
+      <Nav score={score} />
       <div className="page-content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home onCatch={() => setScore(s => s + 1)} />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/blog" element={<Blog />} />
