@@ -303,16 +303,6 @@ const featured = {
 
 const projects = [
   {
-    slug: 'moonfade',
-    img: moonfadePhoto,
-    alt: 'Moonfade',
-    title: 'Moonfade',
-    short: 'A pastel desktop-OS site for lighting virtual candles tied to goals and intentions.',
-    desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that's down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
-    tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
-    links: []
-  },
-  {
     slug: '3li3li',
     img: eliPhoto,
     alt: '3LI3LI',
@@ -337,6 +327,17 @@ const projects = [
     links: [
       { href: 'https://themichiferqueen.com', label: 'live' },
     ]
+  },
+  {
+    slug: 'moonfade',
+    img: moonfadePhoto,
+    alt: 'Moonfade',
+    title: 'Moonfade',
+    status: 'launching soon',
+    short: 'A pastel desktop-OS site for lighting virtual candles tied to goals and intentions.',
+    desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that is down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
+    tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
+    links: []
   },
   {
     slug: 'lunev',
@@ -477,7 +478,9 @@ function Projects() {
                   >
                     <FolderIcon />
                     <span className="folder-name">{p.title}</span>
-                    <span className="folder-index">{String(r * 2 + i + 1).padStart(2, '0')}</span>
+                    {p.status
+                      ? <span className="folder-status">{p.status}</span>
+                      : <span className="folder-index">{String(r * 2 + i + 1).padStart(2, '0')}</span>}
                   </button>
                 ))}
               </div>
@@ -509,7 +512,7 @@ function Projects() {
                         ))}
                       </div>
                       <div className="project-links">
-                        <Link to={`/projects/${active.slug}`} className="project-readmore">read more</Link>
+                        <Link to={`/projects/${active.slug}`} className="project-readmore">permalink</Link>
                         {active.links.map(l => (
                           <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
                         ))}

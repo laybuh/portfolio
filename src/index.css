@@ -645,7 +645,7 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(1);
+  filter: saturate(0.8);
 }
 
 .about-text {
@@ -871,6 +871,18 @@ button:hover::before {
   font-size: 0.42rem;
   letter-spacing: 1px;
   color: rgba(255, 199, 230, 0.4);
+}
+
+.folder-status {
+  font-family: var(--pixel);
+  font-size: 0.36rem;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--pink-2);
+  border: 1px solid rgba(255, 143, 199, 0.4);
+  background: rgba(255, 143, 199, 0.1);
+  padding: 0.3rem 0.5rem;
 }
 
 .folder:hover {
@@ -1157,11 +1169,11 @@ a.project-status:hover {
   font-size: 0.57rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 143, 199, 0.85);
-  border: 1px solid rgba(255, 143, 199, 0.2);
+  color: rgba(255, 199, 230, 0.5);
+  border: 1px solid rgba(255, 143, 199, 0.14);
   border-radius: 2px;
   padding: 0.2rem 0.6rem;
-  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .project-tag:hover {
@@ -1182,22 +1194,26 @@ a.project-status:hover {
 .project-link,
 .project-readmore {
   font-family: var(--mono);
-  font-size: 0.52rem;
-  letter-spacing: 1px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--pink);
+  color: #2a0a1c;
   text-decoration: none;
-  border: 1px solid var(--border-hover);
-  border-radius: 2px;
-  padding: 0.32rem 0.55rem;
-  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  background: var(--pink-2);
+  border: 1px solid var(--pink-1);
+  border-radius: 0;
+  padding: 0.45rem 0.85rem;
+  box-shadow: 2px 2px 0 var(--pink-5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
 }
 
 .project-link:hover,
 .project-readmore:hover {
-  color: var(--cyan);
-  border-color: rgba(255, 143, 199, 0.5);
-  background: rgba(255, 143, 199, 0.06);
+  color: #2a0a1c;
+  background: var(--pink-1);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--pink-5);
 }
 
 .blog {
