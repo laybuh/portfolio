@@ -1,11 +1,12 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Routes, Route, Link, useNavigate, useLocation, useParams } from 'react-router-dom'
 import ContactForm from './ContactForm'
 import laybaPhoto from './assets/layba.webp'
 import animePhoto from './assets/anime.webp'
 import mapPhoto from './assets/map.webp'
 import dospacePhoto from './assets/dospace.webp'
+import moonfadePhoto from './assets/moonfade.webp'
 import hazefmPhoto from './assets/hazefm.webp'
 import eliPhoto from './assets/3li3li.webp'
 import michiferqueenPhoto from './assets/themichiferqueen.webp'
@@ -13,11 +14,26 @@ import laybadevPhoto from './assets/laybadev.webp'
 import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        return
+      }
+    }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-  }, [pathname])
+  }, [pathname, hash])
   return null
+}
+
+function StarShape({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z" />
+    </svg>
+  )
 }
 
 function Sparkles() {
@@ -86,34 +102,112 @@ function KofiButton() {
   )
 }
 
+const navLinks = [
+  { key: '1', label: 'about', to: '/#about' },
+  { key: '2', label: 'projects', to: '/projects' },
+  { key: '3', label: 'blog', to: '/blog' },
+  { key: '4', label: 'contact', to: '/contact' },
+]
+
 function Nav() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
+  const [error, setError] = useState(false)
+  const [typing, setTyping] = useState(false)
+  const inputRef = useRef(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!open) return undefined
+    if (typing) inputRef.current?.focus()
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, typing])
+
+  const go = (to) => {
+    setOpen(false)
+    setValue('')
+    setError(false)
+    navigate(to)
+  }
+
+  const submit = (e) => {
+    e.preventDefault()
+    const match = navLinks.find(l => l.key === value.trim())
+    if (match) go(match.to)
+    else setError(true)
+  }
+
   return (
-    <nav>
-      <Link to="/" className="logo">layba.dev</Link>
-      <ul>
-        <li><Link to="/">index</Link></li>
-        <li><Link to="/about">about</Link></li>
-        <li><Link to="/projects">projects</Link></li>
-        <li><Link to="/blog">blog</Link></li>
-        <li><Link to="/contact">contact</Link></li>
-      </ul>
+    <nav className="nav-term">
+      <Link to="/" className="nav-term-home">
+        <span className="nav-term-prompt">&gt;</span>index
+      </Link>
+      <div className="nav-term-inner">
+      <button
+        type="button"
+        className="nav-term-trigger"
+        aria-expanded={open}
+        onClick={() => { setTyping(true); setOpen(v => !v) }}
+      >
+        <span className="nav-term-prompt">&gt;</span>
+        {open ? 'close' : 'navigation'}
+        <span className="nav-term-caret" />
+      </button>
+
+      {open && (
+        <div className="nav-term-panel">
+          <p className="nav-term-head">select a destination</p>
+          <ul className="nav-term-list">
+            {navLinks.map(l => (
+              <li key={l.key}>
+                <Link to={l.to} onClick={() => go(l.to)}>
+                  <span className="nav-term-key">[{l.key}]</span>
+                  <span className="nav-term-label">{l.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <form className="nav-term-form" onSubmit={submit}>
+            <span className="nav-term-prompt">&gt;</span>
+            <input
+              ref={inputRef}
+              onFocus={() => setTyping(true)}
+              className="nav-term-input"
+              value={value}
+              onChange={(e) => { setValue(e.target.value); setError(false) }}
+              inputMode="numeric"
+              maxLength={1}
+              aria-label="Enter a destination number"
+            />
+          </form>
+          <p className={`nav-term-foot${error ? ' nav-term-err' : ''}`}>
+            {error ? `unknown command: ${value}` : 'type a number.'}
+          </p>
+        </div>
+      )}
+      </div>
     </nav>
   )
 }
 
-function Home() {
+function Hero() {
   const navigate = useNavigate()
   return (
     <section className="hero">
-      <div className="hero-bg" aria-hidden="true" />
-      <div className="hero-overlay" aria-hidden="true" />
-      <div className="hero-dark" aria-hidden="true" />
-      <div className="hero-glitch" aria-hidden="true" />
-      <div className="hero-crt" aria-hidden="true" />
-      <div className="hero-grain" aria-hidden="true" />
+      <div className="hero-stars" aria-hidden="true" />
+      <div className="hero-stars2" aria-hidden="true" />
+      <div className="hero-wordmark" lang="ar" dir="rtl" aria-hidden="true">&#1604;&#1610;&#1576;&#1577;</div>
       <div className="hero-content">
-        <span className="hero-eyebrow"><span className="term-sign">$</span>cat intro.txt<span className="term-caret" /></span>
-        <h1 className="glitch" data-text="Hi, I'm Layba.">Hi, I'm <span>Layba</span>.</h1>
+        <div className="checker-row">
+          <StarShape className="accent-star" />
+          <span className="eyebrow">HI I'M LAYBA</span>
+          <StarShape className="accent-star" />
+        </div>
+        <h1 className="welcome">WELCOME</h1>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
           <button type="button" onClick={() => navigate('/projects')}>
@@ -150,9 +244,25 @@ function Home() {
   )
 }
 
+function Home() {
+  return (
+    <>
+      <Hero />
+      <About />
+    </>
+  )
+}
+
 function About() {
   return (
     <section className="about" id="about">
+      <div className="about-cover" aria-hidden="true">
+        <div className="about-eyebrow-row">
+          <span className="about-eyebrow">N&deg;01 &mdash; Layba</span>
+          <span className="about-rule" />
+          <span className="about-eyebrow">2026</span>
+        </div>
+      </div>
       <div className="about-container">
         <div className="about-photo-wrap">
           <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
@@ -192,6 +302,16 @@ const featured = {
 }
 
 const projects = [
+  {
+    slug: 'moonfade',
+    img: moonfadePhoto,
+    alt: 'Moonfade',
+    title: 'Moonfade',
+    short: 'A pastel desktop-OS site for lighting virtual candles tied to goals and intentions.',
+    desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that's down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
+    tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
+    links: []
+  },
   {
     slug: '3li3li',
     img: eliPhoto,
@@ -314,36 +434,95 @@ function ProjectBadges({ project }) {
   )
 }
 
+function FolderIcon() {
+  return (
+    <svg className="folder-icon" viewBox="0 0 32 26" aria-hidden="true">
+      <path className="folder-back" d="M1 3h11l3 3h16v17H1z" />
+      <path className="folder-front" d="M1 8h30v15H1z" />
+    </svg>
+  )
+}
+
+const folderRows = allProjects.reduce((rows, p, i) => {
+  if (i % 2 === 0) rows.push([p])
+  else rows[rows.length - 1].push(p)
+  return rows
+}, [])
+
 function Projects() {
+  const [openSlug, setOpenSlug] = useState(null)
+  const active = allProjects.find(p => p.slug === openSlug)
+
   return (
     <section className="projects" id="projects">
       <div className="projects-header">
         <h2>Things I've built.</h2>
+        <p className="projects-note">Personal projects and freelance client work.</p>
+        <p className="projects-hint">click a folder to open it.</p>
       </div>
-      <div className="projects-grid">
-        {allProjects.map((p, i) => (
-          <div className={`project-card${p.slug === featured.slug ? ' project-card-featured' : ''}`} key={p.slug}>
-            <div className="project-window-bar">
-              <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
-              <span className="project-window-name">~/{p.slug}/</span>
+
+      <div className="folder-grid">
+        {folderRows.map((row, r) => {
+          const openHere = row.some(p => p.slug === openSlug)
+          return (
+            <div className="folder-row-wrap" key={`row-${r}`}>
+              <div className="folder-row">
+                {row.map((p, i) => (
+                  <button
+                    type="button"
+                    key={p.slug}
+                    className={`folder${openSlug === p.slug ? ' folder-open' : ''}`}
+                    aria-expanded={openSlug === p.slug}
+                    onClick={() => setOpenSlug(cur => (cur === p.slug ? null : p.slug))}
+                  >
+                    <FolderIcon />
+                    <span className="folder-name">{p.title}</span>
+                    <span className="folder-index">{String(r * 2 + i + 1).padStart(2, '0')}</span>
+                  </button>
+                ))}
+              </div>
+
+              {openHere && active && (
+                <div className="folder-window">
+                  <div className="project-window-bar">
+                    <span className="project-window-name">~/{active.slug}/</span>
+                    <button
+                      type="button"
+                      className="folder-window-close"
+                      onClick={() => setOpenSlug(null)}
+                      aria-label="Close"
+                    >
+                      x
+                    </button>
+                  </div>
+                  <div className="folder-window-body">
+                    <Link to={`/projects/${active.slug}`} className="folder-window-media">
+                      <img src={active.img} alt={active.alt} />
+                    </Link>
+                    <div className="folder-window-info">
+                      <p className="project-title">{active.title}</p>
+                      <ProjectBadges project={active} />
+                      <p className="project-desc">{active.desc}</p>
+                      <div className="project-tags">
+                        {active.tags.map(tag => (
+                          <span className="project-tag" key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                      <div className="project-links">
+                        <Link to={`/projects/${active.slug}`} className="project-readmore">read more</Link>
+                        {active.links.map(l => (
+                          <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="project-img-wrap">
-              <img src={p.img} alt={p.alt} />
-            </div>
-            <div className="project-info">
-              <p className="project-title">{p.title}</p>
-              <ProjectBadges project={p} />
-              <p className="project-desc">{p.short}</p>
-            </div>
-            <div className="project-links">
-              <Link to={`/projects/${p.slug}`} className="project-readmore">read more</Link>
-              {p.links.map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
-              ))}
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
+
     </section>
   )
 }
@@ -515,7 +694,6 @@ function App() {
       <div className="page-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/blog" element={<Blog />} />
