@@ -1208,6 +1208,13 @@ a.project-status:hover {
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
+.project-link::before,
+.project-readmore::before {
+  content: '>';
+  margin-right: 0.55ch;
+  opacity: 0.65;
+}
+
 .project-link:hover,
 .project-readmore:hover {
   color: rgba(255, 199, 230, 0.95);
