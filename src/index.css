@@ -645,7 +645,7 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: saturate(0.8);
+  filter: grayscale(1.0);
 }
 
 .about-text {
