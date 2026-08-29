@@ -292,8 +292,8 @@ const featured = {
   alt: 'layba.dev',
   title: 'layba.dev',
   status: 'this site',
-  short: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library.",
-  desc: "The site you're on. React, Vite, and React Router, with every style hand-written in plain CSS instead of a component library. The hero blends two photos into one scene using masked blend modes, then layers a CRT grille, film grain, glitch lines, and a vignette for the cyberpunk look. Images are served as WebP, routes scroll back to the top, and a sparkle cursor trails the mouse.",
+  short: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library.",
+  desc: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library. The hero is a pixel wordmark over a starfield, with film grain over the whole site. Navigation is a terminal panel where you click a destination or type its number, and the top bar has a clock and an XP meter that fills as you click around. Projects open as folders in place instead of separate pages. Images are WebP and routes scroll back to the top.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
   links: [
     { href: 'https://layba.dev', label: 'live' },
