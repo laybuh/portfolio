@@ -1520,82 +1520,6 @@ a.project-status:hover {
 }
 
 
-.credits {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10rem 5rem 8rem;
-  position: relative;
-  z-index: 1;
-}
-
-.credits-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 560px;
-  padding: 2.25rem 2.25rem 1.75rem;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(12, 15, 14, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-}
-
-.credits-container h2 {
-  font-family: var(--display);
-  font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: linear-gradient(120deg, var(--pink), var(--purple) 50%, var(--cyan), var(--pink));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 24px rgba(240, 168, 210, 0.35));
-}
-
-.credits-sub {
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  margin-bottom: 0.25rem;
-}
-
-.credits-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.25rem;
-}
-
-.credits-list a {
-  display: inline-flex;
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--purple);
-  border: 1px solid rgba(211, 146, 187, 0.18);
-  border-radius: 2px;
-  padding: 0.55rem 1rem;
-  background: rgba(211, 146, 187, 0.04);
-  text-shadow: 0 0 10px rgba(211, 146, 187, 0.35);
-  text-decoration: none;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.credits-list a:hover {
-  color: var(--cyan);
-  border-color: rgba(211, 146, 187, 0.4);
-  background: rgba(211, 146, 187, 0.08);
-}
-
 .contact {
   min-height: 100vh;
   display: flex;
@@ -2315,7 +2239,6 @@ a.project-status:hover {
 
 .about-text h2::before,
 .projects-header h2::before,
-.credits-container h2::before,
 .contact-container h2::before,
 .project-detail-title::before {
   content: '> ';

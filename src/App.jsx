@@ -634,24 +634,6 @@ function ProjectDetail() {
   )
 }
 
-function Credits() {
-  return (
-    <section className="credits" id="credits">
-      <div className="credits-container">
-        <h2>Credits</h2>
-        <ul className="credits-list">
-          <li>
-            <a href="https://unsplash.com/photos/a-room-with-tables-and-chairs-hzBQyvjM59Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noreferrer">Interior · Unsplash</a>
-          </li>
-          <li>
-            <a href="https://unsplash.com/photos/people-walking-on-street-during-night-time-6-cvDnp9y7I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noreferrer">Ray ZHUANG · Unsplash</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-  )
-}
-
 function Contact() {
   return (
     <section className="contact" id="contact">
@@ -696,7 +678,6 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/credits" element={<Credits />} />
         </Routes>
       </div>
       <Footer />
