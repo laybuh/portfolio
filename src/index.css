@@ -708,8 +708,8 @@ button:hover::before {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: contrast(1.5) brightness(1.0) grayscale(0);
-  opacity: 0.4;
+  filter: contrast(1.5);
+  
 }
 
 .about-text {
