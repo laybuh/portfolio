@@ -666,7 +666,7 @@ button:hover::before {
     radial-gradient(circle 5px at 22px 19px, var(--pink) 50%, transparent 55%),
     radial-gradient(circle 5px at 40px 19px, var(--purple) 50%, transparent 55%),
     radial-gradient(circle 5px at 58px 19px, var(--cyan) 50%, transparent 55%),
-    rgba(16, 10, 24, 0.7);
+    rgba(24, 12, 18, 0.7);
 }
 
 .about-photo-wrap {
