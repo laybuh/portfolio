@@ -2431,3 +2431,11 @@ body::after {
     animation: none;
   }
 }
+
+@media (hover: none) {
+  .nav-term .nav-score,
+  .hero .catch-layer,
+  .hero .hero-hint {
+    display: none;
+  }
+}

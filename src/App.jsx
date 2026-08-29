@@ -156,7 +156,13 @@ function Nav({ score }) {
               onFocus={() => setTyping(true)}
               className="nav-term-input"
               value={value}
-              onChange={(e) => { setValue(e.target.value); setError(false) }}
+              onChange={(e) => {
+                const v = e.target.value.trim()
+                setValue(v)
+                const match = navLinks.find(l => l.key === v)
+                if (match) go(match.to)
+                else setError(v.length > 0)
+              }}
               inputMode="numeric"
               maxLength={1}
               aria-label="Enter a destination number"
@@ -184,7 +190,7 @@ function CatchGame({ onCatch }) {
   useEffect(() => {
     const host = hostRef.current
     if (!host) return undefined
-    if (!window.matchMedia('(min-width: 601px)').matches) return undefined
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return undefined
 
     const bounds = (rect) => ({
       minX: 50,
