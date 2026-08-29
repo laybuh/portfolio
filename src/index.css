@@ -169,7 +169,6 @@ nav {
 }
 
 .nav-score {
-  margin-right: auto;
   pointer-events: auto;
   font-family: var(--pixel);
   font-size: 0.5rem;
@@ -187,6 +186,30 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 0.8ch;
+}
+
+.nav-clock {
+  margin-right: auto;
+  pointer-events: auto;
+  user-select: none;
+  font-family: var(--pixel);
+  font-size: 0.5rem;
+  line-height: 1.8;
+  letter-spacing: 0;
+  color: rgba(248, 211, 233, 0.55);
+  border: 1px solid rgba(240, 168, 210, 0.35);
+  background: rgba(7, 4, 8, 0.72);
+  padding: 0.7rem 0.95rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-clock i {
+  font-style: normal;
+  margin-right: -2px;
 }
 
 .nav-score b {
@@ -1797,7 +1820,8 @@ a.project-status:hover {
     align-self: flex-start;
   }
 
-  .nav-term .nav-score {
+  .nav-term .nav-score,
+  .nav-term .nav-clock {
     display: none;
   }
 
@@ -1831,14 +1855,23 @@ a.project-status:hover {
     margin-top: 0.6rem;
   }
 
-  .hero .hero-buttons button {
+  .hero .hero-buttons.btn-visible button {
     flex: 0 0 auto;
     width: auto;
     min-width: 0;
-    font-size: 0.32rem;
+    font-size: 8px;
     line-height: 1.6;
-    letter-spacing: 0.3px;
-    padding: 8px 7px;
+    letter-spacing: 0.5px;
+    padding: 9px 12px;
+    border-width: 1px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+      2px 2px 0 var(--pink-5),
+      0 0 10px rgba(240, 168, 210, 0.2);
+  }
+
+  .hero .hero-buttons.btn-visible button::before {
+    margin-right: 6px;
   }
 
   button {
@@ -1927,8 +1960,9 @@ a.project-status:hover {
 
 @media (max-width: 600px) {
   .hero {
-    min-height: 100dvh;
-    padding-top: 10rem;
+    min-height: 100svh;
+    justify-content: center;
+    padding-top: 7rem;
   }
 }
 

@@ -74,6 +74,22 @@ const navLinks = [
 const METER_SEGMENTS = 10
 const METER_GOAL = 20
 
+function Clock() {
+  const [now, setNow] = useState(() => new Date())
+
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(t)
+  }, [])
+
+  const hh = String(now.getHours()).padStart(2, '0')
+  const mm = String(now.getMinutes()).padStart(2, '0')
+
+  return (
+    <span className="nav-clock">{hh}<i>:</i>{mm}</span>
+  )
+}
+
 function Nav({ score }) {
   const cycle = score % METER_GOAL
   const filled = score > 0 && cycle === 0
@@ -121,6 +137,7 @@ function Nav({ score }) {
           ))}
         </span>
       </span>
+      <Clock />
       <Link to="/" className="nav-term-home">
         <span className="nav-term-prompt">&gt;</span>index
       </Link>
