@@ -259,10 +259,10 @@ function CatchGame({ onCatch }) {
       place()
     }
 
-    window.addEventListener('mousemove', onMove)
+    window.addEventListener('pointermove', onMove)
     window.addEventListener('resize', place)
     return () => {
-      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('pointermove', onMove)
       window.removeEventListener('resize', place)
     }
   }, [])
