@@ -185,6 +185,7 @@ nav {
   user-select: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.8ch;
 }
 
@@ -195,8 +196,8 @@ nav {
 
 .nav-score-meter {
   display: inline-flex;
+  align-items: center;
   gap: 2px;
-  margin-left: 0.4ch;
 }
 
 .nav-score-meter i {
@@ -2108,6 +2109,14 @@ a.project-status:hover {
   padding: 0.5rem 0.75rem;
 }
 
+.hint-star {
+  width: 9px;
+  height: 9px;
+  margin-left: 0.7ch;
+  color: var(--pink-2);
+  filter: drop-shadow(0 0 4px var(--pink-3));
+}
+
 .catch-layer {
   position: absolute;
   inset: 0;
@@ -2244,6 +2253,7 @@ a.project-status:hover {
 
 .hero h1.welcome {
   font-family: var(--pixel-display);
+  opacity: 0.6;
   font-weight: 400;
   font-size: clamp(26px, 9vw, 62px);
   line-height: 1.15;
