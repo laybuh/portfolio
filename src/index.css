@@ -2433,3 +2433,11 @@ body::after {
     animation: none;
   }
 }
+
+@media (any-hover: none) {
+  .nav-term .nav-score,
+  .hero .catch-layer,
+  .hero .hero-hint {
+    display: none;
+  }
+}

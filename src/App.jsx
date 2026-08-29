@@ -191,6 +191,7 @@ function CatchGame({ onCatch }) {
     const host = hostRef.current
     if (!host) return undefined
     if (!window.matchMedia('(min-width: 601px)').matches) return undefined
+    if (window.matchMedia('(any-hover: none)').matches) return undefined
 
     const bounds = (rect) => ({
       minX: 50,
