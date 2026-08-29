@@ -190,7 +190,7 @@ function CatchGame({ onCatch }) {
   useEffect(() => {
     const host = hostRef.current
     if (!host) return undefined
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return undefined
+    if (!window.matchMedia('(min-width: 601px)').matches) return undefined
 
     const bounds = (rect) => ({
       minX: 50,

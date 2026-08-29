@@ -1164,6 +1164,7 @@ a.project-status:hover {
 .project-card .project-desc {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1359,6 +1360,7 @@ a.project-status:hover {
   font-size: 0.8rem;
   line-height: 1.8;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .blog-card .project-links {
@@ -2429,13 +2431,5 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::after {
     animation: none;
-  }
-}
-
-@media (hover: none) {
-  .nav-term .nav-score,
-  .hero .catch-layer,
-  .hero .hero-hint {
-    display: none;
   }
 }
