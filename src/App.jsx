@@ -113,7 +113,7 @@ function Nav({ score }) {
   return (
     <nav className="nav-term">
       <span className="nav-score">
-        <span className="nav-score-label">caught:</span>
+        <span className="nav-score-label">xp:</span>
         <b>{String(score).padStart(2, '0')}</b>
         <span className="nav-score-meter" aria-hidden="true">
           {Array.from({ length: METER_SEGMENTS }, (_, i) => (
@@ -319,7 +319,7 @@ function Hero({ onCatch }) {
           <StarShape className="accent-star" />
         </div>
         <h1 className="welcome">WELCOME</h1>
-        <p className="hero-hint">game: catch the star.</p>
+        <p className="hero-hint">&gt; try: catch the star <StarShape className="hint-star" /></p>
         <p className="subtitle">I like building aesthetic digital experiences.</p>
         <div className="hero-buttons btn-visible">
           <button type="button" onClick={() => navigate('/projects')}>
