@@ -1873,9 +1873,7 @@ a.project-status:hover {
     align-self: flex-start;
   }
 
-  .nav-term .nav-score,
-  .hero .catch-layer,
-  .hero .hero-hint {
+  .nav-term .nav-score {
     display: none;
   }
 
@@ -2094,98 +2092,6 @@ a.project-status:hover {
       transparent 76%
     ),
     #000;
-}
-
-.hero-hint {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  font-family: var(--pixel);
-  font-size: 0.4rem;
-  line-height: 1.9;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(248, 211, 233, 0.55);
-  border: 1px solid rgba(240, 168, 210, 0.22);
-  background: rgba(240, 168, 210, 0.05);
-  padding: 0.5rem 0.75rem;
-}
-
-.hint-star {
-  width: 9px;
-  height: 9px;
-  margin-left: 0.7ch;
-  color: var(--pink-2);
-  filter: drop-shadow(0 0 4px var(--pink-3));
-}
-
-.catch-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.catch-target {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: none;
-  background: none;
-  box-shadow: none;
-  pointer-events: auto;
-  transform: translate(-50%, -50%);
-  transition: left 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
-  opacity: 0.55;
-  filter: drop-shadow(0 0 4px rgba(240, 168, 210, 0.45));
-}
-
-.catch-target::before {
-  display: none;
-}
-
-.catch-target:hover {
-  box-shadow: none;
-  opacity: 0.8;
-}
-
-.catch-star {
-  width: 100%;
-  height: 100%;
-  display: block;
-  color: var(--pink-2);
-}
-
-.catch-ghost {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: catch-trail 0.35s ease forwards;
-}
-
-@keyframes catch-trail {
-  from { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-  to { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-}
-
-.catch-flash {
-  position: absolute;
-  font-family: var(--pixel);
-  font-size: 0.45rem;
-  color: rgba(248, 211, 233, 0.75);
-  text-shadow: 0 0 6px rgba(240, 168, 210, 0.4);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: catch-pop 0.6s ease forwards;
-}
-
-@keyframes catch-pop {
-  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
-  100% { opacity: 0; transform: translate(-50%, -160%) scale(1.1); }
 }
 
 .hero-stars,
@@ -2431,13 +2337,5 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::after {
     animation: none;
-  }
-}
-
-@media (any-hover: none) {
-  .nav-term .nav-score,
-  .hero .catch-layer,
-  .hero .hero-hint {
-    display: none;
   }
 }
