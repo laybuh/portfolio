@@ -199,8 +199,6 @@ function Hero() {
   const navigate = useNavigate()
   return (
     <section className="hero">
-      <div className="hero-stars" aria-hidden="true" />
-      <div className="hero-stars2" aria-hidden="true" />
       <div className="hero-content">
         <div className="checker-row">
           <StarShape className="accent-star" />

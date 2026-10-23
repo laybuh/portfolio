@@ -2052,44 +2052,6 @@ a.project-status:hover {
     #000;
 }
 
-.hero-stars,
-.hero-stars2 {
-  position: absolute;
-  inset: 0;
-  background-repeat: repeat;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-stars {
-  background-image:
-    radial-gradient(1.5px 1.5px at 20px 30px, var(--star), transparent),
-    radial-gradient(1.5px 1.5px at 140px 90px, var(--star), transparent),
-    radial-gradient(2px 2px at 90px 160px, var(--star), transparent),
-    radial-gradient(1px 1px at 200px 40px, var(--star), transparent),
-    radial-gradient(1.5px 1.5px at 260px 200px, var(--star), transparent),
-    radial-gradient(1px 1px at 320px 120px, var(--star), transparent);
-  background-size: 340px 240px;
-  opacity: 0.8;
-  animation: star-drift 90s linear infinite;
-}
-
-.hero-stars2 {
-  background-image:
-    radial-gradient(1px 1px at 60px 80px, var(--star), transparent),
-    radial-gradient(1px 1px at 180px 20px, var(--star), transparent),
-    radial-gradient(1.5px 1.5px at 300px 150px, var(--star), transparent),
-    radial-gradient(1px 1px at 40px 190px, var(--star), transparent);
-  background-size: 260px 260px;
-  opacity: 0.5;
-  animation: star-drift 140s linear infinite reverse;
-}
-
-@keyframes star-drift {
-  from { background-position: 0 0; }
-  to { background-position: -1000px 600px; }
-}
-
 .hero .hero-content {
   align-items: center;
   gap: 26px;
@@ -2194,13 +2156,6 @@ a.project-status:hover {
 
 .hero .hero-social {
   justify-content: center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-stars,
-  .hero-stars2 {
-    animation: none !important;
-  }
 }
 
 
