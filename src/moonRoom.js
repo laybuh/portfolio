@@ -46,6 +46,8 @@ export function startMoonRoom(cv, grainCv) {
   const winStars = [[158,38],[167,41],[176,37],[192,40],[200,37],[214,41],[162,44],[183,43]];
 
   let lampOn = true, lampLevel = 1, t = 0;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let wallT = -1;
 
   const WALL_W = 375, WALL_H = 162;
   const wallImg = x.createImageData(WALL_W, WALL_H);
@@ -63,7 +65,13 @@ export function startMoonRoom(cv, grainCv) {
   const SMOKE = [[26, 15, 32], [44, 25, 48], [74, 40, 66], [112, 62, 94], [156, 92, 126]];
   const PURPLE = [[24, 15, 36], [40, 26, 62], [66, 42, 104], [102, 70, 152], [140, 104, 190]];
   function drawSmokeWall() {
-    const tt = t, d = wallImg.data, LV = 10;
+    const tt = still ? 0 : t;
+    if (wallT >= 0 && (still || tt - wallT < 0.12)) {
+      x.putImageData(wallImg, 0, 0);
+      return;
+    }
+    wallT = tt;
+    const d = wallImg.data, LV = 10;
     for (let j = 0; j < WALL_H; j++) {
       const fade = 1 - 0.18 * (j / WALL_H), vy = j * 0.03;
       const wv = Math.sin(vy * 1.4 + tt * 0.3) * 0.9;
@@ -97,13 +105,6 @@ export function startMoonRoom(cv, grainCv) {
     R(24, 162, 375, 1, P.trim);
     R(25, 196, 375, 1, P.trim);
     R(399, 0, 1, 197, P.trim);
-  }
-
-  function bulb() {
-    R(100, 0, 1, 8, '#111');
-    R(97, 8, 7, 2, '#2b2630');
-    R(98, 10, 5, 2, '#38323d');
-    R(99, 12, 3, 3, '#ffcf7a');
   }
 
   function painting() {
@@ -159,9 +160,22 @@ export function startMoonRoom(cv, grainCv) {
       dot(ax, at - 4, '#ff71ce');
       x.globalAlpha = 1;
     });
-    const cpx = Math.floor(150 + ((t * 5) % 95));
-    if (cpx - 2 >= GX0 && cpx < GX1 - 1) { dot(cpx, 46, '#fff0f6'); dot(cpx - 1, 46, '#ff9fc5'); dot(cpx - 2, 46, '#c04f85'); }
-    for (let i = 0; i < 12; i++) {
+    const sp = (t % 6) / 1.1;
+    if (!still && sp < 1) {
+      const hx = Math.round(GX1 - 8 - sp * 44), hy = Math.round(38 + sp * 16);
+      for (let k = 10; k >= 1; k--) {
+        if (hx + k < GX1 - 1) {
+          x.globalAlpha = 1 - k / 11;
+          dot(hx + k, hy - Math.round(k * 0.4), '#ffc4e1');
+          x.globalAlpha = 1;
+        }
+      }
+      if (hx >= GX0 + 1) {
+        dot(hx, hy, '#fff0f6');
+        dot(hx - 1, hy, '#ffd6ea'); dot(hx, hy - 1, '#ffd6ea'); dot(hx, hy + 1, '#ffd6ea');
+      }
+    }
+    for (let i = 0; i < (still ? 0 : 12); i++) {
       const rx = GX0 + 1 + ((i * 29) % 64), ry = 35 + ((t * 26 + i * 17) % 36);
       if (ry < GBOT - 1) R(rx, Math.floor(ry), 1, 2, 'rgba(215,195,255,.3)');
     }
@@ -200,7 +214,6 @@ export function startMoonRoom(cv, grainCv) {
     R(137, 163, 74, 2, P.pink);
     R(133, 168, 2, 15, P.pink); R(213, 167, 2, 16, P.pink);
     R(137, 186, 74, 1, P.pink);
-    for (let i = 0; i < 12; i++) dot(140 + i*6, 170 + (i%3)*4, P.pinkD);
   }
 
   function nightstand() {
@@ -336,7 +349,7 @@ export function startMoonRoom(cv, grainCv) {
 
   const GW = 36, GH = 62;
   const GIRL_COLORS = {
-    hair: '#2a1f21', hairHi: '#463230', ink: '#0b0809',
+    hair: '#2a1f21', ink: '#0b0809',
     skin: '#cfa87a', skinSh: '#b79162', blush: '#d29b8e',
     lip: '#8b4a2f', lip2: '#a45f3e', gloss: '#cf9570', iris: '#4a2f2c', white: '#e5e5f2', brow: '#3a2420',
     top: '#f8b9d6', topSh: '#d998a0', trim: '#b2709a', tee: '#2a232f', teeSh: '#17131b', teeTrim: '#4a4350',
@@ -422,13 +435,7 @@ export function startMoonRoom(cv, grainCv) {
     px(17, 16, C.skinSh); px(18, 16, C.skinSh);
     rect(16, 18, 4, 1, C.lip); rect(16, 19, 4, 1, C.lip2); px(17, 19, C.gloss);
 
-    rect(23, 1, 3, 4, C.top); rect(28, 1, 3, 4, C.top); rect(26, 2, 2, 2, C.trim);
-    rect(25, 5, 2, 2, C.top); rect(28, 5, 2, 2, C.trim);
-    px(24, 2, '#ffe0ec'); px(29, 2, '#ffe0ec');
 
-    for (let yy = 0; yy < 42; yy++) for (let xx = 0; xx < GW; xx++)
-      if (g[yy][xx] === C.hair && ((xx + yy) % 5 === 0 || (xx * 3 + yy) % 11 === 0)) g[yy][xx] = C.hairHi;
-    for (let yy = 7; yy <= 13; yy++) px(Math.ceil(xb(yy)) + 1, yy, C.hairHi);
 
     outline(g, C);
     return g;
@@ -444,7 +451,7 @@ export function startMoonRoom(cv, grainCv) {
           if (((i - cx) / rx) ** 2 + ((j - cy) / ry) ** 2 <= 1) px(i, j, c);
     };
     const C = { ...GIRL_COLORS };
-    C.lite = '#e2c699'; C.hairHi = '#4d3835'; C.hairHi2 = '#6a504b'; C.iris = '#4a2f2c'; C.brow = '#4a3330';
+    C.lite = '#e2c699'; C.iris = '#4a2f2c'; C.brow = '#4a3330';
     const nearSw = step === 2 ? 2 : -2;
     rect(15, 29, 2, 6, C.skin); rect(15 - nearSw, 34, 2, 5, C.skin);
     ell(14, 10, 10.8, 10, C.hair);
@@ -501,21 +508,8 @@ export function startMoonRoom(cv, grainCv) {
       const cx = 14 + 1.8 * Math.sin((r - 17) * 0.9);
       const w = r >= 26 ? 2 : 3;
       for (let xx = Math.round(cx - w / 2 + 0.5); xx <= Math.round(cx + w / 2 - 0.5 + 0.5); xx++) px(xx, r, C.hair);
-      if ((r - 17) % 4 === 1) px(Math.round(cx), r, C.hairHi);
     }
     rect(11, 28, 3, 1, C.hair); rect(10, 29, 3, 1, C.hair); px(10, 30, C.hair);
-    rect(17, 1, 3, 4, C.top); rect(22, 1, 3, 4, C.top); rect(20, 2, 2, 2, C.trim);
-    rect(19, 5, 2, 2, C.top); rect(22, 5, 2, 2, C.trim);
-    px(18, 2, '#ffe0ec'); px(23, 2, '#ffe0ec');
-    for (let yy = 0; yy < 42; yy++) for (let xx = 0; xx < GW; xx++) if (g[yy][xx] === C.hair) {
-      const lx = xx - OFF, d = Math.hypot(lx - 14, yy - 9.5), ang = Math.atan2(yy - 9.5, lx - 14) * 180 / Math.PI;
-      if (ang > -170 && ang < -40) {
-        if (d >= 7 && d < 8.2) g[yy][xx] = C.hairHi2;
-        else if (d >= 5.2 && d < 6) g[yy][xx] = C.hairHi;
-      }
-    }
-    for (let yy = 11; yy < 42; yy++) for (let xx = 0; xx < GW; xx++)
-      if (g[yy][xx] === C.hair && ((xx + yy) % 5 === 0 || (xx * 3 + yy) % 11 === 0)) g[yy][xx] = C.hairHi;
     outline(g, C);
     return g;
   }
@@ -569,9 +563,7 @@ export function startMoonRoom(cv, grainCv) {
   }
 
   function lighting() {
-    let g = x.createRadialGradient(95, 14, 1, 95, 14, 40);
-    g.addColorStop(0, 'rgba(255,200,120,.28)'); g.addColorStop(1, 'rgba(255,200,120,0)');
-    x.fillStyle = g; x.fillRect(45, 0, 100, 70);
+    let g;
 
     if (lampLevel > 0.02) {
       x.globalCompositeOperation = 'lighter';
@@ -595,7 +587,6 @@ export function startMoonRoom(cv, grainCv) {
     x.setTransform(1, 0, 0, 1, -VX, 0);
     x.clearRect(0, 0, W, H);
     wall();
-    x.save(); x.translate(-5, 0); bulb(); x.restore();
     x.save(); x.translate(18, 0); painting(); x.restore();
     windowScene();
     bed();

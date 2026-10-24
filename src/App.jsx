@@ -1,8 +1,7 @@
 import './App.css'
-import { useState, useEffect, useRef, useId } from 'react'
+import { useState, useEffect, useRef, useId, Fragment } from 'react'
 import { Routes, Route, Link, useNavigate, useLocation, useParams } from 'react-router-dom'
 import ContactForm from './ContactForm'
-import laybaPhoto from './assets/layba.webp'
 import animePhoto from './assets/anime.webp'
 import mapPhoto from './assets/map.webp'
 import dospacePhoto from './assets/dospace.webp'
@@ -13,6 +12,7 @@ import michiferqueenPhoto from './assets/themichiferqueen.webp'
 import laybadevPhoto from './assets/laybadev.webp'
 import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 import { startMoonRoom } from './moonRoom'
+import avatarPhoto from './assets/avatar.webp'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -206,7 +206,7 @@ const ROOM_TAGS = [
 const PHONE = '(max-width: 600px)'
 const HALF_SPOTS = [118, 306]
 
-function GameHelp({ className, label = 'controls', verb = 'click', target = 'a sign', arrows = false }) {
+function GameHelp({ className, label = 'controls', verb = 'click', target = 'a label', arrows = false }) {
   const ref = useRef(null)
   const id = useId()
   const [open, setOpen] = useState(false)
@@ -290,28 +290,25 @@ function MoonRoom() {
   )
 }
 
-function Dialogue() {
+function Dialogue({ line }) {
   return (
-    <div className="vn-box">
+    <div className={line.length > 90 ? 'vn-box vn-box-long' : 'vn-box'}>
       <span className="vn-name">LAYBA</span>
-      <h1 className="vn-line">
-        Welcome! I'm Layba. I like building aesthetic digital experiences.
-      </h1>
+      <h1 className="vn-line">{line}</h1>
     </div>
   )
 }
 
-function Hero() {
-  const [run, setRun] = useState(0)
+function GameShell({ line, onHome, help = false, children }) {
   return (
     <section className="hero">
       <div className="game">
         <aside className="game-side">
-          <button type="button" className="game-side-link" onClick={() => setRun(r => r + 1)} aria-label="Home">
+          <Link to="/" className="game-side-link" onClick={onHome} aria-label="Home">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3z" />
             </svg>
-          </button>
+          </Link>
           <a className="game-side-link" href="mailto:hello@layba.dev" aria-label="Email">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
@@ -339,11 +336,11 @@ function Hero() {
               <path d="M8 2v2M11 2v2" />
             </svg>
           </a>
-          <GameHelp className="game-help-side" label="?" verb="tap" target="a link" arrows />
+          {help && <GameHelp className="game-help-side" label="?" verb="tap" target="a link" arrows />}
         </aside>
-        <div className="game-main" key={run}>
-          <MoonRoom />
-          <Dialogue />
+        <div className="game-main">
+          {children}
+          <Dialogue line={line} />
         </div>
       </div>
     </section>
@@ -351,43 +348,277 @@ function Hero() {
 }
 
 function Home() {
+  const [run, setRun] = useState(0)
+  return (
+    <GameShell line="Welcome! I'm Layba. I like building aesthetic digital experiences." onHome={() => setRun(r => r + 1)} help>
+      <MoonRoom key={run} />
+    </GameShell>
+  )
+}
+
+const PIXEL_COLORS = { P: '#f0a8d2', L: '#f8d3e9', D: '#b86198', W: '#ffffff' }
+
+const PIXEL_ICONS = {
+  room: [
+    '............',
+    '....PPPP....',
+    '..PPPLL.....',
+    '.PPLL.......',
+    '.PPL........',
+    'PPLL........',
+    'PPLL........',
+    'PPLL.......P',
+    '.PPLL....PP.',
+    '.PPPLLLLPP..',
+    '..PPPPPPP...',
+    '....PPP.....',
+  ],
+  about: [
+    '............',
+    '.PPPP..PPPP.',
+    'PWLLPPPPLLLP',
+    'PWLLLLLLLLLP',
+    'PLLLLLLLLLLP',
+    '.PLLLLLLLLP.',
+    '..PLLLLLLP..',
+    '...PLLLLP...',
+    '....PLLP....',
+    '.....PP.....',
+    '............',
+    '............',
+  ],
+  projects: [
+    '............',
+    '.DDDD.......',
+    'DPPPPD......',
+    'DPPPPPDDDDD.',
+    'DLLLLLLLLLLD',
+    'DLPPPPPPPPLD',
+    'DLPPPPPPPPLD',
+    'DLPPPPPPPPLD',
+    'DLPPPPPPPPLD',
+    'DLPPPPPPPPLD',
+    'DDDDDDDDDDDD',
+    '............',
+  ],
+  blog: [
+    '..D..D..D...',
+    '.PDPPDPPDPP.',
+    '.PLLLLLLLLP.',
+    '.PLDDDDDDLP.',
+    '.PLLLLLLLLP.',
+    '.PLDDDDDLLP.',
+    '.PLLLLLLLLP.',
+    '.PLDDDDDDLP.',
+    '.PLLLLLLLLP.',
+    '.PLDDDLLLLP.',
+    '.PLLLLLLLLP.',
+    '.PPPPPPPPPP.',
+  ],
+  contact: [
+    '............',
+    '............',
+    'PPPPPPPPPPPP',
+    'PLPLLLLLLPLP',
+    'PLLPLLLLPLLP',
+    'PLLLPLLPLLLP',
+    'PLLLLPPLLLLP',
+    'PLLLLLLLLLLP',
+    'PLLLLLLLLLLP',
+    'PPPPPPPPPPPP',
+    '............',
+    '............',
+  ],
+}
+
+function PixelIcon({ name }) {
+  return (
+    <svg className="pixel-icon" viewBox="0 0 12 12" shapeRendering="crispEdges" aria-hidden="true">
+      {PIXEL_ICONS[name].flatMap((row, y) => [...row].map((c, x) => (
+        c === '.' ? null : <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" fill={PIXEL_COLORS[c]} />
+      )))}
+    </svg>
+  )
+}
+
+const DESK_ICONS = [
+  { name: 'room', label: 'index', to: '/' },
+  { name: 'about', label: 'about', to: '/about' },
+  { name: 'projects', label: 'projects', to: '/projects' },
+  { name: 'blog', label: 'blog', to: '/blog' },
+  { name: 'contact', label: 'contact', to: '/contact' },
+]
+
+const SKILLS = [
+  'JavaScript', 'TypeScript', 'HTML', 'CSS', 'React', 'Next.js', 'Angular', 'Bootstrap', 'Vite',
+  'Java', 'Spring Boot', 'Node.js', 'Python', 'FastAPI', 'C#', '.NET', 'C++', 'Kotlin', 'Android',
+  'RESTful APIs', 'OOP', 'PostgreSQL', 'MySQL', 'Git', 'Gradle', 'Docker', 'AWS',
+  'Linux', 'Vercel', 'Jest', 'VS Code', 'Visual Studio', 'Agile',
+]
+
+function SkillList() {
+  return (
+    <div className="skill-chips">
+      {SKILLS.map(item => <span key={item}>{item}</span>)}
+    </div>
+  )
+}
+
+const CERTS = [
+  ['Python Full Stack Developer (Python + React Intern)', 'Oriented In Silence Designs Inc. · Riipen'],
+  ['AWS Certified Cloud Practitioner', 'Amazon Web Services Training and Certification'],
+  ['ITIL 4 Foundation Certificate in IT Service Management', 'PeopleCert'],
+  ['WGU Certificate: Back-End Developer', 'Western Governors University'],
+  ['WGU Certificate: Front-End Developer', 'Western Governors University'],
+]
+
+function CertList() {
+  return (
+    <ul className="cert-list">
+      {CERTS.map(([name, from]) => (
+        <li key={name}>
+          <span className="cert-name">{name}</span>
+          <span className="cert-from">{from}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const ORIGIN = { x: 0, y: 0 }
+
+function DeskWindow({ title, className, front, offset, onMove, onClose, onFocus, children }) {
+  const startDrag = (e) => {
+    if (e.button !== 0 || e.target.closest('button') || window.matchMedia(PHONE).matches) return
+    e.preventDefault()
+    const win = e.currentTarget.parentElement
+    const desk = win.parentElement.getBoundingClientRect()
+    const box = win.getBoundingClientRect()
+    const bar = e.currentTarget.offsetHeight
+    const start = { x: e.clientX, y: e.clientY }
+    const move = (ev) => {
+      const dx = Math.min(Math.max(ev.clientX - start.x, desk.left - box.left), desk.right - box.right)
+      const dy = Math.min(Math.max(ev.clientY - start.y, desk.top - box.top), desk.bottom - box.top - bar)
+      onMove({ x: offset.x + dx, y: offset.y + dy })
+    }
+    const stop = () => {
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerup', stop)
+    }
+    window.addEventListener('pointermove', move)
+    window.addEventListener('pointerup', stop)
+  }
+
+  return (
+    <section
+      className={front ? `desk-win ${className} desk-win-front` : `desk-win ${className}`}
+      style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
+      onPointerDown={onFocus}
+    >
+      <header className="desk-bar" onPointerDown={startDrag}>
+        <span className="desk-bar-title">{title}</span>
+        <button type="button" className="desk-close" onClick={onClose} aria-label={`Close ${title}`}>&times;</button>
+      </header>
+      {children}
+    </section>
+  )
+}
+
+function useDeskWindows(ids, firstFront = ids[0]) {
+  const [open, setOpen] = useState(() => Object.fromEntries(ids.map(id => [id, true])))
+  const show = (id) => {
+    setOpen(o => ({ ...o, [id]: true }))
+    setFront(id)
+  }
+  const [front, setFront] = useState(firstFront)
+  const [pos, setPos] = useState({})
+  const reopen = () => {
+    setOpen(Object.fromEntries(ids.map(id => [id, true])))
+    setFront(ids[0])
+  }
+  const win = (id) => ({
+    front: front === id,
+    offset: pos[id] || ORIGIN,
+    onMove: (p) => setPos(o => ({ ...o, [id]: p })),
+    onClose: () => setOpen(o => ({ ...o, [id]: false })),
+    onFocus: () => setFront(id),
+  })
+  return { open, show, reopen, win }
+}
+
+
+function Desktop({ onReopen, children }) {
+  const { pathname } = useLocation()
   return (
     <>
-      <Hero />
+      <nav className="moon-nav">
+        {ROOM_TAGS.map(tag => (
+          <Link key={tag.to} to={tag.to} className={tag.to === pathname ? 'moon-nav-on' : undefined}>{tag.label}</Link>
+        ))}
+      </nav>
+      <div className="desk">
+        <div className="desk-icons">
+          {DESK_ICONS.map(icon => (
+            icon.to === pathname
+              ? (
+                <button key={icon.name} type="button" className="desk-icon desk-icon-on" onClick={onReopen}>
+                  <PixelIcon name={icon.name} />
+                  <span>{icon.label}</span>
+                </button>
+              )
+              : (
+                <Link key={icon.name} to={icon.to} className="desk-icon">
+                  <PixelIcon name={icon.name} />
+                  <span>{icon.label}</span>
+                </Link>
+              )
+          ))}
+        </div>
+        {children}
+      </div>
     </>
   )
 }
 
 function About() {
+  const { open, reopen, win } = useDeskWindows(['about', 'skills', 'certs'])
+
   return (
-    <section className="about" id="about">
-      <div className="about-cover" aria-hidden="true">
-        <div className="about-eyebrow-row">
-          <span className="about-eyebrow">N&deg;01</span>
-          <span className="about-rule" />
-          <span className="about-eyebrow">2026</span>
-        </div>
-      </div>
-      <div className="about-container">
-        <div className="about-photo-wrap">
-          <img src={laybaPhoto} alt="Layba" className="about-photo-placeholder" />
-        </div>
-        <div className="about-text">
-          <h2>Profile</h2>
-          <div className="about-desc">
-            <p>I'm Layba, a software engineer and full-stack developer who likes building things that are both functional and beautiful.</p>
-            <p>On the frontend, I work with React, Angular, TypeScript, and Bootstrap; on the backend, Java, Spring Boot, Node.js, and Python. I'm also comfortable with C# and C++, with a strong OOP foundation that carries over to everything. I design RESTful APIs, work with PostgreSQL and MySQL, and lean on Git and Docker to keep projects organized and deployable.</p>
-            <p>Tutoring taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
-            <p>I'm open to freelance work right now. Website, web app, or something custom, I'd love to help.</p>
-            <p>Outside of coding, you'll find me with my cats, keeping up with fashion and beauty, or hunting for good Thai food, usually with a coffee or matcha in hand.</p>
-          </div>
-          <div className="about-meta">
-            <span className="about-availability">Open to freelance opportunities</span>
-            <span className="about-tag">full stack developer</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <GameShell line="Here's more about me!">
+      <Desktop onReopen={reopen}>
+        {open.about && (
+          <DeskWindow title="about_me.txt" className="desk-win-main" {...win('about')}>
+            <div className="desk-doc">
+              <img className="about-avatar" src={avatarPhoto} alt="Layba" />
+              <h2>PROFILE</h2>
+              <p className="desk-hi">{'// hi hi!'}</p>
+              <p>I'm Layba, a software engineer and full-stack developer who likes building things that are both functional and beautiful.</p>
+              <p>My experience taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
+              <p>Right now I'm focused on UX/UI and getting better at creative coding, while challenging my current skills and learning how to improve them more efficiently.</p>
+              <p>Outside of coding, you'll find me with my cats, keeping up with fashion and beauty, or hunting for good Thai food, usually with a coffee or matcha in hand.</p>
+              <div className="desk-skills-inline">
+                <SkillList />
+                <CertList />
+              </div>
+            </div>
+          </DeskWindow>
+        )}
+        {open.skills && (
+          <DeskWindow title="skills.exe" className="desk-win-skills" {...win('skills')}>
+            <div className="desk-doc">
+              <SkillList />
+            </div>
+          </DeskWindow>
+        )}
+        {open.certs && (
+          <DeskWindow title="certs.txt" className="desk-win-certs" {...win('certs')}>
+            <div className="desk-doc">
+              <CertList />
+            </div>
+          </DeskWindow>
+        )}
+      </Desktop>
+    </GameShell>
   )
 }
 
@@ -397,7 +628,7 @@ const featured = {
   alt: 'layba.dev',
   title: 'layba.dev',
   status: 'this site',
-  short: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library.",
+  short: "The site you're currently on.",
   desc: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library. The hero is a pixel wordmark over a starfield, with film grain over the whole site. Navigation is a terminal panel where you click a destination or type its number, and the top bar has a clock and an XP meter that fills as you click around. Projects open as folders in place instead of separate pages. Images are WebP and routes scroll back to the top.",
   tags: ['React', 'Vite', 'React Router', 'CSS'],
   links: [
@@ -413,7 +644,7 @@ const projects = [
     alt: '3LI3LI',
     title: '3LI3LI',
     instagram: { href: 'https://www.instagram.com/3li3lielieli', label: '@3li3lielieli' },
-    short: 'A Y2K/vaporwave site for 3LI3LI, an independent singer, songwriter, and DJ.',
+    short: 'A site for singer, songwriter, and DJ 3LI3LI.',
     desc: 'A Y2K/vaporwave site for independent music artist 3LI3LI. React, Vite, and CSS Modules across multiple routes, with an AIM-style intro window, a scrolling Y2K ticker bar, and a sparkle cursor. The music page runs a Spotify embed, ElfSight pulls in her latest TikTok and Instagram posts automatically, and fans can buy and download her EP through a Web3Forms and Cash App setup.',
     tags: ['React', 'Vite', 'CSS Modules', 'Elfsight', 'Spotify Embed', 'Web3Forms API'],
     links: [
@@ -426,7 +657,7 @@ const projects = [
     alt: 'themichiferqueen',
     title: 'themichiferqueen',
     instagram: { href: 'https://instagram.com/themichiferqueen', label: '@themichiferqueen' },
-    short: 'A retro-pixel/Y2K site for independent author and artist Jasmine Plaskon.',
+    short: 'A site for independent author and artist Jasmine Plaskon.',
     desc: 'A retro-pixel/Y2K site for independent author and artist Jasmine Plaskon. Next.js, TypeScript, and Tailwind across stories, blog, gallery, lore, and shop, with an 18+ age gate, a floating Spotify player, and a gallery for her art and video. Sanity lets her run every page and post her own work without touching code, and readers can buy her books through a Stripe shop or keep up through a Web3Forms newsletter.',
     tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Stripe API', 'Tailwind CSS', 'Spotify Embed', 'Web3Forms API'],
     links: [
@@ -437,9 +668,10 @@ const projects = [
     slug: 'moonfade',
     img: moonfadePhoto,
     alt: 'Moonfade',
-    title: 'Moonfade',
+    title: 'moonfade',
     status: 'launching soon',
-    short: 'A pastel desktop-OS site for lighting virtual candles tied to goals and intentions.',
+    short: 'A goal and intention tracker where each intention is represented by a virtual candle you light as you commit to it.',
+    preview: moonfadePhoto,
     desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that is down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
     tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
     links: []
@@ -449,7 +681,7 @@ const projects = [
     img: dospacePhoto,
     alt: 'lunev',
     title: 'lunev',
-    short: 'A full-stack mental wellness and productivity app that pulls tasks, journaling, mood tracking, affirmations, and focus tools into one private space.',
+    short: 'A mental wellness and productivity app that brings tasks, journaling, mood tracking, and focus tools into one private space.',
     desc: 'A full-stack mental wellness and productivity app that pulls tasks, journaling, mood tracking, affirmations, and focus tools into one private space. React, Vite, and Tailwind up front, with Node.js, Express, and PostgreSQL behind it. Everything a user writes is encrypted with AES-256-GCM before it reaches the database, so a leak would only expose unreadable ciphertext. Auth is hardened with JWT refresh-token rotation and reuse detection, bcrypt hashing, two-step email verification, rate limiting, CSRF checks, a strict Content-Security-Policy, and idle session timeout.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'PostgreSQL', 'JWT', '2FA', 'AES-256-GCM', 'bcrypt'],
     links: [
@@ -463,7 +695,8 @@ const projects = [
     img: hazefmPhoto,
     alt: 'haze.fm',
     title: 'haze.fm',
-    short: 'A music discovery app that builds playlists from a mood or a favorite artist.',
+    short: 'A music discovery app that builds playlists from a mood or an artist.',
+    note: 'Work in progress: it runs on a free tier, so it may be rate limited.',
     desc: 'A music discovery app that builds playlists from a mood or a favorite artist. Next.js and TypeScript, with Last.fm mapping emotional tags to tracks and the YouTube Data API streaming full songs in-app. Custom mood-to-tag logic, real-time playlist generation, shuffle, skip, and regenerate controls, and cycling background scenes to set the tone.',
     tags: ['Next.js', 'TypeScript', 'Last.fm API', 'YouTube API', 'Tailwind CSS'],
     links: [
@@ -475,8 +708,8 @@ const projects = [
     slug: 'anime-search-terminal',
     img: animePhoto,
     alt: 'Anime Search Terminal',
-    title: 'Anime Search Terminal',
-    short: 'A React and Vite app wired to the Jikan API for live MyAnimeList data.',
+    title: 'anime search terminal',
+    short: 'A search terminal for finding anime.',
     desc: 'A React and Vite app wired to the Jikan API for live MyAnimeList data. Search by title, filter by type, genre, and minimum score, then sort by rating or name. Each result shows cover art, score, and a hover-to-reveal synopsis, with a light/dark toggle and a responsive dark neon interface.',
     tags: ['React', 'Vite', 'Jikan API'],
     links: [
@@ -488,8 +721,8 @@ const projects = [
     slug: 'angular-world-map',
     img: mapPhoto,
     alt: 'Angular World Map',
-    title: 'Angular World Map',
-    short: 'An interactive world map in Angular and TypeScript, pulling live country data from the World Bank API.',
+    title: 'world data map',
+    short: 'An interactive world map that pulls live country data.',
     desc: 'An interactive world map in Angular and TypeScript, pulling live country data from the World Bank API. Click any country on the SVG map to see its name, capital, region, income level, and coordinates in a sidebar. Uses Angular routing, HttpClient, and event binding. Started as a university project, then extended and deployed on my own.',
     tags: ['Angular', 'TypeScript', 'World Bank API', 'SVG'],
     links: [
@@ -525,258 +758,190 @@ const posts = [
   },
 ]
 
-function ProjectBadges({ project }) {
-  if (!project.instagram && !project.status) return null
+function FolderGrid({ items, icon, keep, renderPanel }) {
+  const [openKey, setOpenKey] = useState(null)
+  const [aboutKey, setAboutKey] = useState(null)
+  const panelRef = useRef(null)
+  const perRow = 2
+  const active = items.find(item => item.slug === openKey)
+  const activeRow = active ? Math.floor(items.indexOf(active) / perRow) : -1
+
+  useEffect(() => {
+    panelRef.current?.scrollIntoView({ block: 'nearest' })
+  }, [openKey, aboutKey])
+
+  useEffect(() => {
+    if (!openKey) return undefined
+    const onDown = (e) => {
+      if (e.target.closest(`.proj-folder, .proj-panel, ${keep}`)) return
+      setOpenKey(null)
+      setAboutKey(null)
+    }
+    document.addEventListener('pointerdown', onDown)
+    return () => document.removeEventListener('pointerdown', onDown)
+  }, [openKey, keep])
+
+  const toggle = (key) => {
+    setOpenKey(cur => (cur === key ? null : key))
+    setAboutKey(null)
+  }
+
   return (
-    <div className="project-badges">
-      {project.instagram && (
-        <a className="project-handle" href={project.instagram.href} target="_blank" rel="noreferrer">{project.instagram.label}</a>
-      )}
-      {project.status && (project.statusHref
-        ? <a className="project-status" href={project.statusHref}>{project.status}</a>
-        : <span className="project-status">{project.status}</span>
-      )}
+    <div className="desk-doc proj-grid">
+      {items.map((item, i) => {
+        const endOfRow = (i + 1) % perRow === 0 || i === items.length - 1
+        return (
+          <Fragment key={item.slug}>
+            <button
+              type="button"
+              className={openKey === item.slug ? 'proj-folder proj-folder-on' : 'proj-folder'}
+              aria-expanded={openKey === item.slug}
+              onClick={() => toggle(item.slug)}
+            >
+              <PixelIcon name={icon} />
+              <span>{item.title}</span>
+            </button>
+            {endOfRow && Math.floor(i / perRow) === activeRow && (
+              <div className="proj-panel" ref={panelRef}>
+                {renderPanel(active, {
+                  aboutOpen: aboutKey === active.slug,
+                  aboutButton: (
+                    <button type="button" className={aboutKey === active.slug ? 'proj-btn proj-btn-on' : 'proj-btn'} onClick={() => setAboutKey(cur => (cur === active.slug ? null : active.slug))}>
+                      about
+                    </button>
+                  ),
+                })}
+              </div>
+            )}
+          </Fragment>
+        )
+      })}
     </div>
   )
 }
 
-function FolderIcon() {
-  return (
-    <svg className="folder-icon" viewBox="0 0 32 26" aria-hidden="true">
-      <path className="folder-back" d="M1 3h11l3 3h16v17H1z" />
-      <path className="folder-front" d="M1 8h30v15H1z" />
-    </svg>
-  )
-}
-
-const folderRows = allProjects.reduce((rows, p, i) => {
-  if (i % 2 === 0) rows.push([p])
-  else rows[rows.length - 1].push(p)
-  return rows
-}, [])
-
 function Projects() {
-  const [openSlug, setOpenSlug] = useState(null)
-  const active = allProjects.find(p => p.slug === openSlug)
+  const { open, show, win } = useDeskWindows(['web'])
+  const [preview, setPreview] = useState(null)
+
+  const openPreview = (project) => {
+    setPreview(project)
+    show('preview')
+  }
 
   return (
-    <section className="projects" id="projects">
-      <div className="projects-header">
-        <h2>Things I've built.</h2>
-        <p className="projects-note">Personal projects and freelance client work.</p>
-        <p className="projects-hint">click a folder to open it.</p>
-      </div>
-
-      <div className="folder-grid">
-        {folderRows.map((row, r) => {
-          const openHere = row.some(p => p.slug === openSlug)
-          return (
-            <div className="folder-row-wrap" key={`row-${r}`}>
-              <div className="folder-row">
-                {row.map((p, i) => (
-                  <button
-                    type="button"
-                    key={p.slug}
-                    className={`folder${openSlug === p.slug ? ' folder-open' : ''}`}
-                    aria-expanded={openSlug === p.slug}
-                    onClick={() => setOpenSlug(cur => (cur === p.slug ? null : p.slug))}
-                  >
-                    <FolderIcon />
-                    <span className="folder-name">{p.title}</span>
-                    {p.status
-                      ? <span className="folder-status">{p.status}</span>
-                      : <span className="folder-index">{String(r * 2 + i + 1).padStart(2, '0')}</span>}
-                  </button>
-                ))}
-              </div>
-
-              {openHere && active && (
-                <div className="folder-window">
-                  <div className="project-window-bar">
-                    <span className="project-window-name">~/{active.slug}/</span>
-                    <button
-                      type="button"
-                      className="folder-window-close"
-                      onClick={() => setOpenSlug(null)}
-                      aria-label="Close"
-                    >
-                      x
-                    </button>
-                  </div>
-                  <div className="folder-window-body">
-                    <Link to={`/projects/${active.slug}`} className="folder-window-media">
-                      <img src={active.img} alt={active.alt} />
-                    </Link>
-                    <div className="folder-window-info">
-                      <p className="project-title">{active.title}</p>
-                      <ProjectBadges project={active} />
-                      <p className="project-desc">{active.desc}</p>
-                      <div className="project-tags">
-                        {active.tags.map(tag => (
-                          <span className="project-tag" key={tag}>{tag}</span>
-                        ))}
-                      </div>
-                      <div className="project-links">
-                        <Link to={`/projects/${active.slug}`} className="project-readmore">permalink</Link>
-                        {active.links.map(l => (
-                          <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
-                        ))}
-                      </div>
+    <GameShell line="My page for some of my personal and freelance projects! I have not uploaded all my projects yet. This page is still under construction. I will be updating it ASAP.">
+      <Desktop onReopen={() => show('web')}>
+        {open.web && (
+          <DeskWindow title="projects" className="desk-win-web" {...win('web')}>
+            <FolderGrid
+              items={allProjects}
+              icon="projects"
+              keep=".desk-win-preview"
+              renderPanel={(project, { aboutOpen, aboutButton }) => {
+                const live = project.links.find(link => link.label === 'live')
+                return (
+                  <>
+                    <p className="proj-panel-name">~/{project.title}/</p>
+                    <div className="proj-panel-btns">
+                      {aboutButton}
+                      {live
+                        ? <a className="proj-btn" href={live.href} target="_blank" rel="noreferrer">visit &#8599;</a>
+                        : <button type="button" className="proj-btn" onClick={() => openPreview(project)}>preview</button>}
                     </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )
-        })}
-      </div>
-
-    </section>
+                    {aboutOpen && (
+                      <p className="proj-panel-desc">
+                        {project.short}
+                        {project.note && <em className="proj-note">{project.note}</em>}
+                      </p>
+                    )}
+                  </>
+                )
+              }}
+            />
+          </DeskWindow>
+        )}
+        {open.preview && preview && (
+          <DeskWindow title={`${preview.title}.png`} className="desk-win-preview" {...win('preview')}>
+            <img className="proj-preview-img" src={preview.preview} alt={`${preview.title} preview`} />
+          </DeskWindow>
+        )}
+      </Desktop>
+    </GameShell>
   )
 }
 
 function Blog() {
-  return (
-    <section className="blog" id="blog">
-      <div className="projects-header">
-        <h2>Things I've written.</h2>
-      </div>
-      <div className="blog-list">
-        {posts.map((p, i) => (
-          <article className="project-card blog-card" key={p.slug}>
-            <div className="project-window-bar">
-              <span className="project-window-index">{String(i + 1).padStart(2, '0')}</span>
-              <span className="project-window-name">~/blog/{p.slug}/</span>
-            </div>
-            <div className="blog-card-body">
-              <Link to={`/blog/${p.slug}`} className="blog-cover">
-                <img src={p.img} alt={p.alt} />
-              </Link>
-              <div className="project-info">
-                <span className="blog-date">{p.date}</span>
-                <p className="project-title">{p.title}</p>
-                <p className="project-desc">{p.excerpt}</p>
-              </div>
-            </div>
-            <div className="project-links">
-              <Link to={`/blog/${p.slug}`} className="project-readmore">read more</Link>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function BlogPost() {
   const { slug } = useParams()
-  const post = posts.find(p => p.slug === slug)
-
-  if (!post) {
-    return (
-      <section className="project-detail">
-        <div className="project-detail-container">
-          <Link to="/blog" className="project-back">&larr; back to blog</Link>
-          <h2 className="project-detail-title">Post not found</h2>
-          <p className="project-detail-desc">That post doesn't exist. Head back and pick another.</p>
-        </div>
-      </section>
-    )
-  }
+  const navigate = useNavigate()
+  const { open, show, win } = useDeskWindows(['blog'], slug ? 'read' : 'blog')
+  const reading = posts.find(post => post.slug === slug)
 
   return (
-    <section className="project-detail blog-post">
-      <div className="project-detail-container">
-        <Link to="/blog" className="project-back">&larr; back to blog</Link>
-        <div className="project-detail-body">
-          <span className="blog-date">{post.date}</span>
-          <h2 className="project-detail-title">{post.title}</h2>
-          <div className="blog-post-cover">
-            <img src={post.img} alt={post.alt} />
-          </div>
-          <div className="blog-body">
-            {post.body.map((para, i) => (
-              <p className="project-detail-desc" key={i}>{para}</p>
-            ))}
-          </div>
-          <div className="blog-sources">
-            <p className="blog-sources-title">Sources</p>
-            <ul className="blog-sources-list">
-              {post.sources.map(s => (
-                <li key={s}>{s}</li>
+    <GameShell line="My blog page consists of just one entry talking about my thoughts on sexism in the tech industry, but I plan to write more as time goes on.">
+      <Desktop onReopen={() => show('blog')}>
+        {open.blog && (
+          <DeskWindow title="blog" className="desk-win-web desk-win-blog" {...win('blog')}>
+            <div className="desk-doc blog-entries">
+              {posts.map(post => (
+                <article key={post.slug} className="blog-entry">
+                  <PixelIcon name="blog" />
+                  <h2>{post.title}</h2>
+                  <p className="read-date">{post.date}</p>
+                  <p>{post.excerpt}</p>
+                  <Link className="proj-btn" to={`/blog/${post.slug}`} onClick={() => show('read')}>read</Link>
+                </article>
               ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProjectDetail() {
-  const { slug } = useParams()
-  const project = allProjects.find(p => p.slug === slug)
-
-  if (!project) {
-    return (
-      <section className="project-detail">
-        <div className="project-detail-container">
-          <Link to="/projects" className="project-back">&larr; back to projects</Link>
-          <h2 className="project-detail-title">Project not found</h2>
-          <p className="project-detail-desc">That project doesn't exist. Head back and pick another.</p>
-        </div>
-      </section>
-    )
-  }
-
-  return (
-    <section className="project-detail">
-      <div className="project-detail-container">
-        <Link to="/projects" className="project-back">&larr; back to projects</Link>
-        <div className="project-detail-media">
-          <img src={project.img} alt={project.alt} />
-        </div>
-        <div className="project-detail-body">
-          <h2 className="project-detail-title">{project.title}</h2>
-          <ProjectBadges project={project} />
-          <p className="project-detail-desc">{project.desc}</p>
-          <div className="project-tags">
-            {project.tags.map(tag => (
-              <span className="project-tag" key={tag}>{tag}</span>
-            ))}
-          </div>
-          <div className="project-detail-links">
-            {project.links.map(l => (
-              <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="project-link">{l.label}</a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+            </div>
+          </DeskWindow>
+        )}
+        {reading && (
+          <DeskWindow title={`${reading.slug}.txt`} className="desk-win-read" {...win('read')} onClose={() => navigate('/blog')}>
+            <article className="desk-doc read-doc">
+              <p className="read-date">{reading.date}</p>
+              <h2>{reading.title}</h2>
+              {reading.body.map((para, i) => (
+                <Fragment key={i}>
+                  <p>{para}</p>
+                  {i === 1 && <img className="read-cover" src={reading.img} alt={reading.alt} />}
+                </Fragment>
+              ))}
+              <p className="read-sources-title">sources</p>
+              <ul className="read-sources">
+                {reading.sources.map(source => <li key={source}>{source}</li>)}
+              </ul>
+            </article>
+          </DeskWindow>
+        )}
+      </Desktop>
+    </GameShell>
   )
 }
 
 function Contact() {
+  const { open, show, win } = useDeskWindows(['contact'])
+
   return (
-    <section className="contact" id="contact">
-      <div className="contact-container">
-        <h2>Let's connect.</h2>
-        <p className="contact-sub">Have a project in mind or just want to say hi? Send a message.</p>
-        <ContactForm />
-        <div className="contact-links">
-          <a href="mailto:hello@layba.dev" className="contact-link">hello@layba.dev</a>
-          <a href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" className="contact-link">linkedin</a>
-          <a href="https://www.instagram.com/layba.dev" target="_blank" rel="noreferrer" className="contact-link">instagram</a>
-          <a href="https://github.com/laybuh" target="_blank" rel="noreferrer" className="contact-link">github</a>
-        </div>
-      </div>
-    </section>
+    <GameShell line="Do you want to work together? Do you have feedback, questions, or concerns? Do you just want to say hi? Send me a message, and I will get back to you!">
+      <Desktop onReopen={() => show('contact')}>
+        {open.contact && (
+          <DeskWindow title="contact" className="desk-win-web desk-win-contact" {...win('contact')}>
+            <div className="desk-doc">
+              <h2>Let's connect!</h2>
+              <p className="contact-hint">Send a message.</p>
+              <ContactForm />
+            </div>
+          </DeskWindow>
+        )}
+      </Desktop>
+    </GameShell>
   )
 }
 
 function App() {
   const [score, setScore] = useState(0)
-  const isHome = useLocation().pathname === '/'
+  const { pathname } = useLocation()
+  const inGame = ['/', '/about', '/projects', '/blog', '/contact'].includes(pathname) || pathname.startsWith('/blog/')
 
   useEffect(() => {
     const onClick = (e) => {
@@ -792,19 +957,18 @@ function App() {
   return (
     <main>
       <ScrollToTop />
-      {!isHome && <Nav score={score} />}
+      {!inGame && <Nav score={score} />}
       <div className="page-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog/:slug" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
-      {!isHome && <Footer />}
+      {!inGame && <Footer />}
     </main>
   )
 }
