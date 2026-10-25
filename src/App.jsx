@@ -253,7 +253,7 @@ function MoonRoom() {
   useEffect(() => {
     const room = startMoonRoom(mainRef.current, grainRef.current)
     roomRef.current = room
-    if (window.matchMedia(PHONE).matches) room.placeAt(HALF_SPOTS[0])
+    room.placeAt(HALF_SPOTS[0])
     return room.stop
   }, [])
 
