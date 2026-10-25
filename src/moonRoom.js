@@ -263,42 +263,53 @@ export function startMoonRoom(cv, grainCv) {
     R(307, 101, 45, 26, '#0a070c');
     R(307, 101, 45, 1, '#3a3340');
 
-    const WALLPAPER = [[42, 16, 48], [96, 40, 92], [184, 97, 152]];
-    for (let ly = 0; ly < 21; ly++) {
-      const pos = ly / 18 * (WALLPAPER.length - 1), k = Math.min(WALLPAPER.length - 2, Math.floor(pos)), m = Math.min(1, pos - k);
-      const c = WALLPAPER[k].map((v, i) => Math.round(v + (WALLPAPER[k + 1][i] - v) * m));
-      L(0, ly, 41, 1, `rgb(${c[0]},${c[1]},${c[2]})`);
+    for (let ly = 3; ly < 21; ly++) {
+      const k = (ly - 3) / 17;
+      L(0, ly, 41, 1, `rgb(${Math.round(16 + 34 * k)},${Math.round(9 + 8 * k)},${Math.round(22 + 16 * k)})`);
     }
-    x.globalAlpha = .08;
-    for (let ly = 0; ly < 21; ly += 3) L(0, ly, 41, 1, '#f8d3e9');
-    for (let lx = 0; lx < 41; lx += 3) L(lx, 0, 1, 21, '#f8d3e9');
-    x.globalAlpha = 1;
-
-    [2, 8, 14].forEach((iy) => {
-      L(2, iy, 3, 3, '#f0a8d2'); LD(3, iy + 1, '#b86198');
-      L(2, iy + 4, 3, 1, '#d392bb');
-    });
-
-    const win = (wx, wy, w, h) => {
-      L(wx + 1, wy + 1, w, h, '#82406a');
-      L(wx, wy, w, h, '#f0a8d2');
-      L(wx + 1, wy + 1, w - 2, h - 2, '#0a0609');
-      const half = Math.ceil((w - 2) / 2);
-      L(wx + 1, wy + 1, half, 2, '#f0a8d2'); L(wx + 1 + half, wy + 1, w - 2 - half, 2, '#f8d3e9');
-      L(wx + 1, wy + 3, w - 2, 1, '#82406a');
-      L(wx + 2, wy + 2, Math.min(6, w - 7), 1, '#1a0a14');
-      L(wx + w - 4, wy + 1, 2, 2, '#ffffff');
+    const bloom = (bx, by, br, al, col) => {
+      x.globalAlpha = al;
+      for (let ly = Math.max(3, by - br); ly <= Math.min(20, by + br); ly++)
+        for (let lx = Math.max(0, bx - br); lx <= Math.min(40, bx + br); lx++)
+          if ((lx - bx) ** 2 + (ly - by) ** 2 <= br * br) LD(lx, ly, col);
+      x.globalAlpha = 1;
     };
+    bloom(20, 24, 14, .22, '#cf7a93'); bloom(20, 24, 9, .22, '#cf7a93'); bloom(38, 4, 6, .12, '#cf7a93');
+    LD(5, 17, '#d99aae');
 
-    win(14, 3, 16, 12);
-    L(19, 7, 6, 4, '#f0a8d2'); L(20, 8, 4, 2, '#2a1f21'); L(21, 9, 2, 1, '#cfa87a');
-    L(16, 12, 12, 1, '#d392bb');
-    x.globalAlpha = .4;
-    L(14, 3, 17, 13, '#050305');
-    x.globalAlpha = 1;
+    L(0, 0, 41, 2, '#08060a'); L(0, 2, 41, 1, '#cf7a93');
+    LD(1, 0, '#cf7a93'); LD(3, 0, '#cf7a93'); L(1, 1, 3, 1, '#cf7a93');
+    L(6, 1, 3, 1, '#d99aae'); L(10, 1, 4, 1, '#d99aae'); L(15, 1, 3, 1, '#d99aae'); L(19, 1, 3, 1, '#d99aae');
+    L(33, 0, 4, 2, '#cf7a93'); LD(37, 0, '#cf7a93'); L(38, 1, 2, 1, '#f0ccd7');
 
-    L(0, 19, 41, 2, '#1a0a14'); L(0, 19, 41, 1, '#82406a');
-    L(1, 20, 4, 1, '#d392bb'); L(36, 20, 4, 1, '#82406a');
+    L(2, 4, 5, 4, '#cf7a93'); L(2, 4, 2, 1, '#e08fa5'); L(2, 5, 5, 1, '#e6b0c0'); L(2, 8, 5, 1, '#d99aae');
+    L(2, 10, 4, 5, '#cf7a93'); L(3, 11, 2, 3, '#140e18'); LD(3, 12, '#e08fa5'); L(2, 15, 5, 1, '#d99aae');
+    for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++)
+      if (dx * dx + dy * dy <= 9.5 && (dx - 2) ** 2 + (dy + 1) ** 2 > 6) LD(37 + dx, 9 + dy, '#efe2fa');
+
+    x.globalAlpha = .55; L(13, 5, 21, 11, '#000000'); x.globalAlpha = 1;
+    L(12, 4, 21, 2, '#cf7a93'); L(12, 5, 21, 1, '#a85a78');
+    LD(13, 4, '#08060a'); LD(15, 4, '#f0ccd7'); LD(17, 4, '#d99aae'); L(22, 4, 8, 1, '#f0ccd7');
+    L(12, 6, 21, 9, '#140e18');
+    L(14, 13, 9, 1, '#3a2536');
+    for (let i = 0; i < 5; i++) {
+      const h = 2 + Math.round(2 + 2 * Math.sin(t * 0.5 + i * 1.3));
+      L(14 + i * 2, 13 - h, 1, h, i % 2 ? '#d99aae' : '#cf7a93');
+    }
+    L(14, 14, 9, 1, '#47303f');
+    L(25, 7, 5, 5, '#2a1a2c');
+    LD(26, 8, '#cf7a93'); LD(28, 8, '#cf7a93'); L(26, 9, 3, 1, '#cf7a93'); LD(27, 10, '#cf7a93');
+    for (let i = 0; i < 2; i++) { const h = 1 + Math.floor(1.5 + 1.5 * Math.sin(t * 1.3 + i * 1.7)); L(31 + i, 11 - h, 1, h, '#e08fa5'); }
+    L(24, 13, 8, 1, '#3a2536');
+    L(24, 13, 1 + Math.floor(((t * 0.4) % 1) * 7), 1, '#cf7a93');
+    L(24, 14, 5, 1, '#5a3a50');
+
+    x.globalAlpha = .55; L(9, 14, 15, 7, '#000000'); x.globalAlpha = 1;
+    L(8, 13, 16, 2, '#e08fa5'); L(8, 14, 16, 1, '#a85a78');
+    LD(9, 13, '#08060a'); L(11, 13, 5, 1, '#f0ccd7'); LD(22, 13, '#08060a');
+    L(8, 15, 16, 6, '#140e18');
+    L(10, 16, 10, 1, '#5a3a50'); L(10, 18, 6, 1, '#3a2536');
+    if (Math.floor(t * 2) % 2) LD(17, 18, '#e08fa5');
 
     R(303, 127, 53, 1, '#4a4350');
     R(325, 127, 9, 1, '#2c262f');
@@ -558,7 +569,7 @@ export function startMoonRoom(cv, grainCv) {
     wall();
     x.save(); x.translate(18, 0); painting(); x.restore();
     windowScene();
-    bed();
+    x.save(); x.translate(0, 3); bed(); x.restore();
     x.save(); x.translate(11, 0); rug(); x.restore();
     nightstand();
     x.save(); x.translate(8, 0); lamp(); x.restore();
@@ -571,7 +582,7 @@ export function startMoonRoom(cv, grainCv) {
   raf = requestAnimationFrame(frame);
 
   const HOTSPOTS = [
-    { x0: 58, x1: 132, y0: 105, y1: 172, cx: 95 },
+    { x0: 58, x1: 132, y0: 108, y1: 175, cx: 95 },
     { x0: 77, x1: 113, y0: 49, y1: 76, cx: 95 },
     { x0: 148, x1: 225, y0: 23, y1: 80, cx: 186.5 },
     { x0: 169, x1: 204, y0: 130, y1: 172, cx: 186.5 },
