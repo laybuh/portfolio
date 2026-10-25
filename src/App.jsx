@@ -630,7 +630,7 @@ const featured = {
   status: 'this site',
   short: "The site you're currently on.",
   desc: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library. The hero is a pixel wordmark over a starfield, with film grain over the whole site. Navigation is a terminal panel where you click a destination or type its number, and the top bar has a clock and an XP meter that fills as you click around. Projects open as folders in place instead of separate pages. Images are WebP and routes scroll back to the top.",
-  tags: ['React', 'Vite', 'React Router', 'CSS'],
+  tags: ['React', 'Vite', 'React Router', 'Pixel Art', 'CSS'],
   links: [
     { href: 'https://layba.dev', label: 'live' },
     { href: 'https://github.com/laybuh/portfolio', label: 'github' },
@@ -665,16 +665,15 @@ const projects = [
     ]
   },
   {
-    slug: 'moonfade',
-    img: moonfadePhoto,
-    alt: 'Moonfade',
-    title: 'moonfade',
-    status: 'launching soon',
-    short: 'A goal and intention tracker where each intention is represented by a virtual candle you light as you commit to it.',
-    preview: moonfadePhoto,
-    desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that is down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
-    tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
-    links: []
+    slug: 'dollie-exe',
+    title: 'dollie.exe',
+    short: 'A cozy pixel dress-up game where you can style a doll with different body types, hairstyles, hijabs, outfits, and any colors you want.',
+    desc: 'A cozy pixel dress-up game set in a moonlit bedroom. React and Vite with the room and doll made in pixel art. Players can switch between body types, curly, coily, wavy, and straight hairstyles, braids, twists, locs, hijabs, tops, bottoms, and dresses, and recolor everything with a color picker or hex code. Looks save in the browser and download as small transparent PNG icons with credit built into the file.',
+    tags: ['React', 'Vite', 'Pixel Art', 'CSS'],
+    links: [
+      { href: 'https://dollieexe.vercel.app', label: 'live' },
+      { href: 'https://github.com/laybuh/dollhouse.exe', label: 'github' },
+    ]
   },
   {
     slug: 'lunev',
@@ -689,6 +688,18 @@ const projects = [
       { href: 'https://github.com/laybuh/todo-frontend', label: 'github (FE)' },
       { href: 'https://github.com/laybuh/todo-app', label: 'github (BE)' },
     ]
+  },
+  {
+    slug: 'moonfade',
+    img: moonfadePhoto,
+    alt: 'Moonfade',
+    title: 'moonfade',
+    status: 'launching soon',
+    short: 'A goal and intention tracker where each intention is represented by a virtual candle you light as you commit to it.',
+    preview: moonfadePhoto,
+    desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that is down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
+    tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
+    links: []
   },
   {
     slug: 'haze-fm',
