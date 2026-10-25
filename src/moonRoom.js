@@ -320,13 +320,6 @@ export function startMoonRoom(cv, grainCv) {
     x.globalCompositeOperation = 'source-over';
   }
 
-  function bag() {
-    R(382, 158, 11, 11, '#1d171f');
-    R(384, 154, 1, 4, '#33293a'); R(390, 154, 1, 4, '#33293a'); R(384, 154, 7, 1, '#33293a');
-    x.fillStyle = P.pinkL; x.font = 'bold 3px monospace'; x.textBaseline = 'top';
-    x.fillText('LUNA', 383, 162);
-  }
-
   const GW = 36, GH = 62;
   const GIRL_COLORS = {
     hair: '#2a1f21', ink: '#0b0809',
@@ -575,7 +568,6 @@ export function startMoonRoom(cv, grainCv) {
     x.save(); x.translate(8, 0); lamp(); x.restore();
     x.save(); x.translate(4, 0); mirror(); x.restore();
     dresser();
-    bag();
     girl();
     lighting();
   }
