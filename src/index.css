@@ -2661,6 +2661,10 @@ body::after {
   margin-top: 1.2cqw;
 }
 
+.desk-doc .proj-panel-tags {
+  margin-top: 1.2cqw;
+}
+
 .proj-note {
   align-self: flex-start;
   padding: 0.3cqw 0.7cqw;

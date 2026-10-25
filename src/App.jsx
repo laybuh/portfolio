@@ -830,7 +830,7 @@ function Projects() {
   }
 
   return (
-    <GameShell line="My page for some of my personal and freelance projects! I have not uploaded all my projects yet. This page is still under construction. I will be updating it ASAP.">
+    <GameShell line="This page is still under construction and will be updated with more projects, but in the meantime, enjoy the projects that are listed!">
       <Desktop onReopen={() => show('web')}>
         {open.web && (
           <DeskWindow title="projects.exe" className="desk-win-web" {...win('web')}>
@@ -846,14 +846,19 @@ function Projects() {
                     <div className="proj-panel-btns">
                       {aboutButton}
                       {live
-                        ? <a className="proj-btn" href={live.href} target="_blank" rel="noreferrer">visit &#8599;</a>
+                        ? <a className="proj-btn" href={live.href} target="_blank" rel="noreferrer">visit</a>
                         : <button type="button" className="proj-btn" onClick={() => openPreview(project)}>preview</button>}
                     </div>
                     {aboutOpen && (
-                      <p className="proj-panel-desc">
-                        {project.short}
-                        {project.note && <em className="proj-note">{project.note}</em>}
-                      </p>
+                      <>
+                        <p className="proj-panel-desc">
+                          {project.short}
+                          {project.note && <em className="proj-note">{project.note}</em>}
+                        </p>
+                        <div className="skill-chips proj-panel-tags">
+                          {project.tags.map(tag => <span key={tag}>{tag}</span>)}
+                        </div>
+                      </>
                     )}
                   </>
                 )
