@@ -160,25 +160,6 @@ export function startMoonRoom(cv, grainCv) {
       dot(ax, at - 4, '#ff71ce');
       x.globalAlpha = 1;
     });
-    const sp = (t % 6) / 1.1;
-    if (!still && sp < 1) {
-      const hx = Math.round(GX1 - 8 - sp * 44), hy = Math.round(38 + sp * 16);
-      for (let k = 10; k >= 1; k--) {
-        if (hx + k < GX1 - 1) {
-          x.globalAlpha = 1 - k / 11;
-          dot(hx + k, hy - Math.round(k * 0.4), '#ffc4e1');
-          x.globalAlpha = 1;
-        }
-      }
-      if (hx >= GX0 + 1) {
-        dot(hx, hy, '#fff0f6');
-        dot(hx - 1, hy, '#ffd6ea'); dot(hx, hy - 1, '#ffd6ea'); dot(hx, hy + 1, '#ffd6ea');
-      }
-    }
-    for (let i = 0; i < (still ? 0 : 12); i++) {
-      const rx = GX0 + 1 + ((i * 29) % 64), ry = 35 + ((t * 26 + i * 17) % 36);
-      if (ry < GBOT - 1) R(rx, Math.floor(ry), 1, 2, 'rgba(215,195,255,.3)');
-    }
     for (let yy = 27; yy < 34; yy++) R(GX0, yy, GX1 - GX0 - 1, 1, yy % 2 ? '#1f1727' : '#2d2236');
     R(GX0, 34, GX1 - GX0 - 1, 2, '#3a2b44');
     R(GX0, 36, GX1 - GX0 - 1, 1, P.pinkD);

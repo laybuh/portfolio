@@ -833,7 +833,7 @@ function Projects() {
     <GameShell line="My page for some of my personal and freelance projects! I have not uploaded all my projects yet. This page is still under construction. I will be updating it ASAP.">
       <Desktop onReopen={() => show('web')}>
         {open.web && (
-          <DeskWindow title="projects" className="desk-win-web" {...win('web')}>
+          <DeskWindow title="projects.exe" className="desk-win-web" {...win('web')}>
             <FolderGrid
               items={allProjects}
               icon="projects"
@@ -881,7 +881,7 @@ function Blog() {
     <GameShell line="My blog page consists of just one entry talking about my thoughts on sexism in the tech industry, but I plan to write more as time goes on.">
       <Desktop onReopen={() => show('blog')}>
         {open.blog && (
-          <DeskWindow title="blog" className="desk-win-web desk-win-blog" {...win('blog')}>
+          <DeskWindow title="blog.log" className="desk-win-web desk-win-blog" {...win('blog')}>
             <div className="desk-doc blog-entries">
               {posts.map(post => (
                 <article key={post.slug} className="blog-entry">
@@ -925,7 +925,7 @@ function Contact() {
     <GameShell line="Do you want to work together? Do you have feedback, questions, or concerns? Do you just want to say hi? Send me a message, and I will get back to you!">
       <Desktop onReopen={() => show('contact')}>
         {open.contact && (
-          <DeskWindow title="contact" className="desk-win-web desk-win-contact" {...win('contact')}>
+          <DeskWindow title="contact.exe" className="desk-win-web desk-win-contact" {...win('contact')}>
             <div className="desk-doc">
               <h2>Let's connect!</h2>
               <p className="contact-hint">Send a message.</p>

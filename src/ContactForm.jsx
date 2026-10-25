@@ -47,7 +47,7 @@ function ContactForm() {
         <textarea name="message" required rows={5}></textarea>
       </label>
       <button type="submit" className="contact-send" disabled={status === 'sending'}>
-        {status === 'sending' ? 'sending…' : 'send message'}
+        {status === 'sending' ? 'sending…' : 'submit'}
       </button>
       {status === 'success' && (
         <p className="contact-status contact-status-ok">✓ Your message has been sent successfully.</p>

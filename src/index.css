@@ -2418,10 +2418,10 @@ body::after {
   padding: 0;
   color: var(--pink-2);
   background: transparent;
-  border: 1px solid rgba(240, 168, 210, 0.3);
+  border: 0;
   box-shadow: none;
   letter-spacing: 0;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
 .game-side-link::before {
@@ -2440,7 +2440,6 @@ body::after {
 .game-side-link:hover,
 .game-side-link:focus-visible {
   color: var(--pink-1);
-  border-color: var(--pink);
   background: rgba(240, 168, 210, 0.1);
   box-shadow: none;
   outline: none;
