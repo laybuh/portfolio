@@ -667,7 +667,7 @@ const projects = [
   {
     slug: 'dollie-exe',
     title: 'dollie.exe',
-    short: 'A cozy pixel dress-up game where you can style a doll with different body types, hairstyles, hijabs, outfits, and any colors you want.',
+    short: 'A cozy pixel dress-up game where you style a doll and her room.',
     desc: 'A cozy pixel dress-up game set in a moonlit bedroom. React and Vite with the room and doll made in pixel art. Players can switch between body types, curly, coily, wavy, and straight hairstyles, braids, twists, locs, hijabs, tops, bottoms, and dresses, and recolor everything with a color picker or hex code. Looks save in the browser and download as small transparent PNG icons with credit built into the file.',
     tags: ['React', 'Vite', 'Pixel Art', 'CSS'],
     links: [
