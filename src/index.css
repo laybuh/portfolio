@@ -2910,7 +2910,7 @@ body::after {
   flex-direction: column;
   background: #0a0609;
   border: 0.3cqw solid var(--pink-2);
-  box-shadow: 0.5cqw 0.5cqw 0 var(--pink-5), 0 0 2cqw rgba(240, 168, 210, 0.15);
+  box-shadow: 0.5cqw 0.5cqw 0 var(--pink-5);
 }
 
 .desk-win-main {
@@ -2982,6 +2982,7 @@ body::after {
 
 .desk-win-front {
   z-index: 5;
+  box-shadow: 0.5cqw 0.5cqw 0 var(--pink-5), 0 0 2cqw rgba(240, 168, 210, 0.15);
 }
 
 button.desk-icon {
@@ -3052,7 +3053,6 @@ button.desk-icon:hover {
   font-size: 1.4cqw;
   letter-spacing: 0.15cqw;
   color: #f8d3e9;
-  text-shadow: 0 0 1cqw rgba(240, 168, 210, 0.5);
 }
 
 .desk-doc p {
@@ -3069,7 +3069,7 @@ button.desk-icon:hover {
   height: auto;
   margin: 0.4cqw auto 1.6cqw;
   border: 0.3cqw solid var(--pink-2);
-  box-shadow: 0.45cqw 0.45cqw 0 var(--pink-5), 0 0 1.4cqw rgba(240, 168, 210, 0.35);
+  box-shadow: 0.45cqw 0.45cqw 0 var(--pink-5);
 }
 
 .desk-doc .desk-hi {
