@@ -350,7 +350,7 @@ function GameShell({ line, onHome, help = false, children }) {
 function Home() {
   const [run, setRun] = useState(0)
   return (
-    <GameShell line="Welcome! I'm Layba. I like building aesthetic digital experiences." onHome={() => setRun(r => r + 1)} help>
+    <GameShell line="Welcome to my portfolio! I'm Layba. I am a software engineer who likes building aesthetic digital experiences." onHome={() => setRun(r => r + 1)} help>
       <MoonRoom key={run} />
     </GameShell>
   )
