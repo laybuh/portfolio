@@ -405,7 +405,7 @@ export function startMoonRoom(cv, grainCv) {
       [['E','H','E','W'], ['E','E','E','W']].forEach((row, j) => row.forEach((k, i) => eyePx(21 + i, 13 + j, eyeCol(k))));
     }
     rect(11, 15, 3, 2, C.blush); rect(22, 15, 3, 2, C.blush);
-    px(17, 16, C.skinSh); px(18, 16, C.skinSh);
+    px(17, 16, '#7a6347'); px(18, 16, '#7a6347');
     rect(16, 18, 4, 1, C.lip); rect(16, 19, 4, 1, C.lip2); px(17, 19, C.gloss);
 
 
