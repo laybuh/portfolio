@@ -274,6 +274,7 @@ function MoonRoom() {
           <canvas ref={mainRef} className="moon-main" width="376" height="197" aria-label="Layba's bedroom" />
           <canvas ref={grainRef} className="moon-grain" width="376" height="197" aria-hidden="true" />
           <span className="moon-sign" aria-hidden="true">layba.dev</span>
+          <span className="moon-sign-sub">software engineer · portfolio</span>
           <div className="moon-vignette" aria-hidden="true" />
           <GameHelp className="game-help-room" />
           {ROOM_TAGS.map(tag => (
