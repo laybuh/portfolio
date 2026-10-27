@@ -2969,7 +2969,7 @@ body::after {
 
 .cert-from {
   font-family: var(--pixel);
-  font-size: max(11px, 0.6cqw);
+  font-size: max(8px, 0.6cqw);
   line-height: 1.6;
   color: rgba(240, 168, 210, 0.85);
 }
@@ -3300,7 +3300,7 @@ button.desk-icon:hover {
   }
 
   .cert-from {
-    font-size: max(11px, 1.6cqw);
+    font-size: max(8px, 1.6cqw);
   }
 
   .desk-skills-inline {
