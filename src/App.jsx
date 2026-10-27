@@ -87,7 +87,7 @@ function Clock() {
   const mm = String(now.getMinutes()).padStart(2, '0')
 
   return (
-    <span className="nav-clock">{hh}<i>:</i>{mm}</span>
+    <span className="nav-clock" aria-hidden="true">{hh}<i>:</i>{mm}</span>
   )
 }
 

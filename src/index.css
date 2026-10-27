@@ -248,7 +248,7 @@ nav {
 .nav-term-trigger,
 .nav-term-home {
   font-family: var(--pixel);
-  font-size: 0.5rem;
+  font-size: 0.62rem;
   line-height: 1.8;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -338,13 +338,13 @@ nav {
   align-items: center;
   gap: 0.9ch;
   font-family: var(--pixel);
-  font-size: 0.52rem;
+  font-size: 0.64rem;
   line-height: 1.9;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--pink-1);
   text-decoration: none;
-  padding: 0.45rem 0.5rem;
+  padding: 0.5rem 0.6rem;
   border: 1px solid transparent;
   transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
@@ -354,7 +354,12 @@ nav {
   color: #fff;
   background: rgba(240, 168, 210, 0.12);
   border-color: rgba(240, 168, 210, 0.4);
-  outline: none;
+}
+
+.nav-term-list a:focus-visible,
+.nav-term-home:focus-visible {
+  outline: 2px dashed var(--pink);
+  outline-offset: 2px;
 }
 
 .nav-term-key {
@@ -369,14 +374,18 @@ nav {
   padding-top: 0.75rem;
   border-top: 1px solid rgba(240, 168, 210, 0.2);
   font-family: var(--pixel);
-  font-size: 0.52rem;
+  font-size: 0.64rem;
+}
+
+.nav-term-form:focus-within {
+  border-top-color: var(--pink);
 }
 
 .nav-term-input {
   flex: 1;
   min-width: 0;
   font-family: var(--pixel);
-  font-size: 0.52rem;
+  font-size: 0.64rem;
   line-height: 1.9;
   letter-spacing: 1px;
   color: var(--pink-1);
@@ -417,7 +426,7 @@ nav {
   .nav-term-trigger,
   .nav-term-home {
     width: auto;
-    font-size: 0.42rem;
+    font-size: 0.54rem;
     letter-spacing: 0.5px;
     padding: 0.6rem 0.7rem;
   }
@@ -1629,7 +1638,7 @@ a.project-status:hover {
 
 .contact-field-label {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: max(11px, 0.6rem);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.65);
@@ -1656,14 +1665,15 @@ a.project-status:hover {
 
 .contact-field input:focus,
 .contact-field textarea:focus {
-  outline: none;
+  outline: 2px dashed var(--pink);
+  outline-offset: 2px;
   border-color: rgba(240, 168, 210, 0.5);
   background: rgba(240, 168, 210, 0.04);
 }
 
 .contact-send {
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: max(11px, 0.7rem);
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -2353,7 +2363,7 @@ body::after {
   left: 1.25rem;
   padding: 6px 10px;
   font-family: var(--pixel);
-  font-size: 0.6rem;
+  font-size: max(11px, 0.6rem);
   letter-spacing: 2px;
   color: #1a0a14;
   background: var(--pink-2);
@@ -2363,7 +2373,7 @@ body::after {
 .vn-line {
   font-family: var(--pixel);
   font-weight: 400;
-  font-size: clamp(0.45rem, 0.9vw, 0.62rem);
+  font-size: max(11px, clamp(0.45rem, 0.9vw, 0.62rem));
   line-height: 2.2;
   letter-spacing: 0.5px;
   text-transform: none;
@@ -2583,7 +2593,7 @@ body::after {
 
 .proj-folder span {
   padding: 0.3cqw 0.5cqw;
-  font-size: 0.8cqw;
+  font-size: max(11px, 0.8cqw);
   line-height: 1.5;
   text-align: center;
   color: var(--pink-1);
@@ -2628,7 +2638,7 @@ body::after {
   padding: 0.5cqw 1cqw;
   font-family: var(--pixel);
   font-weight: 400;
-  font-size: 0.7cqw;
+  font-size: max(11px, 0.7cqw);
   letter-spacing: 0.08cqw;
   text-transform: none;
   text-decoration: none;
@@ -2717,7 +2727,7 @@ body::after {
 
 .desk-win-contact .contact-field-label {
   font-family: var(--pixel);
-  font-size: 0.7cqw;
+  font-size: max(11px, 0.7cqw);
   letter-spacing: 0.1cqw;
   color: var(--pink-2);
 }
@@ -2750,7 +2760,7 @@ body::after {
   padding: 0.8cqw 1.6cqw;
   font-family: var(--pixel);
   font-weight: 400;
-  font-size: 0.8cqw;
+  font-size: max(11px, 0.8cqw);
   letter-spacing: 0.1cqw;
   text-transform: none;
   color: #1a0a14;
@@ -2815,7 +2825,7 @@ body::after {
 .desk-doc .read-sources-title {
   margin: 0 0 0.8cqw;
   font-family: var(--pixel);
-  font-size: 0.7cqw;
+  font-size: max(11px, 0.7cqw);
   color: rgba(240, 168, 210, 0.7);
 }
 
@@ -2888,7 +2898,7 @@ body::after {
 .desk-icon span {
   padding: 0.3cqw 0.4cqw;
   font-family: var(--pixel);
-  font-size: 0.85cqw;
+  font-size: max(11px, 0.85cqw);
   white-space: nowrap;
   color: var(--pink-1);
 }
@@ -2959,9 +2969,9 @@ body::after {
 
 .cert-from {
   font-family: var(--pixel);
-  font-size: 0.6cqw;
+  font-size: max(11px, 0.6cqw);
   line-height: 1.6;
-  color: rgba(240, 168, 210, 0.6);
+  color: rgba(240, 168, 210, 0.85);
 }
 
 .desk-bar {
@@ -2973,7 +2983,7 @@ body::after {
   justify-content: space-between;
   padding: 0.4cqw 0.5cqw 0.4cqw 0.9cqw;
   font-family: var(--pixel);
-  font-size: 0.9cqw;
+  font-size: max(11px, 0.9cqw);
   letter-spacing: 0.1cqw;
   color: #1a0a14;
   background: linear-gradient(90deg, #f0a8d2, #f8d3e9);
@@ -3050,7 +3060,7 @@ button.desk-icon:hover {
   margin-bottom: 1cqw;
   font-family: var(--pixel);
   font-weight: 400;
-  font-size: 1.4cqw;
+  font-size: max(11px, 1.4cqw);
   letter-spacing: 0.15cqw;
   color: #f8d3e9;
 }
@@ -3073,7 +3083,7 @@ button.desk-icon:hover {
 }
 
 .desk-doc .desk-hi {
-  color: rgba(240, 168, 210, 0.55);
+  color: rgba(240, 168, 210, 0.8);
 }
 
 .skill-chips {
@@ -3125,7 +3135,7 @@ button.desk-icon:hover {
   .moon-nav a {
     padding: 5px 6px;
     font-family: var(--pixel);
-    font-size: 0.45rem;
+    font-size: max(11px, 0.45rem);
     letter-spacing: 1px;
     color: #fff;
     text-decoration: none;
@@ -3215,7 +3225,7 @@ button.desk-icon:hover {
   }
 
   .vn-box-long .vn-line {
-    font-size: 0.4rem;
+    font-size: max(11px, 0.4rem);
     line-height: 1.9;
   }
 
@@ -3223,7 +3233,7 @@ button.desk-icon:hover {
     top: -11px;
     left: 0.9rem;
     padding: 4px 7px;
-    font-size: 0.45rem;
+    font-size: max(11px, 0.45rem);
     letter-spacing: 1.5px;
   }
 
@@ -3290,7 +3300,7 @@ button.desk-icon:hover {
   }
 
   .cert-from {
-    font-size: 1.6cqw;
+    font-size: max(11px, 1.6cqw);
   }
 
   .desk-skills-inline {
@@ -3300,7 +3310,7 @@ button.desk-icon:hover {
 
   .desk-bar {
     padding: 1cqw 1cqw 1cqw 2cqw;
-    font-size: 2.2cqw;
+    font-size: max(11px, 2.2cqw);
   }
 
   .desk-close {
@@ -3322,7 +3332,7 @@ button.desk-icon:hover {
 
   .desk-doc h2 {
     margin-bottom: 2cqw;
-    font-size: 3.2cqw;
+    font-size: max(11px, 3.2cqw);
   }
 
   .desk-doc p {
@@ -3352,7 +3362,7 @@ button.desk-icon:hover {
 
   .proj-folder span {
     padding: 0.6cqw 1cqw;
-    font-size: 2.2cqw;
+    font-size: max(11px, 2.2cqw);
   }
 
   .proj-panel {
@@ -3370,7 +3380,7 @@ button.desk-icon:hover {
 
   .proj-btn {
     padding: 1.2cqw 2.4cqw;
-    font-size: 1.9cqw;
+    font-size: max(11px, 1.9cqw);
   }
 
   .proj-note {
@@ -3386,7 +3396,7 @@ button.desk-icon:hover {
 
   .desk-doc .read-date,
   .desk-doc .read-sources-title {
-    font-size: 1.8cqw;
+    font-size: max(11px, 1.8cqw);
   }
 
   .read-cover {
@@ -3412,7 +3422,7 @@ button.desk-icon:hover {
   }
 
   .desk-win-contact .contact-field-label {
-    font-size: 1.8cqw;
+    font-size: max(11px, 1.8cqw);
   }
 
   .desk-win-contact .contact-field input,
@@ -3429,7 +3439,7 @@ button.desk-icon:hover {
   .desk-win-contact .contact-send {
     align-self: stretch;
     padding: 2.4cqw;
-    font-size: 2cqw;
+    font-size: max(11px, 2cqw);
   }
 
   .desk-win-contact .contact-status {
@@ -3456,4 +3466,9 @@ button.desk-icon:hover {
     left: 3%;
     width: 94%;
   }
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px dashed var(--pink);
+  outline-offset: 2px;
 }

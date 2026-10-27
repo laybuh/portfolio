@@ -50,10 +50,10 @@ function ContactForm() {
         {status === 'sending' ? 'sending…' : 'submit'}
       </button>
       {status === 'success' && (
-        <p className="contact-status contact-status-ok">✓ Your message has been sent successfully.</p>
+        <p className="contact-status contact-status-ok" role="status">✓ Your message has been sent successfully.</p>
       )}
       {status === 'error' && (
-        <p className="contact-status contact-status-err">✗ Your message could not be sent. Please try again.</p>
+        <p className="contact-status contact-status-err" role="alert">✗ Your message could not be sent. Please try again.</p>
       )}
     </form>
   )
