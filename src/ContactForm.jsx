@@ -27,7 +27,7 @@ function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <input type="checkbox" name="botcheck" className="contact-botcheck" tabIndex="-1" autoComplete="off" />
+      <input type="checkbox" name="botcheck" className="contact-botcheck" aria-label="Leave unchecked" tabIndex="-1" autoComplete="off" />
       <div className="contact-row">
         <label className="contact-field">
           <span className="contact-field-label">name</span>
