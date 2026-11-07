@@ -1,4 +1,3 @@
-import './App.css'
 import { useState, useEffect, useRef, useId, Fragment } from 'react'
 import { Routes, Route, Link, useNavigate, useLocation, useParams } from 'react-router-dom'
 import ContactForm from './ContactForm'
@@ -14,6 +13,24 @@ import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 import { startMoonRoom } from './moonRoom'
 import avatarPhoto from './assets/avatar.webp'
 import folderArt from './assets/folder.webp'
+
+function useReveal(key) {
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 600px)').matches) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const nodes = document.querySelectorAll('[data-reveal]')
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in')
+          io.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
+    nodes.forEach(node => io.observe(node))
+    return () => io.disconnect()
+  }, [key])
+}
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -37,95 +54,17 @@ function ScrollToTop() {
   return null
 }
 
-function StarShape({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z" />
-    </svg>
-  )
-}
-
-function KofiButton() {
-  return (
-    <a
-      href="https://ko-fi.com/layba"
-      target="_blank"
-      rel="noreferrer"
-      className="kofi-float"
-      aria-label="Buy me a coffee"
-    >
-      <svg
-        className="kofi-icon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 8h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
-        <path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" />
-        <path d="M8 2v2M11 2v2" />
-      </svg>
-      <span className="kofi-text"><span className="kofi-prompt">$</span>ko-fi</span>
-    </a>
-  )
-}
-
-const navLinks = [
-  { key: '1', label: 'about', to: '/about' },
-  { key: '2', label: 'projects', to: '/projects' },
-  { key: '3', label: 'blog', to: '/blog' },
-  { key: '4', label: 'contact', to: '/contact' },
-]
-
-const METER_SEGMENTS = 10
-const METER_GOAL = 20
-
-function Clock() {
-  const [now, setNow] = useState(() => new Date())
-
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
-    return () => clearInterval(t)
-  }, [])
-
-  const hh = String(now.getHours()).padStart(2, '0')
-  const mm = String(now.getMinutes()).padStart(2, '0')
-
-  return (
-    <span className="nav-clock" aria-hidden="true">{hh}<i>:</i>{mm}</span>
-  )
-}
-
-function ScoreMeter({ score }) {
-  const cycle = score % METER_GOAL
-  const filled = score > 0 && cycle === 0
-    ? METER_SEGMENTS
-    : Math.ceil(cycle / (METER_GOAL / METER_SEGMENTS))
-
-  return (
-    <span className="nav-score">
-      <span className="nav-score-label">xp:</span>
-      <b>{String(score).padStart(2, '0')}</b>
-      <span className="nav-score-meter" aria-hidden="true">
-        {Array.from({ length: METER_SEGMENTS }, (_, i) => (
-          <i key={i} className={i < filled ? 'nav-score-seg-on' : undefined} />
-        ))}
-      </span>
-    </span>
-  )
-}
-
 function Masthead() {
   const phone = usePhone()
 
   return (
     <header className="mast" id="top">
-      <Link to="/" className="mast-sign" aria-label="layba.dev home">layba.dev</Link>
+      <Link to="/" className="mast-sign" data-reveal aria-label="layba.dev home">layba.dev</Link>
+      <p className="mast-spine" data-reveal data-delay="3">LAYBA K.</p>
       <img
         className="mast-folder"
+        data-reveal
+        data-delay="1"
         src={folderArt}
         alt="Portfolio, software engineer, full stack dev"
         width="1203"
@@ -133,111 +72,18 @@ function Masthead() {
       />
       {phone
         ? (
-          <Link className="mast-enter" to="/#enter">
+          <Link className="mast-enter" to="/#enter" data-reveal data-delay="2">
             enter
             <span className="mast-enter-ring" aria-hidden="true">&rarr;</span>
           </Link>
         )
         : (
-          <a className="mast-enter" href="#enter">
+          <a className="mast-enter" href="#enter" data-reveal data-delay="2">
             enter
             <span className="mast-enter-ring" aria-hidden="true">&darr;</span>
           </a>
         )}
     </header>
-  )
-}
-
-function Nav({ score }) {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-  const [typing, setTyping] = useState(false)
-  const inputRef = useRef(null)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!open) return undefined
-    if (typing) inputRef.current?.focus()
-    const onKey = (e) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [open, typing])
-
-  const go = (to) => {
-    setOpen(false)
-    setValue('')
-    setError(false)
-    navigate(to)
-  }
-
-  const submit = (e) => {
-    e.preventDefault()
-    const match = navLinks.find(l => l.key === value.trim())
-    if (match) go(match.to)
-    else setError(true)
-  }
-
-  return (
-    <nav className="nav-term">
-      <ScoreMeter score={score} />
-      <Clock />
-      <Link to="/" className="nav-term-home">
-        <span className="nav-term-prompt">&gt;</span>index
-      </Link>
-      <div className="nav-term-inner">
-      <button
-        type="button"
-        className="nav-term-trigger"
-        aria-expanded={open}
-        onClick={() => { setTyping(true); setOpen(v => !v) }}
-      >
-        <span className="nav-term-prompt">&gt;</span>
-        {open ? 'close' : 'navigation'}
-        <span className="nav-term-caret" />
-      </button>
-
-      {open && (
-        <div className="nav-term-panel">
-          <p className="nav-term-head">select a destination</p>
-          <ul className="nav-term-list">
-            {navLinks.map(l => (
-              <li key={l.key}>
-                <Link to={l.to} onClick={() => go(l.to)}>
-                  <span className="nav-term-key">[{l.key}]</span>
-                  <span className="nav-term-label">{l.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <form className="nav-term-form" onSubmit={submit}>
-            <span className="nav-term-prompt">&gt;</span>
-            <input
-              ref={inputRef}
-              onFocus={() => setTyping(true)}
-              className="nav-term-input"
-              value={value}
-              onChange={(e) => {
-                const v = e.target.value.trim()
-                setValue(v)
-                const match = navLinks.find(l => l.key === v)
-                if (match) go(match.to)
-                else setError(v.length > 0)
-              }}
-              inputMode="numeric"
-              maxLength={1}
-              aria-label="Enter a destination number"
-            />
-          </form>
-          <p className={`nav-term-foot${error ? ' nav-term-err' : ''}`}>
-            {error ? `unknown command: ${value}` : 'type a number.'}
-          </p>
-        </div>
-      )}
-      </div>
-    </nav>
   )
 }
 
@@ -264,10 +110,12 @@ function usePhone() {
 }
 const HALF_SPOTS = [118, 306]
 
-function GameHelp({ className, label = 'controls', verb = 'click', target = 'a label', arrows = false }) {
+function GameHelp({ room = false }) {
   const ref = useRef(null)
   const id = useId()
+  const phone = usePhone()
   const [open, setOpen] = useState(false)
+  const verb = phone ? 'tap' : 'click'
 
   useEffect(() => {
     if (!open) return undefined
@@ -279,7 +127,7 @@ function GameHelp({ className, label = 'controls', verb = 'click', target = 'a l
   }, [open])
 
   return (
-    <div className={`game-help ${className}`} ref={ref}>
+    <div className="game-help game-help-side" ref={ref}>
       <button
         type="button"
         className="game-help-btn"
@@ -287,15 +135,20 @@ function GameHelp({ className, label = 'controls', verb = 'click', target = 'a l
         aria-controls={id}
         onClick={() => setOpen(o => !o)}
       >
-        {label}
+        ?
       </button>
       {open && (
         <ul className="game-help-tip" id={id}>
-          <li><b>{verb} anywhere</b> to walk</li>
-          <li><b>{verb} her</b> to hop</li>
-          <li><b>{verb} the lamp</b> for lights</li>
-          {arrows && <li><b>{verb} the arrow</b> to switch sides</li>}
-          <li><b>{verb} {target}</b> to open it</li>
+          {room && <li><b>{verb} anywhere</b> to walk</li>}
+          {room && <li><b>{verb} her</b> to hop</li>}
+          {room && <li><b>{verb} the lamp</b> for lights</li>}
+          {room && phone && <li><b>{verb} the arrow</b> to switch sides</li>}
+          {room && <li><b>{verb} a label</b> to open it</li>}
+          {!room && <li><b>{verb} an icon</b> to open a page</li>}
+          <li><b>{phone ? '←' : '↑'}</b> back to the cover</li>
+          <li><b>the house</b> to the room</li>
+          <li><b>the envelope</b> to email me</li>
+          <li><b>the logos</b> linkedin, instagram, github, ko-fi</li>
         </ul>
       )}
     </div>
@@ -332,7 +185,6 @@ function MoonRoom() {
           <canvas ref={mainRef} className="moon-main" width="376" height="197" aria-label="Layba's bedroom" />
           <canvas ref={grainRef} className="moon-grain" width="376" height="197" aria-hidden="true" />
           <div className="moon-vignette" aria-hidden="true" />
-          <GameHelp className="game-help-room" />
           {ROOM_TAGS.map(tag => (
             <Link key={tag.to} to={tag.to} className="moon-tag" style={{ left: `${((tag.x - 24) / 376) * 100}%`, top: `${(tag.y / 197) * 100}%` }}>
               {tag.label}
@@ -366,52 +218,52 @@ function GameShell({ line, onHome, help = false, children }) {
 
   return (
     <section className="hero" id="enter">
-      <div className="game">
+      <div className="game" data-reveal>
         <aside className="game-side">
           {phone
             ? (
-              <Link to="/" className="game-side-link" aria-label="Back to the cover">
+              <Link to="/" className="game-side-link" data-tip="cover" aria-label="Back to the cover">
                 {topArrow}
               </Link>
             )
             : (
-              <a href="#top" className="game-side-link" aria-label="Back to the cover">
+              <a href="#top" className="game-side-link" data-tip="cover" aria-label="Back to the cover">
                 {topArrow}
               </a>
             )}
-          <Link to="/#enter" className="game-side-link" onClick={onHome} aria-label="Home">
+          <Link to="/#enter" className="game-side-link" data-tip="home" onClick={onHome} aria-label="Home">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3z" />
             </svg>
           </Link>
-          <a className="game-side-link" href="mailto:hello@layba.dev" aria-label="Email">
+          <a className="game-side-link" data-tip="email" href="mailto:hello@layba.dev" aria-label="Email">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
             </svg>
           </a>
-          <a className="game-side-link" href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a className="game-side-link" href="https://linkedin.com/in/laybas" target="_blank" rel="noreferrer" data-tip="linkedin" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
           </a>
-          <a className="game-side-link" href="https://www.instagram.com/layba.dev" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <a className="game-side-link" href="https://www.instagram.com/layba.dev" target="_blank" rel="noreferrer" data-tip="instagram" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
             </svg>
           </a>
-          <a className="game-side-link" href="https://github.com/laybuh" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <a className="game-side-link" href="https://github.com/laybuh" target="_blank" rel="noreferrer" data-tip="github" aria-label="GitHub">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
             </svg>
           </a>
-          <a className="game-side-link" href="https://ko-fi.com/layba" target="_blank" rel="noreferrer" aria-label="Ko-fi">
+          <a className="game-side-link" href="https://ko-fi.com/layba" target="_blank" rel="noreferrer" data-tip="ko-fi" aria-label="Ko-fi">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 8h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z" />
               <path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" />
               <path d="M8 2v2M11 2v2" />
             </svg>
           </a>
-          {help && <GameHelp className="game-help-side" label="?" verb="tap" target="a link" arrows />}
+          <GameHelp room={help} />
         </aside>
         <div className="game-main">
           {children}
@@ -425,7 +277,7 @@ function GameShell({ line, onHome, help = false, children }) {
 function Home() {
   const [run, setRun] = useState(0)
   return (
-    <GameShell line="Welcome to my portfolio! I'm Layba. I'm a software engineer who likes building aesthetic digital experiences for myself and others." onHome={() => setRun(r => r + 1)} help>
+    <GameShell line="Welcome to my portfolio! I'm Layba. I like building aesthetic digital experiences." onHome={() => setRun(r => r + 1)} help>
       <MoonRoom key={run} />
     </GameShell>
   )
@@ -620,7 +472,6 @@ function useDeskWindows(ids, firstFront = ids[0]) {
   })
   return { open, show, reopen, win }
 }
-
 
 function Desktop({ onReopen, children }) {
   const { pathname } = useLocation()
@@ -1029,28 +880,15 @@ function Contact() {
 }
 
 function App() {
-  const [score, setScore] = useState(0)
   const { pathname, hash } = useLocation()
   const phone = usePhone()
   const atCover = pathname === '/' && hash !== '#enter'
-  const inGame = ['/', '/about', '/projects', '/blog', '/contact'].includes(pathname) || pathname.startsWith('/blog/')
-
-  useEffect(() => {
-    const onClick = (e) => {
-      const el = e.target
-      if (el && typeof el.closest === 'function' && el.closest('a, button')) {
-        setScore(s => s + 1)
-      }
-    }
-    document.addEventListener('click', onClick)
-    return () => document.removeEventListener('click', onClick)
-  }, [])
+  useReveal(pathname + hash)
 
   return (
     <main>
       <ScrollToTop />
       {(!phone || atCover) && <Masthead />}
-      {!inGame && <Nav score={score} />}
       {!(phone && atCover) && (
       <div className="page-content">
         <Routes>
@@ -1063,17 +901,7 @@ function App() {
         </Routes>
       </div>
       )}
-      {!inGame && <Footer />}
     </main>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="site-footer">
-      <Link to="/" className="footer-tag">© {new Date().getFullYear()} layba.dev</Link>
-      <KofiButton />
-    </footer>
   )
 }
 
