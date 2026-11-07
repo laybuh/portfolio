@@ -323,7 +323,7 @@ export function startMoonRoom(cv, grainCv) {
   const GW = 36, GH = 62;
   const GIRL_COLORS = {
     hair: '#2a1f21', ink: '#0b0809',
-    skin: '#c19f77', skinSh: '#ac8c63', blush: '#c09370',
+    skin: '#be996e', skinSh: '#aa8c69', blush: '#c09370',
     lip: '#8b4a2f', lip2: '#a45f3e', gloss: '#cf9570', iris: '#4a2f2c', white: '#e5e5f2', brow: '#3a2420',
     top: '#f8b9d6', topSh: '#d998a0', trim: '#b2709a', tee: '#2a232f', teeSh: '#17131b', teeTrim: '#4a4350',
     skirt: '#1f1a24', skirtHi: '#4a4350', skirtDk: '#121016', sock: '#ffe9f2', shoe: '#2b1b30'
