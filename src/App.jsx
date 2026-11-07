@@ -13,6 +13,7 @@ import laybadevPhoto from './assets/laybadev.webp'
 import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 import { startMoonRoom } from './moonRoom'
 import avatarPhoto from './assets/avatar.webp'
+import folderArt from './assets/folder.webp'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -21,6 +22,13 @@ function ScrollToTop() {
       const target = document.querySelector(hash)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        return
+      }
+    }
+    if (pathname !== '/') {
+      const game = document.getElementById('enter')
+      if (game) {
+        game.scrollIntoView({ behavior: 'instant', block: 'start' })
         return
       }
     }
@@ -91,11 +99,56 @@ function Clock() {
   )
 }
 
-function Nav({ score }) {
+function ScoreMeter({ score }) {
   const cycle = score % METER_GOAL
   const filled = score > 0 && cycle === 0
     ? METER_SEGMENTS
     : Math.ceil(cycle / (METER_GOAL / METER_SEGMENTS))
+
+  return (
+    <span className="nav-score">
+      <span className="nav-score-label">xp:</span>
+      <b>{String(score).padStart(2, '0')}</b>
+      <span className="nav-score-meter" aria-hidden="true">
+        {Array.from({ length: METER_SEGMENTS }, (_, i) => (
+          <i key={i} className={i < filled ? 'nav-score-seg-on' : undefined} />
+        ))}
+      </span>
+    </span>
+  )
+}
+
+function Masthead() {
+  const phone = usePhone()
+
+  return (
+    <header className="mast" id="top">
+      <Link to="/" className="mast-sign" aria-label="layba.dev home">layba.dev</Link>
+      <img
+        className="mast-folder"
+        src={folderArt}
+        alt="Portfolio, software engineer, full stack dev"
+        width="1203"
+        height="971"
+      />
+      {phone
+        ? (
+          <Link className="mast-enter" to="/#enter">
+            enter
+            <span className="mast-enter-ring" aria-hidden="true">&darr;</span>
+          </Link>
+        )
+        : (
+          <a className="mast-enter" href="#enter">
+            enter
+            <span className="mast-enter-ring" aria-hidden="true">&darr;</span>
+          </a>
+        )}
+    </header>
+  )
+}
+
+function Nav({ score }) {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
@@ -129,15 +182,7 @@ function Nav({ score }) {
 
   return (
     <nav className="nav-term">
-      <span className="nav-score">
-        <span className="nav-score-label">xp:</span>
-        <b>{String(score).padStart(2, '0')}</b>
-        <span className="nav-score-meter" aria-hidden="true">
-          {Array.from({ length: METER_SEGMENTS }, (_, i) => (
-            <i key={i} className={i < filled ? 'nav-score-seg-on' : undefined} />
-          ))}
-        </span>
-      </span>
+      <ScoreMeter score={score} />
       <Clock />
       <Link to="/" className="nav-term-home">
         <span className="nav-term-prompt">&gt;</span>index
@@ -204,6 +249,19 @@ const ROOM_TAGS = [
 ]
 
 const PHONE = '(max-width: 600px)'
+
+const TWO_SCREEN = '(max-width: 600px)'
+
+function usePhone() {
+  const [phone, setPhone] = useState(() => window.matchMedia(TWO_SCREEN).matches)
+  useEffect(() => {
+    const mq = window.matchMedia(TWO_SCREEN)
+    const sync = () => setPhone(mq.matches)
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+  return phone
+}
 const HALF_SPOTS = [118, 306]
 
 function GameHelp({ className, label = 'controls', verb = 'click', target = 'a label', arrows = false }) {
@@ -273,8 +331,6 @@ function MoonRoom() {
         <div className={half ? 'moon-room moon-room-right' : 'moon-room'}>
           <canvas ref={mainRef} className="moon-main" width="376" height="197" aria-label="Layba's bedroom" />
           <canvas ref={grainRef} className="moon-grain" width="376" height="197" aria-hidden="true" />
-          <span className="moon-sign" aria-hidden="true">layba.dev</span>
-          <span className="moon-sign-sub">software engineer · portfolio</span>
           <div className="moon-vignette" aria-hidden="true" />
           <GameHelp className="game-help-room" />
           {ROOM_TAGS.map(tag => (
@@ -301,11 +357,29 @@ function Dialogue({ line }) {
 }
 
 function GameShell({ line, onHome, help = false, children }) {
+  const phone = usePhone()
+  const topArrow = (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4 4 12h5v8h6v-8h5L12 4z" />
+    </svg>
+  )
+
   return (
-    <section className="hero">
+    <section className="hero" id="enter">
       <div className="game">
         <aside className="game-side">
-          <Link to="/" className="game-side-link" onClick={onHome} aria-label="Home">
+          {phone
+            ? (
+              <Link to="/" className="game-side-link" aria-label="Back to the cover">
+                {topArrow}
+              </Link>
+            )
+            : (
+              <a href="#top" className="game-side-link" aria-label="Back to the cover">
+                {topArrow}
+              </a>
+            )}
+          <Link to="/#enter" className="game-side-link" onClick={onHome} aria-label="Home">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3z" />
             </svg>
@@ -443,7 +517,7 @@ function PixelIcon({ name }) {
 }
 
 const DESK_ICONS = [
-  { name: 'room', label: 'index', to: '/' },
+  { name: 'room', label: 'index', to: '/#enter' },
   { name: 'about', label: 'about', to: '/about' },
   { name: 'projects', label: 'projects', to: '/projects' },
   { name: 'blog', label: 'blog', to: '/blog' },
@@ -592,7 +666,6 @@ function About() {
             <div className="desk-doc">
               <img className="about-avatar" src={avatarPhoto} alt="Layba" />
               <h2>PROFILE</h2>
-              <p className="desk-hi">{'// hi hi!'}</p>
               <p>I'm Layba, a software engineer and full-stack developer who likes building things that are both functional and beautiful.</p>
               <p>My experience taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
               <p>Right now I'm focused on UX/UI and getting better at creative coding, while challenging my current skills and learning how to improve them more efficiently.</p>
@@ -957,7 +1030,9 @@ function Contact() {
 
 function App() {
   const [score, setScore] = useState(0)
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
+  const phone = usePhone()
+  const atCover = pathname === '/' && hash !== '#enter'
   const inGame = ['/', '/about', '/projects', '/blog', '/contact'].includes(pathname) || pathname.startsWith('/blog/')
 
   useEffect(() => {
@@ -974,7 +1049,9 @@ function App() {
   return (
     <main>
       <ScrollToTop />
+      {(!phone || atCover) && <Masthead />}
       {!inGame && <Nav score={score} />}
+      {!(phone && atCover) && (
       <div className="page-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -985,6 +1062,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
+      )}
       {!inGame && <Footer />}
     </main>
   )

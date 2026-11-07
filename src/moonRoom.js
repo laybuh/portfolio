@@ -323,7 +323,7 @@ export function startMoonRoom(cv, grainCv) {
   const GW = 36, GH = 62;
   const GIRL_COLORS = {
     hair: '#2a1f21', ink: '#0b0809',
-    skin: '#b39169', skinSh: '#9e7e55', blush: '#b28562',
+    skin: '#c19f77', skinSh: '#ac8c63', blush: '#c09370',
     lip: '#8b4a2f', lip2: '#a45f3e', gloss: '#cf9570', iris: '#4a2f2c', white: '#e5e5f2', brow: '#3a2420',
     top: '#f8b9d6', topSh: '#d998a0', trim: '#b2709a', tee: '#2a232f', teeSh: '#17131b', teeTrim: '#4a4350',
     skirt: '#1f1a24', skirtHi: '#4a4350', skirtDk: '#121016', sock: '#ffe9f2', shoe: '#2b1b30'
@@ -405,7 +405,7 @@ export function startMoonRoom(cv, grainCv) {
       [['E','H','E','W'], ['E','E','E','W']].forEach((row, j) => row.forEach((k, i) => eyePx(21 + i, 13 + j, eyeCol(k))));
     }
     rect(11, 15, 3, 2, C.blush); rect(22, 15, 3, 2, C.blush);
-    px(17, 16, '#7a6347'); px(18, 16, '#7a6347');
+    px(17, 16, '#8a7254'); px(18, 16, '#8a7254');
     rect(16, 18, 4, 1, C.lip); rect(16, 19, 4, 1, C.lip2); px(17, 19, C.gloss);
 
 

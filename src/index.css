@@ -2273,41 +2273,6 @@ body::after {
   mix-blend-mode: screen;
 }
 
-.moon-sign {
-  position: absolute;
-  left: 81%;
-  top: 18%;
-  transform: translate(-50%, -50%);
-  font-family: 'Allura', cursive;
-  font-size: 9cqw;
-  line-height: 1;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 0.015em #ffc4e1;
-  filter: drop-shadow(0 0 0.04em #ff8fc8) drop-shadow(0 0 0.15em #ff4fae) drop-shadow(0 0 0.3em rgba(255, 79, 174, 0.6));
-  pointer-events: none;
-  animation: sign-flicker 7s steps(1) infinite;
-}
-
-@keyframes sign-flicker {
-  0%, 100% { opacity: 1; }
-  60% { opacity: 0.25; }
-  60.6% { opacity: 1; }
-  61.4% { opacity: 0.15; }
-  62.4% { opacity: 0.8; }
-  63% { opacity: 0.2; }
-  65% { opacity: 1; }
-  88% { opacity: 0.45; }
-  88.7% { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .moon-sign {
-    animation: none;
-  }
-
-}
-
 .moon-vignette {
   position: absolute;
   inset: 0;
@@ -3075,15 +3040,11 @@ button.desk-icon:hover {
 
 .about-avatar {
   display: block;
-  width: 13cqw;
+  width: 15.5cqw;
   height: auto;
   margin: 0.4cqw auto 1.6cqw;
   border: 0.3cqw solid var(--pink-2);
   box-shadow: 0.45cqw 0.45cqw 0 var(--pink-5);
-}
-
-.desk-doc .desk-hi {
-  color: rgba(240, 168, 210, 0.8);
 }
 
 .skill-chips {
@@ -3239,14 +3200,6 @@ button.desk-icon:hover {
     padding: 4px 7px;
     font-size: 0.45rem;
     letter-spacing: 1.5px;
-  }
-
-  .moon-sign {
-    font-size: 7.5cqw;
-  }
-
-  .moon-sign-sub {
-    display: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -3481,20 +3434,128 @@ button.desk-icon:hover {
   outline-offset: 2px;
 }
 
-.moon-sign-sub {
-  position: absolute;
-  left: 81.5%;
-  top: 35%;
-  transform: translate(-50%, -50%);
-  padding-left: 0.24em;
-  font-family: var(--sans);
-  font-size: max(12px, 1.35cqw);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  white-space: nowrap;
-  color: #ffc4e1;
-  filter: drop-shadow(0 0 0.15em #ff8fc8) drop-shadow(0 0 0.5em rgba(255, 79, 174, 0.6));
-  pointer-events: none;
+.mast + .page-content .hero {
+  margin-top: clamp(3rem, 9vh, 8rem);
 }
 
+.mast {
+  position: relative;
+  z-index: 50;
+  flex: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  justify-items: center;
+  align-items: center;
+  gap: clamp(1rem, 3vh, 2.25rem);
+  min-height: 100svh;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(1.5rem, 5vw, 4rem) clamp(2rem, 5vh, 3.5rem);
+  overflow: hidden;
+  background: #000000;
+}
+
+.mast-folder {
+  width: min(100%, clamp(17rem, 46vw, 38rem));
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.mast-sign {
+  justify-self: start;
+  font-family: var(--mono);
+  font-size: max(13px, 0.95vw);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  white-space: nowrap;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.25s ease;
+}
+
+.mast-sign:hover {
+  opacity: 1;
+}
+
+.mast-enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--mono);
+  font-size: max(12px, 0.8vw);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: #fdf4f9;
+  text-decoration: none;
+}
+
+.mast-enter-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: #ffd4ec;
+  border: 1px solid rgba(240, 168, 210, 0.5);
+  border-radius: 50%;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.mast-enter:hover .mast-enter-ring,
+.mast-enter:focus-visible .mast-enter-ring {
+  color: #1a0a14;
+  background: var(--pink-2);
+  border-color: var(--pink-1);
+}
+
+@media (max-width: 860px) {
+  .mast {
+    gap: 1.5rem;
+  }
+
+  .mast-folder {
+    width: min(100%, 26rem);
+  }
+
+}
+
+@media (max-width: 600px) {
+  .mast {
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .game {
+    --dlg-h: 7.75rem;
+  }
+
+  .vn-line {
+    line-height: 2;
+  }
+}
+
+@media (min-width: 601px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .mast,
+  .hero {
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+}
