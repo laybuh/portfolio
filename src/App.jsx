@@ -360,7 +360,7 @@ function GameShell({ line, onHome, help = false, children }) {
   const phone = usePhone()
   const topArrow = (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 4 4 12h5v8h6v-8h5L12 4z" />
+      <path d={phone ? 'M4 12 12 4v5h8v6h-8v5L4 12z' : 'M12 4 4 12h5v8h6v-8h5L12 4z'} />
     </svg>
   )
 
