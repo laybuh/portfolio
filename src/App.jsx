@@ -135,7 +135,7 @@ function Masthead() {
         ? (
           <Link className="mast-enter" to="/#enter">
             enter
-            <span className="mast-enter-ring" aria-hidden="true">&darr;</span>
+            <span className="mast-enter-ring" aria-hidden="true">&rarr;</span>
           </Link>
         )
         : (
