@@ -274,10 +274,15 @@ function GameShell({ line, onHome, help = false, children }) {
   )
 }
 
+const HOME_LINE = "Welcome to my portfolio! I'm Layba. I'm a software engineer who likes building aesthetic digital experiences for myself and others."
+const HOME_LINE_SHORT = "Welcome to my portfolio! I'm Layba. I like building aesthetic digital experiences."
+
 function Home() {
   const [run, setRun] = useState(0)
+  const phone = usePhone()
+
   return (
-    <GameShell line="Welcome to my portfolio! I'm Layba. I like building aesthetic digital experiences." onHome={() => setRun(r => r + 1)} help>
+    <GameShell line={phone ? HOME_LINE_SHORT : HOME_LINE} onHome={() => setRun(r => r + 1)} help>
       <MoonRoom key={run} />
     </GameShell>
   )
