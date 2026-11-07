@@ -2043,7 +2043,45 @@ button.desk-icon:hover {
   }
 }
 
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 @media (min-width: 601px) {
+  .mast::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(240, 168, 210, 0.13);
+    transform-origin: left center;
+    animation: rule-draw 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s both;
+  }
+
+  .mast-enter-ring {
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .mast-enter:hover .mast-enter-ring,
+  .mast-enter:focus-visible .mast-enter-ring {
+    transform: translateY(4px);
+  }
+
+  .mast-sign {
+    transition: letter-spacing 0.35s ease, opacity 0.25s ease;
+  }
+
+  .mast-sign:hover {
+    letter-spacing: 0.42em;
+  }
+
   [data-reveal] {
     opacity: 0;
     transform: translateY(16px);
@@ -2060,7 +2098,6 @@ button.desk-icon:hover {
   [data-reveal][data-delay='3'] { transition-delay: 0.3s; }
 
   .mast {
-    border-bottom: 1px solid rgba(240, 168, 210, 0.13);
   }
 
   html {
@@ -2074,6 +2111,15 @@ button.desk-icon:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mast::after {
+    animation: none;
+  }
+
+  .mast-enter:hover .mast-enter-ring,
+  .mast-enter:focus-visible .mast-enter-ring {
+    transform: none;
+  }
+
   [data-reveal] {
     opacity: 1;
     transform: none;
