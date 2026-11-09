@@ -538,15 +538,7 @@ button:hover::before {
 .hero {
   align-items: center;
   text-align: center;
-  background:
-    radial-gradient(
-      ellipse 120% 85% at 50% 12%,
-      #2c1424 0%,
-      rgba(36, 12, 24, 0.6) 34%,
-      rgba(24, 8, 16, 0.28) 56%,
-      transparent 76%
-    ),
-    #000;
+  background: #000;
 }
 
 .hero .hero-content {
@@ -647,9 +639,7 @@ button:hover::before {
   overflow: hidden;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  background:
-    radial-gradient(ellipse 90% 70% at 78% 8%, rgba(141, 73, 119, 0.22) 0%, transparent 55%),
-    #0a0708;
+  background: #0a0708;
 }
 
 .about .about-container {
@@ -1652,7 +1642,7 @@ button.desk-icon:hover {
   }
 
   .vn-line {
-    font-size: 11px;
+    font-size: 9px;
     line-height: 1.9;
   }
 
@@ -2082,6 +2072,17 @@ button.desk-icon:hover {
     letter-spacing: 0.42em;
   }
 
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .mast,
+  .hero {
+    scroll-snap-align: start;
+  }
+}
+
+@media (min-width: 1201px) {
   [data-reveal] {
     opacity: 0;
     transform: translateY(16px);
@@ -2096,18 +2097,6 @@ button.desk-icon:hover {
   [data-reveal][data-delay='1'] { transition-delay: 0.1s; }
   [data-reveal][data-delay='2'] { transition-delay: 0.2s; }
   [data-reveal][data-delay='3'] { transition-delay: 0.3s; }
-
-  .mast {
-  }
-
-  html {
-    scroll-snap-type: y proximity;
-  }
-
-  .mast,
-  .hero {
-    scroll-snap-align: start;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

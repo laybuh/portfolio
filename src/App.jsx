@@ -16,7 +16,7 @@ import folderArt from './assets/folder.webp'
 
 function useReveal(key) {
   useEffect(() => {
-    if (window.matchMedia('(max-width: 600px)').matches) return undefined
+    if (window.matchMedia('(max-width: 1200px)').matches) return undefined
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const nodes = document.querySelectorAll('[data-reveal]')
     const io = new IntersectionObserver((entries) => {
@@ -26,7 +26,7 @@ function useReveal(key) {
           io.unobserve(entry.target)
         }
       })
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
+    }, { threshold: 0.12 })
     nodes.forEach(node => io.observe(node))
     return () => io.disconnect()
   }, [key])
