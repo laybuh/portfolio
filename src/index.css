@@ -2046,7 +2046,7 @@ button.desk-icon:hover {
     right: 0;
     bottom: 0;
     height: 1px;
-    background: rgba(240, 168, 210, 0.13);
+    background: rgba(240, 168, 210, 0.3);
     transform-origin: left center;
     animation: rule-draw 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s both;
   }
