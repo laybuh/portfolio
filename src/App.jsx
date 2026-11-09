@@ -564,7 +564,7 @@ const featured = {
   status: 'this site',
   short: "The site you're currently on.",
   desc: "The site you're on. React, Vite, and React Router with plain CSS instead of a component library. The hero is a pixel wordmark over a starfield, with film grain over the whole site. Navigation is a terminal panel where you click a destination or type its number, and the top bar has a clock and an XP meter that fills as you click around. Projects open as folders in place instead of separate pages. Images are WebP and routes scroll back to the top.",
-  tags: ['React', 'Vite', 'React Router', 'Pixel Art', 'CSS'],
+  tags: ['React', 'Vite', 'React Router', 'Pixel Art', 'CSS', 'Canva'],
   links: [
     { href: 'https://layba.dev', label: 'live' },
     { href: 'https://github.com/laybuh/portfolio', label: 'github' },
