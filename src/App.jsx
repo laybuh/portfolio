@@ -91,7 +91,8 @@ function Masthead() {
 const ROOM_TAGS = [
   { label: 'contact', to: '/contact', x: 95, y: 46 },
   { label: 'blog', to: '/blog', x: 186.5, y: 20 },
-  { label: 'about', to: '/about', x: 246.5, y: 105 },
+  { label: 'about', to: '/about', x: 95, y: 107 },
+  { label: 'dressup.exe', href: 'https://dollieexe.vercel.app', x: 246.5, y: 105 },
   { label: 'projects', to: '/projects', x: 329.5, y: 98 },
 ]
 
@@ -156,6 +157,21 @@ function GameHelp({ room = false }) {
   )
 }
 
+function RoomTag({ tag, className, style }) {
+  if (tag.href) {
+    return (
+      <a href={tag.href} target="_blank" rel="noreferrer" className={className} style={style}>
+        {tag.label}
+      </a>
+    )
+  }
+  return (
+    <Link to={tag.to} className={className} style={style}>
+      {tag.label}
+    </Link>
+  )
+}
+
 function MoonRoom() {
   const mainRef = useRef(null)
   const grainRef = useRef(null)
@@ -178,7 +194,7 @@ function MoonRoom() {
     <div className="moon-stage">
       <nav className="moon-nav">
         {ROOM_TAGS.map(tag => (
-          <Link key={tag.to} to={tag.to}>{tag.label}</Link>
+          <RoomTag key={tag.label} tag={tag} />
         ))}
       </nav>
       <div className="moon-view">
@@ -187,9 +203,7 @@ function MoonRoom() {
           <canvas ref={grainRef} className="moon-grain" width="376" height="197" aria-hidden="true" />
           <div className="moon-vignette" aria-hidden="true" />
           {ROOM_TAGS.map(tag => (
-            <Link key={tag.to} to={tag.to} className="moon-tag" style={{ left: `${((tag.x - 24) / 376) * 100}%`, top: `${(tag.y / 197) * 100}%` }}>
-              {tag.label}
-            </Link>
+            <RoomTag key={tag.label} tag={tag} className="moon-tag" style={{ left: `${((tag.x - 24) / 376) * 100}%`, top: `${(tag.y / 197) * 100}%` }} />
           ))}
         </div>
         {half === 0
