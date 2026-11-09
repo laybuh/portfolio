@@ -12,6 +12,7 @@ import laybadevPhoto from './assets/laybadev.webp'
 import y2kFemininePhoto from './assets/y2k-feminine-tech.webp'
 import { startMoonRoom } from './moonRoom'
 import avatarPhoto from './assets/avatar.webp'
+import avatarPhoto2 from './assets/avatar2.webp'
 import folderArt from './assets/folder.webp'
 
 function useReveal(key) {
@@ -520,7 +521,10 @@ function About() {
         {open.about && (
           <DeskWindow title="about_me.txt" className="desk-win-main" {...win('about')}>
             <div className="desk-doc">
-              <img className="about-avatar" src={avatarPhoto} alt="Layba" />
+              <div className="about-avatars">
+                <img className="about-avatar" src={avatarPhoto} alt="Layba" />
+                <img className="about-avatar" src={avatarPhoto2} alt="Layba" />
+              </div>
               <h2>PROFILE</h2>
               <p>I'm Layba, a software engineer and full-stack developer who likes building things that are both functional and beautiful.</p>
               <p>My experience taught me to break down hard problems and explain them clearly, which makes me a better developer. I care a lot about the user experience and getting the details right.</p>
