@@ -92,7 +92,7 @@ const ROOM_TAGS = [
   { label: 'contact', to: '/contact', x: 95, y: 46 },
   { label: 'blog', to: '/blog', x: 186.5, y: 20 },
   { label: 'about', to: '/about', x: 95, y: 107 },
-  { label: 'dress-up', href: 'https://dollieexe.vercel.app', x: 246.5, y: 105 },
+  { label: 'closet', href: 'https://dollieexe.vercel.app', x: 246.5, y: 105 },
   { label: 'projects', to: '/projects', x: 329.5, y: 98 },
 ]
 
@@ -146,6 +146,7 @@ function GameHelp({ room = false }) {
           {room && <li><b>{verb} the lamp</b> for lights</li>}
           {room && phone && <li><b>{verb} the arrow</b> to switch sides</li>}
           {room && <li><b>{verb} a label</b> to open it</li>}
+          {room && <li><b>the closet</b> for a dress-up game</li>}
           {!room && <li><b>{verb} an icon</b> to open a page</li>}
           <li><b>{phone ? '←' : '↑'}</b> back to the cover</li>
           <li><b>the house</b> to the room</li>
