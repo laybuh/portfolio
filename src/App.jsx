@@ -92,7 +92,7 @@ const ROOM_TAGS = [
   { label: 'contact', to: '/contact', x: 95, y: 46 },
   { label: 'blog', to: '/blog', x: 186.5, y: 20 },
   { label: 'about', to: '/about', x: 95, y: 107 },
-  { label: 'dressup.exe', href: 'https://dollieexe.vercel.app', x: 246.5, y: 105 },
+  { label: 'dress-up', href: 'https://dollieexe.vercel.app', x: 246.5, y: 105 },
   { label: 'projects', to: '/projects', x: 329.5, y: 98 },
 ]
 
