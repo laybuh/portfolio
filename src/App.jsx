@@ -644,6 +644,7 @@ const projects = [
     title: 'moonfade',
     status: 'launching soon',
     short: 'A goal and intention tracker where each intention is represented by a virtual candle you light as you commit to it.',
+    note: 'Work in progress: not launched yet.',
     preview: moonfadePhoto,
     desc: "A pastel desktop-OS site for lighting virtual candles tied to goals and intentions. Next.js, TypeScript, and CSS across the altar, history, and account pages, with a main candle at the new moon that lasts the whole cycle and phase candles that only light while their phase is out. Moon phase data comes from the U.S. Naval Observatory, with a local calculation as a backup when that is down, and Postgres on Supabase stores the candles so people can search, edit, and put out their own intentions.",
     tags: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'USNO API', 'JWT Auth', 'CSS Animation'],
