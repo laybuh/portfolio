@@ -27,7 +27,7 @@ function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <input type="checkbox" name="botcheck" className="contact-botcheck" tabIndex="-1" autoComplete="off" />
+      <input type="checkbox" name="botcheck" className="contact-botcheck" aria-label="Leave unchecked" tabIndex="-1" autoComplete="off" />
       <div className="contact-row">
         <label className="contact-field">
           <span className="contact-field-label">name</span>
@@ -47,13 +47,13 @@ function ContactForm() {
         <textarea name="message" required rows={5}></textarea>
       </label>
       <button type="submit" className="contact-send" disabled={status === 'sending'}>
-        {status === 'sending' ? 'sending…' : 'send message'}
+        {status === 'sending' ? 'sending…' : 'submit'}
       </button>
       {status === 'success' && (
-        <p className="contact-status contact-status-ok">✓ Your message has been sent successfully.</p>
+        <p className="contact-status contact-status-ok" role="status">✓ Your message has been sent successfully.</p>
       )}
       {status === 'error' && (
-        <p className="contact-status contact-status-err">✗ Your message could not be sent. Please try again.</p>
+        <p className="contact-status contact-status-err" role="alert">✗ Your message could not be sent. Please try again.</p>
       )}
     </form>
   )
