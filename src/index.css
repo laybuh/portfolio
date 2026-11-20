@@ -1394,6 +1394,10 @@ button.desk-icon:hover {
     box-shadow: 2px 2px 0 var(--pink-5);
   }
 
+  .moon-nav a[href^="http"] {
+    display: none;
+  }
+
   .moon-nav .moon-nav-on,
   .moon-nav a:active {
     color: #1a0a14;

@@ -500,7 +500,9 @@ function Desktop({ onReopen, children }) {
     <>
       <nav className="moon-nav">
         {ROOM_TAGS.map(tag => (
-          <Link key={tag.to} to={tag.to} className={tag.to === pathname ? 'moon-nav-on' : undefined}>{tag.label}</Link>
+          tag.href
+            ? <a key={tag.label} href={tag.href} target="_blank" rel="noreferrer">{tag.label}</a>
+            : <Link key={tag.label} to={tag.to} className={tag.to === pathname ? 'moon-nav-on' : undefined}>{tag.label}</Link>
         ))}
       </nav>
       <div className="desk">
